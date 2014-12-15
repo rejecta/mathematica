@@ -23,21 +23,24 @@
       margin: 0 0 3em 0;
       padding: 0;
       list-style: none;
-      background-color: #f2f2f2;
-      border-bottom: 1px solid #ccc; 
-      border-top: 1px solid #ccc; }
+      margin-top: -2em;
+      /*background-color: #f2f2f2;*/
+      /*border-bottom: 1px solid #ccc; 
+      border-top: 1px solid #ccc;*/}
    #nav li {
-      float: left; }
+      float: left;}
    #nav li a {
       display: block;
       padding: 8px 15px;
-      text-decoration: none;
-      font-weight: bold;
       color: #069;
-      border-right: 1px solid #ccc; }
+      font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+      font-size: 17px;
+      font-weight: bold;
+      /*border-right: 1px solid #ccc;
+      border-left: 1px solid #ccc;*/ }
    #nav li a:hover {
       color: #c00;
-      background-color: #fff; }
+      background-color: #E8E8E8; }
    /* End navigation bar styling. */
 </style>
   </head>
@@ -47,23 +50,23 @@
     <header>
       <div class="inner">
         <img src="images/rm_logo_shaded.png" height="77" />
-        <a href="https://github.com/rejecta/mathematica" class="button"><small>View project on</small> GitHub</a>
+        <h3>(archive)</h4>
       </div>
     </header>
 
-<ul id="nav">
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+
+      <ul id="nav">
       <li><a href="index.html">Archive</a></li>
       <li><a href="about.html">About Rejecta</a></li>
       <li><a href="faq.html">FAQs</a></li>
       <li><a href="author-guidelines.html">Author Guidelines</a></li>
-      <li><a href="vol1.html">Vol. 1 No. 1</a></li>
-      <li><a href="vol2.html">Vol. 2 No. 1</a></li>
-      <li><a href="media.html">Old Docs and Press</a></li>
+      <li><a href="volumes.html">Volumes</a></li>
+      <li><a href="media.html">Media</a></li>
       <li><a href="contact.html">Contact</a></li>
-   </ul>
+      </ul>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
         <section id="main-content">
           
 <h1><a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About this Archive</h1>
@@ -74,7 +77,8 @@ Get papers back online, make source of original journals available, etc.
 
         </section>
         <aside id="sidebar">
-          <h3>Complete Rejecta Project Source (LaTeX)</h3>
+          <h3>Rejecta Journal Source</h3>
+          <a href="https://github.com/rejecta/mathematica" class="button"><small>View project on</small> GitHub</a>
           <a href="https://github.com/rejecta/mathematica/zipball/master" class="button">
             <small>Download</small>
             .zip file
