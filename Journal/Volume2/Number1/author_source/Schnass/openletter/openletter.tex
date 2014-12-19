@@ -1,0 +1,28 @@
+\documentclass[11pt]{article}
+\usepackage[top=1in,right=1in,left=1in,bottom=1in]{geometry}
+\pagestyle{empty}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Title, author, and institution information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\bf An open letter concerning \\
+\vspace{5mm}{\em   Classification via incoherent subspaces  }}
+\author{\large\em Karin Schnass}
+
+\date{} % No date
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+\thispagestyle{empty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+It all started with a talk by Efi, a fellow PhD-student (now Dr. Effrosyni Kokiopoulou), on classification and  dimensionality reduction which gave me an idea. Classification was foreign territory to me so I discussed it with her and in a moment when my other projects where going nowhere, I sat down and thought about my idea in detail. As a result I developed a mathematical model of how signals in different classes could be represented and how you could then try to classify them. And I was happy for a while. Unfortunately the characterization I had come up with was at the same time too complicated and too vague to be actually calculable. So when I wanted to test the idea on some real data I had to simplify to a problem I could solve. The implementation with all the optimizations in the intermediate steps turned out to be a nightmare but after many long months of suffering the algorithm spit out something that seemed to work pretty well, and I wrote up my results and included them in my thesis.
+
+As a next step we submitted the paper to {\em IEEE Trans. on Pattern Analysis and Machine Intelligence}. The reviews were late and ambiguous. Reviewer 1 thought that the paper was garbage, because it did not beat state of the art and was mathematically unsound. In his opinion putting $N$ $d$-dimensional vectors as columns into a matrix did not result in a $d\times N$ matrix. Reviewer 2 was not too thrilled but gave us the benefit of doubt. Reviewer 3 seemed to understand and appreciate the idea and gave a lot of useful comments. We were asked to make a major rewrite. We clarified the model on the coefficients, included test results on another database, emphasized that computational complexity should be a criterion when talking about state of the art, etc., and resubmitted. We got rejected --- the general opinion seemed to be that it was too mathy and did not fit into the narrow view of 2 out of 3 reviewers.
+
+So we thought we would try to submit to a journal with a broader scope: {\em IEEE Trans. on Signal Processing}. The reviews were again late and ambiguous. Reviewer 1 and 2 again thought that it was too mathy, though the idea novel and the paper technically sound. Reviewer 3 again understood and appreciated the idea and made a lot of useful comments. The general verdict was to reject with encouragement to resubmit. Since we do not think that another rewrite will improve the paper,  we made the changes requested by Reviewer 3 and now hope that the paper will make a nice contribution to {\em Rejecta Mathematica}. After all, it was mainly rejected because it contained ``too much math''.
+
+Finally, I have learned one thing: never try to introduce new ideas into an old field that is not your own.
+\end{document}

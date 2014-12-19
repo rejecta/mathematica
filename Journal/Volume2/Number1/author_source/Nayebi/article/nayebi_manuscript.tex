@@ -1,0 +1,828 @@
+\documentclass[11pt]{article}
+\usepackage[top=1in,right=1in,left=1in,bottom=1in]{geometry}
+\pagestyle{empty}
+
+\usepackage{amsmath}
+%\usepackage{hyperref}
+\usepackage{url}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{eucal}
+\usepackage[all]{xy}
+\CompileMatrices
+
+\DeclareFontFamily{OT1}{rsfs}{}
+\DeclareFontShape{OT1}{rsfs}{n}{it}{<-> rsfs10}{}
+\DeclareMathAlphabet{\mathscr}{OT1}{rsfs}{n}{it}
+\renewcommand*{\setminus}{-}
+
+\newcommand{\marginalfootnote}[1]{%
+        \footnote{#1}
+        \marginpar[\hfill{\sf\thefootnote}]{{\sf\thefootnote}}}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+\renewcommand*{\qedsymbol}{\ensuremath{\blacksquare}}            % end of proof
+\newcommand*{\eqdef}{\stackrel{\text{def}}{=}}     % definition
+
+\theoremstyle{plain}
+  \newtheorem{theorem}[subsubsection]{Theorem}
+  \newtheorem{proposition}[subsubsection]{Proposition}
+  \newtheorem{lemma}[subsubsection]{Lemma}
+  \newtheorem{corollary}[subsubsection]{Corollary}
+  \newtheorem{conj}[subsubsection]{Conjecture}
+
+\newcounter{bean}
+
+\theoremstyle{definition}
+  \newtheorem{definition}[subsubsection]{Definition}
+  \newtheorem{notation}{Notation}
+
+\theoremstyle{remark}
+  \newtheorem{example}[subsubsection]{Example}
+  \newtheorem{remark}[subsubsection]{Remark}
+  \newtheorem{remarks}[subsubsection]{Remarks}
+  \newtheorem{exercise}[subsubsection]{Exercise}
+
+\numberwithin{equation}{subsection}
+
+%   \topmargin=0in
+%   \oddsidemargin=0in
+%   \evensidemargin=0in
+%   \textwidth=6.5in
+%   \textheight=8.5in
+   \DeclareMathOperator{\Horz}{=}
+   \DeclareMathOperator{\gl}{GL_2}
+   \DeclareMathOperator{\SL}{SL}
+   \DeclareMathOperator{\gln}{GL}
+   \DeclareMathOperator{\T}{{\bf T}}
+   \DeclareMathOperator{\calC}{\mathscr C}
+   \DeclareMathOperator{\calN}{\mathscr N}
+   \DeclareMathOperator{\calR}{\mathscr R}
+   \DeclareMathOperator{\calFF}{\mathscr{FF}}
+   \DeclareMathOperator{\calM}{\mathscr M}
+   \DeclareMathOperator{\calP}{\mathscr P}
+   \DeclareMathOperator{\calD}{\mathscr D}
+   \DeclareMathOperator{\calK}{\mathscr K}
+   \DeclareMathOperator{\calV}{\mathscr V}
+   \DeclareMathOperator{\End}{End}
+   \DeclareMathOperator{\Frob}{Frob}
+   \DeclareMathOperator{\ord}{ord}
+   \DeclareMathOperator{\un}{un}
+\title{On the distribution of Carmichael numbers}
+\author{Aran Nayebi\thanks{727 Moreno Avenue, Palo Alto, California, United States of America 94303-3618. Email: aran.nayebi@gmail.com}}
+
+\date{}
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\begin{abstract}
+Erd\H{o}s conjectured in 1956 that there are $x^{1-o(1)}$ Carmichael numbers up to $x$. Pomerance made this conjecture more precise and proposed that there are $x^{1-{\frac{\{1+o(1)\}\log\log\log x}{\log\log x}}}$ Carmichael numbers up to $x$. At the time, his data tables up to $25 \cdot 10^{9}$ appeared to support his conjecture. However, Pinch extended this data and showed that up to $10^{21}$, Pomerance's conjecture did not appear well-supported. Thus, the purpose of this paper is two-fold. First, we build upon the work of Pomerance and others to present an alternate conjecture regarding the distribution of Carmichael numbers that fits proven bounds and is better supported by Pinch's new data. Second, we provide another conjecture concerning the distribution of Carmichael numbers that sharpens Pomerance's heuristic arguments. We also extend and update counts pertaining to pseudoprimes and Carmichael numbers, and discuss the distribution of One-Parameter Quadratic-Base Test pseudoprimes.
+\end{abstract}
+
+\def\ord{{\mathrm{ord}}}
+\def\scr{\scriptstyle}
+\def\\{\cr}
+\def\[{\left[}
+\def\]{\right]}
+\def\<{\langle}
+\def\>{\rangle}
+\def\fl#1{\left\lfloor#1\right\rfloor}
+\def\rf#1{\left\lceil#1\right\rceil}
+\def\lcm{{\rm lcm\/}}
+
+\def\C{\mathbb C}
+\def\R{\mathbb R}
+\def\Q{{\mathbb Q}}
+\def\F{{\mathbb F}}
+\def\Z{{\mathbb Z}}
+\def\cO{{\mathcal O}}
+
+\def\ord{{\mathrm{ord}}}
+\def\Nm{{\mathrm{Nm}}}
+\def\L{{\mathbb L}}
+
+\def\xxx{\vskip5pt\hrule\vskip5pt}
+\def\yyy{\vskip5pt\hrule\vskip2pt\hrule\vskip5pt}
+\section{Introduction}
+Fermat's ``little'' theorem states that if $b$ is an integer prime to $n$, and if $n$ is prime, then
+\begin{equation} \label{1}
+b^{n} \equiv b \pmod n.
+\end{equation}
+When $\gcd(b,n) = 1$, we can divide by $b$,
+\begin{equation} \label{2}
+b^{n-1} \equiv 1 \pmod n.
+\end{equation}
+A composite natural number $n$ for which $b^{n-1} \equiv 1 \pmod n$ for any fixed integer $b \ge 2$ is a base $b$ pseudoprime. A positive composite integer $n$ is a Carmichael number if $b^{n-1} \equiv 1 \pmod n$ for all integers $b \ge 2$ with $\gcd(b,n)=1$. The importance of Carmichael numbers is that they test the limits of the Fermat primality test, which ultimately led mathematicians to formulate more effective tests. Furthermore, there is little that is known about them; for instance, the infinitude of Carmichael numbers has only recently been proven by Alford, Granville, and Pomerance \cite{15}. \newline
+\indent Let $\mathscr{P}_{b}(x)$ denote the number of base $b$ pseudoprimes $\le x$ and let $C(x)$ denote the number of Carmichael numbers $\le x$. In 1899, Korselt \cite{20} provided a method for identifying Carmichael numbers
+\begin{theorem} \label{theorem1}
+An odd number $n$ is a Carmichael number iff $n$ is squarefree and $p-1 \mid n-1$ for all $p \mid n$, where $p$ is a prime number.
+\end{theorem}
+As a consequence of Theorem~\ref{theorem1}, it is easy to see that Carmichael numbers have at least three prime factors. \newline
+\indent In 1910, Carmichael \cite{22} found the smallest Carmichael number to be $561 = 3 \cdot 11 \cdot 17$. \newline
+\indent Based on Korselt's criterion, Erd\H{o}s \cite{17} formulated a method for constructing Carmichael numbers, which was the basis for the proof of Alford, Granville, and Pomerance \cite{15}. His notion was to replace ``$p-1 \mid n-1$ for all $p \mid n$'' in Theorem~\ref{theorem1} with $L \mid n-1$ for $L:=\lcm_{p\mid n}(p-1)$. By focusing primarily on $L$, Erd\H{o}s found every $p$ for which $p-1 \mid L$ and then tried to find a product of those primes in which $\equiv 1 \pmod L$ \cite{8}. His results heuristically suggested that for sufficiently large $x$,
+\begin{equation} \label{important1}
+C(x) = x^{1-o(1)}.
+\end{equation}
+More convincingly, Theorem 4 of \cite{15} shows that \eqref{important1} holds if one assumes widely-believed assumptions regarding primes in arithmetic progressions. However, drawing upon available data at the time, Shanks \cite{23} was skeptical of \eqref{important1} because the counts of Carmichael numbers seemed to have noticeably fewer prime factors than those predicted by Erd\H{o}s' heuristic. \newline
+\indent Granville and Pomerance \cite{8} conjectured that the reason for the difference between the computational evidence and the argument of \eqref{important1} stems from a grouping of Carmichael numbers into two distinct classes, namely primitive and imprimitive. If we let $g = g(n) := \gcd(p_1-1,p_2-1,\cdots,p_k-1)$ for a squarefree integer $n = p_1p_2\cdots p_k$ and put $pa_i = p_i-1$ for some integer $a_i$, then $n$ is a primitive Carmichael number if $g(n) \le [a_1,\cdots,a_k]$, and imprimitive if otherwise. Thus, since the observations of Shanks are more applicable to imprimitive Carmichael numbers and those of Erd\H{o}s are more applicable to primitive Carmichael numbers, and most Carmichael numbers are in fact primitive whereas most Carmichael numbers with a fixed number of prime factors are imprimitive, then the two conjecturers easily reached different conclusions. \newline
+\indent Interestingly, Pinch's counts of $k$-prime Carmichael numbers up to $10^{21}$ \cite{16} reproduced in Table~\ref{table1} imply that the number of prime factors of primitive Carmichael numbers tends to increase as $x$ gets larger.
+\begin{table}[t]
+\caption{Counts of $k$-prime Carmichael numbers}
+\centering {\scriptsize \hspace*{-2.5mm}
+\begin{tabular}{ || c | c | c | c | c | c | c | c | c | c | c | c || }
+    \hline
+\textbf{Bound} & \textbf{$C_3(x)$} & \textbf{$C_4(x)$} & \textbf{$C_5(x)$} & \textbf{$C_6(x)$} & \textbf{$C_7(x)$} & \textbf{$C_8(x)$} & \textbf{$C_9(x)$} & \textbf{$C_{10}(x)$} & \textbf{$C_{11}(x)$} & \textbf{$C_{12}(x)$} & \textbf{$C(x)$}\\ \hline
+$10^{3}$ & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+$10^{4}$ & 7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 7\\
+$10^{5}$ & 12 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 16\\
+$10^{6}$ & 23 & 19 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 43\\
+$10^{7}$ & 47 & 55 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 105\\
+$10^{8}$ & 84 & 144 & 27 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 255\\
+$10^{9}$ & 172 & 314 & 146 & 14 & 0 & 0 & 0 & 0 & 0 & 0 & 646\\
+$10^{10}$ & 335 & 619 & 492 & 99 & 2 & 0 & 0 & 0 & 0 & 0 & 1547\\
+$10^{11}$ & 590 & 1179 & 1336 & 459 & 41 & 0 & 0 & 0 & 0 & 0 & 3605\\
+$10^{12}$ & 1000 & 2102 & 3156 & 1714 & 262 & 7 & 0 & 0 & 0 & 0 & 8241\\
+$10^{13}$ & 1858 & 3639 & 7082 & 5270 & 1340 & 89 & 1 & 0 & 0 & 0 & 19279\\
+$10^{14}$ & 3284 & 6042 & 14938 & 14401 & 5359 & 655 & 27 & 0 & 0 & 0 & 44706\\
+$10^{15}$ & 6083 & 9938 & 29282 & 36907 & 19210 & 3622 & 170 & 0 & 0 & 0 & 105212\\
+$10^{16}$ & 10816 & 16202 & 55012 & 86696 & 60150 & 16348 & 1436 & 23 & 0 & 0 & 246683\\
+$10^{17}$ & 19539 & 25758 & 100707 & 194306 & 172234 & 63635 & 8835 & 240 & 1 & 0 & 585355\\
+$10^{18}$ & 35586 & 40685 & 178063 & 414660 & 460553 & 223997 & 44993 & 3058 & 49 & 0 & 1401664\\
+$10^{19}$ & 65309 & 63343 & 306310 & 849564 & 1159167 & 720406 & 196391 & 20738 & 576 & 2 & 3381806\\
+$10^{20}$ & 120625 & 98253 & 514381 & 1681744 & 2774702 & 2148017 & 762963 & 114232 & 5804 & 56 & 8220777\\
+$10^{21}$ & 224763 & 151566 & 846627 & 3230120 & 6363475 & 6015901 & 2714473 & 547528 & 42764 & 983 & 20138200\\ \hline
+\end{tabular} }
+\label{table1}
+\end{table}
+As can be implied from Table~\ref{table1}, for the maximum number of distinct prime factors $k(x) \ll \frac{\log x}{\log^{(2)} x}$,
+\begin{equation} \label{important2}
+C(x) = C_3(x) + C_4(x) + C_5(x) + \cdots + C_{k(x)}(x),
+\end{equation}
+where $\log^{(j)} x$ denotes the $j$-fold iteration of the natural logarithm for $j \ge 2$ (we shall use this notation from now on). Moreover, if we allow $C_k(x)$ to represent the number of Carmichael numbers $\le x$ with precisely $k \ge 3$ prime factors, then it is conjectured that
+\begin{equation} \label{important3}
+C_k(x) = \Omega_k(x^{1/k}/\log^k x).
+\end{equation}
+\begin{table}[t]
+\caption{Values of $h(x)$}
+\centering
+\begin{tabular}{ || c | c || }
+    \hline
+\textbf{Bound} & \textbf{$h(x)$}\\ \hline
+$10^{3}$ & 2.93319\\
+$10^{4}$ & 2.19547\\
+$10^{5}$ & 2.07632\\
+$10^{6}$ & 1.97946\\
+$10^{7}$ & 1.93388\\
+$10^{8}$ & 1.90495\\
+$10^{9}$ & 1.87989\\
+$10^{10}$ & 1.86870\\
+$10^{11}$ & 1.86421\\
+$10^{12}$ & 1.86377\\
+$10^{13}$ & 1.86240\\
+$10^{14}$ & 1.86293\\
+$10^{15}$ & 1.86301\\
+$10^{16}$ & 1.86406\\
+$10^{17}$ & 1.86472\\
+$10^{18}$ & 1.86522\\
+$10^{19}$ & 1.86565\\
+$10^{20}$ & 1.86598\\
+$10^{21}$ & 1.86619\\ \hline
+\end{tabular}
+\label{table2}
+\end{table}
+\indent Returning to the Erd\H{o}s-Shanks controversy, Pomerance \cite{8} sharpened the conjecture in \eqref{important1} for all large $x$ in order to be consistent with both Shanks' and Erd\H{o}s' observations. Define the function $h(x)$ as
+\begin{equation} \label{700}
+C(x) = x \cdot \exp\Big\{-h(x) \frac{\log x \log^{(3)} x}{\log^{(2)} x}\Bigr\}.
+\end{equation}
+According to Pomerance, distribution of Carmichael numbers is given by
+\begin{equation} \label{3}
+C(x) = x^{1-{\frac{\{1+o(1)\}\log^{(3)} x}{\log^{(2)} x}}},
+\end{equation}
+for $x$ sufficiently large. Unfortunately, according to Pinch \cite{19}, there appears to be no limiting value on $h$ as indicated by the recent counts of Carmichael numbers up to $10^{21}$. It is obvious that \eqref{3} holds iff $\lim h = 1$ in \eqref{700}. However, Pinch \cite{19} explains that the decrease in $h$ is reversed between $10^{13}$ and $10^{14}$, which is presented in Table~\ref{table2}. In fact, there is no clear evidence that suggests $\lim h = 1$. \newline
+\indent As a result, we present an alternate conjecture
+\begin{conj} \label{result1}
+\begin{equation} \label{4}
+C(x) \sim \frac{C_3(x) \mathscr{P}_{b}(x)}{\mathscr{P}_{b,2}(x)},
+\end{equation}
+where $\mathscr{P}_{b,2}(x)$ is the number of two-prime base $b$ pseudoprimes $\le x$ and $C_3(x)$ is the number of three-prime Carmichael numbers $\le x$.
+\end{conj}
+\indent From Conjecture~\ref{result1}, we derive a corollary that the number of Carmichael numbers up to $x$ sufficiently large is
+\begin{corollary} \label{result2}
+\begin{equation} \label{600}
+C(x) \sim \frac{\psi'{x^{\frac{5}{6}}}}{\log x \cdot L(x)} \sim \frac{{\psi'_{1}} {x^{\frac{1}{2}}} \log^2 x \displaystyle\int_2^{x^{\frac{1}{3}}}\frac{dt}{\log^3 t}}{L(x)},
+\end{equation}
+where $L(x)=\exp\{\frac{\log x \log^{(3)} x}{\log^{(2)} x}\}$, $\psi' = \frac{\tau_3}{C}$, $\psi'_1 = \frac{\tau_3}{27C}$. If we let $p$, $q$, and $d$ be odd primes, and we define $\omega_{a,b,c}(p)$ as the number of distinct residues modulo $p$ represented by $a,b,c$, then the constants $C$ and $\tau_3$ are explicitly given as such,
+\begin{equation}
+C = 	4T{\sum_{s \ge 1}}
+			\sum_{\substack{r > s \\ \gcd(r,s)=1}}
+			\frac{\delta(rs)\rho(rs(r-s)) }{ (rs)^{\frac{3}{2} }}
+\end{equation}
+\begin{equation*}
+T = 2{\prod_d}{\frac{1-2/d}{(1-1/d)^{2}}},
+\end{equation*}
+\begin{equation*}
+\rho(m) = {\prod_{d \mid m}}{\frac{d-1}{d-2}},
+\end{equation*}
+\begin{equation*}
+\delta(m) = \begin{cases}  2, & $if {$4\mid m$}$; \\
+\\
+1, & $if otherwise.$
+\end{cases}
+\end{equation*}
+\begin{equation}
+\tau_3 = {\kappa_3}{\lambda},
+\end{equation}
+\begin{equation*}
+\lambda := {121.5}{\prod_{p>3}}\left(\frac{1-{3/p}}{(1-{1/p})^3}\right),
+\end{equation*}
+\begin{equation*}
+\kappa_3 = {\sum_{n \ge 1}}
+		{\frac{\gcd(n,6)}{n^{4/3}}}
+		{\prod_{\substack{{p \mid n}\\{p > 3}}}}
+		{\frac{p}{p-3}}
+		{\sum_{\substack{{a<b<c, \,n=abc}\\{a,b,c \, pairwise \, coprime}}}}
+		{\delta^{'}(a,b,c)}
+		{\prod_{\substack{{p\nmid n}\\p>3}}}
+		{\frac{p-{\omega_{a,b,c}{(p)}}}{p-3}},
+\end{equation*}
+\begin{equation*} \label{20}
+\delta^{'}(a,b,c) = \begin{cases}  2, & $if {$a \equiv b \equiv c \not\equiv 0 \pmod 3$}$; \\
+\\
+1, & $if otherwise.$
+\end{cases}.
+\end{equation*}
+\end{corollary}
+\indent Based upon the computation of $C$ made by Galway \cite{3} and the evaluation of $\kappa_3$ by Chick and Davies \cite{14}, we believe that $\psi'$ will approach 69.51 and $\psi'_1$ will approach 2.57; although these values are not yet borne out by the data.
+We also demonstrate that Corollary~\ref{result2} fits the proven upper and lower bounds for $C(x)$, that $\psi'$ and $\psi'_1$ appear to approach constant values based upon Pinch's data, and we support Conjecture~\ref{result1} through computational efforts.\newline
+\indent In private communication \cite{28}, Pomerance suggests to us that the reason for $h(x)$ not approaching its conjectural limit of 1 is that ``some secondary terms may be present.  So, say in my conjecture,
+one replaces ``$\log^{(3)} x$'' with ``$\log^{(3)} x + \log^{(4)} x$''. It is the same conjecture, since the two are asymptotic...and so the Pinch phenomenon is banished''. Hence, if secondary terms do indeed exist, then another conjecture regarding $C(x)$ would be to sharpen the heuristic arguments in \cite{11} which, as a consequence, may better match the \emph{actual} counts of Carmichael numbers. Since these heuristic arguments are dependent upon the number of $y$-smooth numbers up to $x$, represented by $\Psi(x,y)$, with $y$ in the vicinity of $\exp\{(\log x)^{\frac{1}{2}}\}$, then it would suffice to utilize improvements concerning the asymptotic distribution of these numbers in the aforementioned region. As a result of these endeavors, we obtain the more precise heuristic:
+\begin{conj} \label{result3}
+Let $\pi(x)$ be the prime counting function, for $x$ sufficiently large $C(x)$ is
+\begin{equation} \label{heur}x^{1-{\frac{\{1+o(1)\}\log^{(3)} x + 1}{\log^{(2)} x}}}.
+\end{equation}
+\end{conj}
+\indent In Table~\ref{table3}, we define the function
+$$
+a(x) := \left(\frac{(\log^{(2)} x)^2 \pi((\log x)^{\log^{(2)} x})\exp\{-\{1+o(1)\}\log^{(2)} x \log^{(3)} x\}}{\log x}\right)^{\log x/(\log^{(2)} x)^2}.
+$$
+Although Conjecture~\ref{result3} states the same result and is a much more simplified version of $a(x)$, $a(x)$ is a slightly more precise version (for $x < 10^{100}$) of the conjecture and is thus used in the table instead of \eqref{heur}.\newline
+
+\indent The reader may wonder why \emph{two} conjectures are presented. The reason is that due to the lack of information regarding Carmichael numbers and their distribution. Corollary~\ref{result2} asserts that if the values of $\psi'$ and $\psi'_1$ can be accurately determined then an asymptotic formula for $C(x)$ easily follows. Conjecture~\ref{result3} indicates to us that if secondary terms exist, then the relation between the functions $\Psi(x,y)$ and $\Psi'(x,y)$ \emph{must} be examined further (we explain this concept fully in \S 3.4) to effectively prove an equality for $C(x)$. We should note that the values of $C(x)$ predicted by Corollary~\ref{result2} and Conjecture~\ref{result3} appear to be closer to the actual values of $C(x)$ than Pomerance's conjecture in \eqref{13}. Moreover, at least up to $10^{21}$, it appears that Conjecture~\ref{result3} is presenting more accurate values of $C(x)$ than Corollary~\ref{result2}; although, this may cease to be the case for larger bounds. In fact, \eqref{heur} is asymptotically the same as
+\eqref{3}; however, the usage of secondary terms in the former equation provides sharper estimates for smaller bounds than does \eqref{3}.\begin{table}[ht]
+\caption{Comparisons between the actual and predicted Carmichael number counts}
+\centering {\small
+\begin{tabular}{ || c | c | c | c | c | c || }
+    \hline
+\textbf{Bound} & $C(x)$ & $\frac{69.51{x^{\frac{5}{6}}}}{\log x \cdot L(x)}$ & $\frac{2.57{x^{\frac{1}{2}}} \log^2 x \int_2^{x^{\frac{1}{3}}}\frac{dt}{\log^3 t}}{L(x)}$ & $a(x)$ & $x^{1-{\frac{\{1+o(1)\}\log^{(3)} x}{\log^{(2)} x}}}$\\ \hline
+$10^{3}$ & 1 & 301.95 & 1092.82 & 3.50 & 94.89\\
+$10^{4}$ & 7 & 594.43 & 2835.17 & 7.81 & 365.59\\
+$10^{5}$ & 16 & 1316.29 & 6640.29 & 18.18 & 1485.33\\
+$10^{6}$ & 43 & 3131.53 & 14806.24 & 43.43 & 6224.10\\
+$10^{7}$ & 105 & 7826.17 & 32411.27 & 107.50 & 26636.80\\
+$10^{8}$ & 255 & 20282.91 & 71150.56 & 274.074 & 115803.60\\
+$10^{9}$ & 646 & 54070.80 & 159157.24 & 724.86 & 509769.35\\
+$10^{10}$ & 1547 & 147451.71 & 367012.00 & 1926.56 & 2267174.18\\
+$10^{11}$ & 3605 & 409716.38 & 878601.38 & 5245.56 & 10171329.99\\
+$10^{12}$ & 8241 & 1156637.85 & 2188667.23 & 14488.22 & 45977679.09\\
+$10^{13}$ & 19279 & 3309970.24 & 5664006.88 & 40424.93 & 209219668.02\\
+$10^{14}$ & 44706 & 9585268.36 & 15162465.67 & 114558.014 & 957710051.36\\
+$10^{15}$ & 105212 & 28049810.91 & 41763706.96 & 329251.92 & 4407472357.25\\
+$10^{16}$ & 246683 & 82852448.55 & 117743387.56 & 955940.22 & 20382638275.29\\
+$10^{17}$ & 585355 & 246785788.13 & 338238941.70 & 2796027.81 & 94682736406.04\\
+$10^{18}$ & 1401644 & 740679196.52 & 986503770.93 & 8260103.95 & 441642695710.74\\
+$10^{19}$ & 3381806 & 2238429061.23 & 2913197684.15 & 24637581.64 & 2067911761776.64\\
+$10^{20}$ & 8220777 & 6807841639.58 & 8692508977.60 & 74026750.39 & 9717200728399.57\\
+$10^{21}$ & 20138200 & 20826296835.28 & 26167265004.43 & 224193470.90 & 45814162191297.01\\ \hline
+\end{tabular}}
+\label{table3}
+\end{table}
+\section{Preliminaries}
+Before delving into the main results of this paper, we shall first present results regarding pseudoprimes and Carmichael numbers that we will explicitly use later on in our derivations.
+\subsection{Pseudoprimes}
+Currently, the tightest bounds for pseudoprime distribution have been proven by Pomerance \cite{5} \cite{11}.
+\begin{theorem}[R. A. Mollin 1989, Pomerance 1981] \label{pseudo1}
+For the base $2$ pseudoprime counting function, $\exp\{(\log x)^{\frac{85}{207}}\} \le \mathscr{P}_2(x) \le x \cdot L(x)^{\frac{-1}{2}}$, where $L(x) = \exp\{\frac{\log x \log^{(3)} x}{\log^{(2)} x}\}$. These bounds are applicable to $\mathscr{P}_b(x)$ for $x \ge x_0(b)$.
+\end{theorem}
+\begin{theorem}[Pomerance 1981] \label{pseudo2}
+If we allow $l_2(n)$ to denote the exponent with multiplicative order of $2$ modulo $n$, then $n$ is a pseudoprime \emph{(base 2)} iff $l_2(n) \mid n-1$.
+\end{theorem}
+\begin{conj}[Pomerance 1981] \label{pseudo3}
+The number of solutions $w$ for all $n$ and $x$ sufficiently large is,
+\begin{equation} \label{5}
+\#\{w \le x: l_2(w) = n\} \le x \cdot {L(x)}^{-1 + \theta(x)}, \lim_{x\to\infty}\theta(x) = 0.
+\end{equation}
+As a result, the number of base $b$ pseudoprimes for sufficiently large $x \ge x_0(b)$ is conjectured to be,
+\begin{equation} \label{6}
+\mathscr{P}_b(x) \sim x \cdot {L(x)}^{-1}.
+\end{equation}
+\end{conj}
+Galway \cite{3} has recently conjectured a formula for the distribution of pseudoprimes with two distinct prime factors, $p$ and $q$, based on a longstanding conjecture of Hardy and Wright concerning the density of prime pairs. He noticed that a majority of these pseudoprimes satisfy the relation $\frac{p - 1}{q - 1} = \frac{r}{s}$, where $r$ and $s$ are small coprime integers. Thus, we heuristically have
+\begin{conj}[Galway 2004] \label{pseudo4}
+Allow $p$, $q$, and $d$ be odd primes, allow ${\mathscr{P}_{b,2}}(x)$ to represent the counting function for odd pseudoprimes with two distinct prime factors, and ${\mathscr{P}_{b,2}}(x)$ $:= \#\{n \le x: n=pq, p<q, \mathscr{P}_b(n)\}$. Hence, as $x\to\infty$,
+\begin{equation} \label{7}
+\mathscr{P}_{b,2}(x) \sim \frac{C{x^{\frac{1}{2}}}}{\log^2 x},
+\end{equation}
+where
+\begin{equation} \label{8}
+C = 	4T{\sum_{s \ge 1}}
+			\sum_{\substack{r > s \\ \gcd(r,s)=1}}
+			\frac{\delta(rs)\rho(rs(r-s)) }{ (rs)^{\frac{3}{2} }} \approx 30.03,
+\end{equation}
+\begin{equation} \label{9}
+T = 2{\prod_d}{\frac{1-2/d}{(1-1/d)^{2}}} \approx 1.32,
+\end{equation}
+\begin{equation} \label{10}
+\rho(m) = {\prod_{d \mid m}}{\frac{d-1}{d-2}},
+\end{equation}
+\begin{equation} \label{11}
+\delta(m) = \begin{cases}  2, & $if {$4\mid m$}$; \\
+\\
+1, & $if otherwise.$
+\end{cases}
+\end{equation}
+\end{conj}
+Galway's conjecture is somewhat supported by Table~\ref{table4} for it appears that $C$ is slowly approaching its predicted constant value of $30.03$:
+\begin{table}[ht]
+\caption{Values of $C$}
+\centering
+\begin{tabular}{ || c | c | c || }
+    \hline
+\textbf{Bound} & \textbf{$\mathscr{P}_{b,2}(x)$} & \textbf{$C$}\\ \hline
+$10^{3}$ & 0 & 0\\
+$10^{4}$ & 11 & 9.331\\
+$10^{5}$ & 34 & 14.251\\
+$10^{6}$ & 107 & 20.423\\
+$10^{7}$ & 311 & 25.550\\
+$10^{8}$ & 880 & 29.860\\
+$10^{9}$ & 2455 & 33.340\\
+$10^{10}$ & 6501 & 34.468\\
+$10^{11}$ & 17207 & 34.908\\
+$10^{12}$ & 46080 & 35.181\\
+$10^{13}$ & 123877 & 35.100\\
+$10^{14}$ & 334567 & 34.767\\
+$10^{15}$ & 915443 & 34.534\\
+
+$10^{16}$ & 2520503 & 34.210\\
+
+$10^{17}$ & 7002043 & 33.928\\ \hline
+\end{tabular}
+\label{table4}
+\end{table}
+\newline
+\indent Let $\omega(n)$ represent the number of different prime factors of $n$. Also, given an integer sequence $\{m_i\}_{i=1}^{\infty}$, note that a prime $p$ is said to be a primitive prime factor of $m_i$ if $p$ divides $m_i$ but does not divide any $m_j$ for $j < i$.
+\begin{lemma}[Erd\H{o}s 1949] \label{pseudo5}
+Let $n$ be a base $2$ pseudoprime. For every $k$, there exist infinitely many squarefree base $2$ pseudoprimes with $\omega(n)=k$ \emph{\cite{2}}.
+\end{lemma}
+\begin{theorem} \label{pseudo6}
+There exist infinitely many squarefree base $b$ pseudoprimes $n$ for any $b \ge 2$ with $\omega(n) = k$ distinct prime factors.
+\end{theorem}
+\begin{proof}
+Let $\{n_j\}_{j=1}^{\infty}$ be an integer sequence of base $b$ pseudoprimes such that each term is greater than its preceding term, and $\omega(n_i) = {k}-1$, for any $n_i$ in $\{n_j\}_{j=1}^{\infty}$. Let $p_i$ be one of the primitive prime factors of ${b^{{n_i}-1}}-1$. Since $b^{{n_i}-1} \equiv 1 \pmod {{p_i}\cdot{n_i}}$ and $b^{{p_i}-1} \equiv 1 \pmod {p_i}$, ${p_i}\cdot{n_i}$ is a pseudoprime to base $b$. We observe that $b^{p_i-1} \equiv 1 \pmod {n_i}$ because $p_i-1 \equiv 0 \pmod {(n_i-1)}$. As a result, it follows that $b^{n_i-1} \equiv 1 \pmod {n_i}$. Also, $b^{{n_i}{p_i}-1} \equiv 1 \pmod {{p_i}\cdot{n_i}}$ since $b^{{n_i}{p_i}-1} = {b^{(n_i-1)(p_i-1)}}\cdot{b^{{n_i}-1}}\cdot{b^{{p_i}-1}}$. Hence, ${p_i}\cdot{n_i}$ is squarefree and $\omega({p_i}\cdot{n_i})=k$. Moreover, every integer satisfying ${p_i}\cdot{n_i}$ is different because $n_i$ is composite, $p_i > n_i$, and $p_i \equiv 1 \pmod {({n_i}-1)}$.
+\end{proof}
+\begin{theorem} \label{pseudo7}
+For any base $b$ pseudoprime, $b \ge 2$, having $k \ge 2$ distinct prime factors and for $x$ sufficiently large,
+\begin{equation} \label{21}
+\mathscr{P}_{b,{{k}+1}}(x) \ge \mathscr{P}_{b,k}(\log_{b} x).
+\end{equation}
+\end{theorem}
+\begin{proof}
+Let $n$ be a pseudoprime with $k > 1$ distinct prime factors. Since $n-1$ is the smallest exponent $\epsilon$ such that $p \mid b^{\epsilon}-1$ and $\epsilon$ divides an exponent $h$ such that $p \mid b^{h}-1$, it follows from Fermat's little theorem that $p \mid b^{p-1}-1$. Thus, from Zsigmondy's theorem, there exists a prime $p > n$ for which $p\mid{{b^{n-1}}-1}$ and $n-1\mid p-1$ for $b \ge 2$. As a result,
+\begin{equation} \label{22}
+np\mid{{b^{n-1}}-1}.
+\end{equation}
+On the other hand, since $np-1 = n(p-1)+n-1$ and $n-1 \mid p-1$, $n-1 \mid np-1$ and $np \mid {b^{np-1}}-1$. If we let $n,m \in \mathbb{N}^*$, the set of positive natural numbers, such that $n \ne m$ and $p > n$, $q > m$, then ${n}{p} \ne {m}{q}$ for primes $p$ and $q$. However, suppose we let ${n}{p} = {m}{q}$ and $p > n$, then $m \mid p$. Hence, $m \ge p$ and $m > n$. Unfortunately, the latter statement is contradictory, and as a result ${n}{p} \ne {m}{q}$. If $n$ and $m$ are two different base $b$ pseudoprimes with $k \ge 2$ distinct prime factors, then ${n}{p}$ and ${m}{q}$ are distinct pseudoprimes as well. \newline
+\indent From \eqref{22},
+\begin{equation} \label{23}
+p\mid({b^{\frac{n-1}{2}}}-1)({b^{\frac{n-1}{2}}}+1),
+\end{equation}
+and
+\begin{equation} \label{24}
+p \le b^{\frac{n-1}{2}}+1 < b^{\frac{n}{2}}.
+\end{equation}
+If $n \le \log_{b} x$, then $pn < {x^{\frac{1}{2}}}{\log_{b} x} < x$. It then follows that for every base $b$ pseudoprime $n$ with $k$ distinct prime factors, $n={p_1}{p_2}\cdots{p_{k}} \le \log_{b} x$, there is at least one base $b$ pseudoprime such that ${p_1}{p_2}\cdots{p_{k}}{p} < x$.
+\end{proof}
+\subsection{Carmichael Numbers}
+Improving upon Erd\H{o}s' results in \cite{17}, Pomerance \cite{11} sharpened the upper bound on $C(x)$.
+\begin{theorem}[Pomerance 1981] \label{carm1}
+\begin{equation} \label{12}
+C(x) \le x \cdot \exp\Big\{-\frac{\log x}{\log^{(2)} x}\left(\log^{(3)} x + \log^{(4)} x + \frac{\log^{(4)} x - 1}{\log^{(3)} x}+O\left(\left(\frac{\log^{(4)} x}{\log^{(3)} x}\right)^2\right)\right)\Bigr\}.
+\end{equation}
+\end{theorem}
+In the other direction, Alford, Granville, and Pomerance proved a lower bound for $C(x)$ for $x$ sufficiently large \cite{15}.
+\begin{theorem}[Alford-Granville-Pomerance 1994] \label{carm2}
+\begin{equation} \label{13}
+C(x) > x^{\frac{2}{7}},
+\end{equation}
+thus there are infinitely many Carmichael numbers.
+\end{theorem}
+Recently, Harman improved this lower bound \cite{18}.
+\begin{theorem}[Harman 2005] \label{carm3}
+\begin{equation} \label{14}
+C(x) > x^{0.33336704},
+\end{equation}
+It is not yet even known if $C(x) > x^{\frac{1}{2}}$.
+\end{theorem}
+We provide in Table~\ref{table5} a computation of the exponent $\beta$ for which $C(x) = x^{\beta}$ for a sufficient value of $x$ up to $10^{21}$.
+\begin{table}[ht]
+\caption{Values of $\beta$}
+\centering
+\begin{tabular}{ | c || c | c | c | c | c | c | c | c | }
+    \hline
+\textbf{Bound} & $10^{3}$ & $10^{4}$ & $10^{5}$ & $10^{6}$ & $10^{7}$ & $10^{8}$ & $10^{9}$ & $10^{10}$\\ \hline
+\textbf{$C(x)$} & 1 & 7 & 16 & 43 & 105 & 255 & 646 & 1547\\ \hline
+\textbf{$\beta$} & 0 & 0.21127 & 0.24082 & 0.27224 & 0.28874 & 0.30082 & 0.31225 & 0.31895\\ \hline
+\end{tabular}
+\vspace*{2mm}
+\begin{tabular}{ | c || c | c | c | c | c | c | }
+    \hline
+\textbf{Bound} & $10^{11}$ & $10^{12}$ & $10^{13}$ & $10^{14}$ & $10^{15}$ & $10^{16}$\\ \hline
+\textbf{$C(x)$} & 3605 & 8241 & 19279 & 44706 & 105212 & 246683\\ \hline
+\textbf{$\beta$} & 0.32336 & 0.32633 & 0.32962 & 0.33217 & 0.33480 & 0.33700\\ \hline
+\end{tabular}
+\vspace*{2mm}
+\begin{tabular}{ | c || c | c | c | c | c | }
+    \hline
+\textbf{Bound} & $10^{17}$ & $10^{18}$ & $10^{19}$ & $10^{20}$ & $10^{21}$\\ \hline
+\textbf{$C(x)$} & 585355 & 1401644 & 3381806 & 8220777 & 20138200\\ \hline
+\textbf{$\beta$} & 0.33926 & 0.34148 & 0.34364 & 0.34575 & 0.34781\\ \hline
+\end{tabular}
+\label{table5}
+\end{table}
+\newline
+\begin{conj}[Granville-Pomerance 2001] \label{carm5}
+If we let $C_3(x)$ be the counting function for Carmichael numbers with $3$ distinct prime factors, then
+\begin{equation} \label{16}
+C_3(x)
+			\sim {\tau_3} \frac{ x^{\frac{1}{3}} }{\log^3 x}
+			\sim \frac{\tau_3}{27} \int_2^{x^{\frac{1}{3}}} \frac{dt}{\log^3 t},
+\end{equation}
+where
+\begin{equation} \label{17}
+\tau_3 = {\kappa_3}{\lambda} \approx 2100,
+\end{equation}
+\begin{equation} \label{18}
+\lambda := {121.5}{\prod_{p>3}}\left(\frac{1-{3/p}}{(1-{1/p})^3}\right) \approx 77.1727,
+\end{equation}
+\begin{equation} \label{19}
+\kappa_3 = {\sum_{n \ge 1}}
+		{\frac{\gcd(n,6)}{n^{4/3}}}
+		{\prod_{\substack{{p \mid n}\\{p > 3}}}}
+		{\frac{p}{p-3}}
+		{\sum_{\substack{{a<b<c, \,n=abc}\\{a,b,c \, pairwise \, coprime}}}}
+		{\delta^{'}(a,b,c)}
+		{\prod_{\substack{{p\nmid n}\\p>3}}}
+		{\frac{p-{\omega_{a,b,c}{(p)}}}{p-3}},
+\end{equation}
+\begin{equation} \label{20}
+\delta^{'}(a,b,c) = \begin{cases}  2, & $if {$a \equiv b \equiv c \not\equiv 0 \pmod 3$}$; \\
+\\
+1, & $if otherwise.$
+\end{cases},
+\end{equation}
+and $\omega_{a,b,c}(p)$ is the number of distinct residues modulo $p$ represented by $a,b,c$.
+\end{conj}
+\indent Recent provisional estimates by Chick and Davies \cite{14} of the slowly converging infinite series $\kappa_3$ suggest that $\kappa_3 = 27.05$ which gives $\tau_3 = 2087.5$.
+\section{On the Distribution of Carmichael Numbers}
+\subsection{Two Conjectures Regarding $k$-prime Pseudoprimes and $k$-prime Carmichael numbers}
+We conjecture the following relations:
+\begin{conj} \label{imp1}
+For any fixed $k \ge 2$, let $\mathscr{P}_{b,k}(x)$ denote the counting function for base $b$ pseudoprimes with $k$ distinct prime factors, and let $\mathscr{P}_b(x)$ denote the counting function for base $b$ pseudoprimes.
+Asymptotically,
+\begin{equation} \label{25}
+{\frac{\mathscr{P}_{b,k}(x)}{\mathscr{P}_b(x)}} = o(1).
+\end{equation}
+In other terms, for any fixed base $b > 1$, the $k$-prime base $b$ pseudoprimes, $\mathscr{P}_{b,k}(x)$, form a set of relative density 0 in the set of \emph{all} base $b$ pseudoprimes, $\mathscr{P}_b(x)$, for that same value of $b$.
+\end{conj}
+\indent We are only able to partially support Conjecture~\ref{imp1}. First, we express the ratio $\frac{\mathscr{P}_{b,k}(x)}{\mathscr{P}_b(x)}$ as,
+\begin{equation} \label{26}
+\frac{\mathscr{P}_{b,k}(x)}{\mathscr{P}_b(x)} = \frac{\mathscr{P}_{b,k}(x)}{\displaystyle\sum_{i=2}^{k(x)}\mathscr{P}_{b,i}(x)},
+\end{equation}
+where the maximum number of distinct prime factors, $k(x)$, of any integer $\le x$ is $k(x) \ll \frac{\log x}{\log^{(2)} x}$. Let $\log^{(j)}_{b} x$ denote the the $j$-fold iteration of the base $b$ logarithm. Thus,
+\begin{equation} \label{27}
+\displaystyle\sum_{i=2}^{g(x)}\mathscr{P}_{b,i}(x) = \sum_{i=2}^{{k}-1}{\mathscr{P}_{b,i}(x)} + \mathscr{P}_{b,k}(x)+\sum_{i={{k}+1}}^{k(x)}{\mathscr{P}_{b,i}(x)}.
+\end{equation}
+Due to Theorem~\ref{pseudo7}, for any $h \le k$ in \eqref{27}, $\mathscr{P}_{b,k}(x) \ge \mathscr{P}_{b,h}(\log^{({k}-{h})}_{b} x)$, and for any $w \ge k$ in \eqref{27}, $\mathscr{P}_{b,w}(x) \ge \mathscr{P}_{b,k}(\log^{({w}-{k})}_{b} x)$. Hence,
+\begin{equation} \label{28}
+\sum_{i=2}^{{k}-1}{\mathscr{P}_{b,i}(x)} \le \mathscr{P}_{b,2} (\log^{(k-2)}_{b} x)+ \mathscr{P}_{b,3}(\log^{(k-3)}_{b} x)+\cdots+\mathscr{P}_{b,{k-1}}(\log_{b} x)
+\end{equation}
+We cut off the terms from proceeding until $\frac{\log x}{\log^{(2)} x}$ because if such were the case, then no $x$ could be sufficiently large to satisfy \eqref{29},
+\begin{equation} \label{29}
+\sum_{i={{k}+1}}^{k(x)}{\mathscr{P}_{b,i}(x)} \ge \mathscr{P}_{b,{k+1}}(\log_{b} x)+\cdots+\mathscr{P}_{b,{r(x)}}(\log^{({r(x)}-{k})}_{b} x),
+\end{equation}
+where $r(x)$ is any function that grows slower than $\log^* x$, the iterated logarithm. We explicitly define $\log^* x$ as
+\begin{equation} \label{30}
+\log^* x :=   \begin{cases}     0                  & \mbox{if } x \le 1; \\     1 + \log^*(\log x) & \mbox{if } x > 1    \end{cases} .
+\end{equation}
+\begin{remark}
+We should note that the support for Conjecture~\ref{imp1} is rather weak. This is largely due to the weakness of Szymiczek's construction, $\mathscr{P}_{b,{{k}+1}}(x) \ge \mathscr{P}_{b,k}(\log_{b} x)$, in Theorem~\ref{pseudo7}. We believe that the latter relation can be strengthened if a polynomial decrease can be proven. In other words, if $\mathscr{P}_{b,{{k}+1}}(x) \ge \mathscr{P}_{b,k}(x^{c})$ for some $c \in (0,1)$. Similarly, in our support for Conjecture~\ref{imp1}, we defined the function $r(x)$ as any function that grows slower than $\log^* x$, the iterated logarithm. Although it is not hard to see that any function growing faster than $\log^* x$ will fail, it is not obvious whether any function growing at the same rate as $\log^* x$ will succeed. However, we have several reasons to strongly believe that $r(x) = \log^* x$. First, for practical values of $x \le 2^{65536}$ the iterated logarithm grows much more slowly than the logarithm.
+Second, the iterated logarithm's relation to the super-logarithm also supports its slow growth. Third, higher bases give smaller iterated logarithms, and $\log^* x$ is well defined for any base greater than $\exp\Big\{\frac{1}{e}\Bigr\}$. This implies that for any base $b \ge 2$, the iterated logarithm will grow even more slowly for higher pseudoprime bases.
+\end{remark}
+\begin{conj} \label{imp2}
+For any fixed $k \ge 3$, let $C_k(x)$ denote the number of $k$-prime Carmichael numbers up to $x$, and let $C(x)$ denote the Carmichael number counting function.
+Asymptotically,
+\begin{equation} \label{31}
+{\frac{C_k(x)}{C(x)}} = o(1).
+\end{equation}
+\end{conj}
+\subsection{Support for Conjecture~\ref{imp1} and Conjecture~\ref{imp2}}
+\indent So far, the claim established by Conjecture~\ref{imp1} is not yet borne out by the data in Table~\ref{table6}. We believe that the ratio $\frac{\mathscr{P}_{b,2}(x)}{\mathscr{P}_2(x)}$ will approach 0, but may do so slowly at first.
+\begin{table}[ht]
+\caption{Values of $\frac{\mathscr{P}_{b,2}(x)}{\mathscr{P}_2(x)}$}
+\centering
+\begin{tabular}{ || c | c | c | c || }
+    \hline
+\textbf{Bound} & \textbf{$\mathscr{P}_{b,2}(x)$} & \textbf{$\mathscr{P}_2(x)$} & \textbf{$\frac{\mathscr{P}_{b,2}(x)}{\mathscr{P}_2(x)}$}\\ \hline
+$10^{3}$ & 0 & 3 & 0.00\\
+$10^{4}$ & 11 & 22 & 0.50\\
+$10^{5}$ & 34 & 78 & 0.44\\
+$10^{6}$ & 107 & 245 & 0.44\\
+$10^{7}$ & 311 & 750 & 0.41\\
+$10^{8}$ & 880 & 2057 & 0.43\\
+$10^{9}$ & 2455 & 5597 & 0.44\\
+$10^{10}$ & 6501 & 14884 & 0.44\\
+$10^{11}$ & 17207 & 38975 & 0.44\\
+$10^{12}$ & 46080 & 101629 & 0.45\\
+$10^{13}$ & 123877 & 264239 & 0.47\\
+$10^{14}$ & 334567 & 687007 & 0.49\\
+$10^{15}$ & 915443 & 1801533 & 0.51\\
+$10^{16}$ & 2520503 & 4744920 & 0.53\\
+$10^{17}$ & 7002043 & 12604009 & 0.56\\ \hline
+\end{tabular}
+\label{table6}
+\end{table}
+On the other hand, it appears that the ratio $\frac{C_3(x)}{C(x)}$ in Table~\ref{table7} rapidly approaches $0$, thereby supporting Conjecture~\ref{imp2}.
+\begin{table}[ht]
+\caption{Values of $\frac{C_3(x)}{C(x)}$}
+\centering
+\begin{tabular}{ || c | c | c | c || }
+    \hline
+\textbf{Bound} & \textbf{$C_3(x)$} & \textbf{$C(x)$} & \textbf{$\frac{C_3(x)}{C(x)}$}\\ \hline
+$10^{3}$ & 1 & 1 & 1.00\\
+$10^{4}$ & 7 & 7 & 1.00\\
+$10^{5}$ & 12 & 16 & 0.75\\
+$10^{6}$ & 23 & 43 & 0.53\\
+$10^{7}$ & 47 & 105 & 0.45\\
+$10^{8}$ & 84 & 255 & 0.33\\
+$10^{9}$ & 172 & 646 & 0.27\\
+$10^{10}$ & 335 & 1547 & 0.22\\
+$10^{11}$ & 590 & 3605 & 0.16\\
+$10^{12}$ & 1000 & 8241 & 0.12\\
+$10^{13}$ & 1858 & 19279 & 0.096\\
+$10^{14}$ & 3284 & 44706 & 0.073\\
+$10^{15}$ & 6083 & 105212 & 0.058\\
+$10^{16}$ & 10816 & 246683 & 0.044\\
+$10^{17}$ & 19539 & 585355 & 0.033\\
+$10^{18}$ & 35586 & 1401644 & 0.025\\
+$10^{19}$ & 65309 & 3381806 & 0.019\\
+$10^{20}$ & 120625 & 8220777 & 0.015\\
+$10^{21}$ & 224763 & 20138200 & 0.011\\ \hline
+\end{tabular}
+\label{table7}
+\end{table}
+\newline
+\indent Furthermore, Pomerance, Selfridge, and Wagstaff's famous results \cite{10} support both conjectures. In Conjecture 1 of their paper, they believe that for each $\epsilon > 0$, there is an $x_0(\epsilon)$ such that for all $x \ge x_0(\epsilon)$,
+\begin{equation} \label{1980}
+C(x) > x \cdot \exp\Big\{\frac{-\{2+\epsilon\}\log x \cdot \log^{(3)} x}{\log^{(2)} x}\Bigr\}.
+\end{equation}
+Pomerance, Selfridge, and Wagstaff \cite{10} show that $\mathscr{P}_{b,k}(x) \le O_k(x^{2k/(2k+1)})$. If \eqref{1980} is true, then the pseudoprimes ``with exactly $k$ prime factors form a set of relative density 0 in the set of all [pseudoprimes]'' \cite{10}. Similarly, in Theorem 7 of Granville and Pomerance \cite{8}, it is proven that $C_k(x) \le x^{2/3+o_k(1)}$, and if \eqref{1980} holds, ``then for each $k$, $C_k(x) = o(C(x))$'' \cite{10}.\newline
+\indent Interestingly, we can also support the statements in Conjecture~\ref{imp1} and Conjecture~\ref{imp2} by relating them to their composite superset. Let the number of composites $\le x$ with $k$ distinct prime factors be denoted by $\pi_k(x)$ and let the number of composites $\le x$ with $k$ prime factors $($not necessarily distinct$)$ be represented by $\tau_k(x)$. Hence, we can prove upper and lower bounds for $\pi_k(x)$. In 22.18.2 of Hardy and Wright \cite{7} for $k \ge 1$,
+\begin{equation} \label{32}
+k!\pi_k(x) \le \Pi_k(x) \le k!\tau_k(x),
+\end{equation}
+where $\Pi_k(x) = \frac{\vartheta_k(x)}{\log x}+O(\frac{x}{\log x})$ in 22.18.5. In 22.18.24, since $\vartheta_k(x) = \Pi_k(x)\log x - \displaystyle\int_2^x {\frac{\Pi_k(x)}{t}}{dt} \sim kx(\log^{(2)} x)^{k-1}$ for $k \ge 2$ and $\displaystyle\int_2^x {\frac{\Pi_k(x)}{t}}{dt} = O(x)$, $\Pi_k(x) \sim \frac{kx{(\log^{(2)} x)^{k-1}}}{\log x}$. As a result, it follows that
+\begin{equation} \label{33}
+\pi_k(x) \le (1+o(1))\frac{x(\log^{(2)} x)^{k-1}}{(k-1)!\log x}.
+\end{equation}
+In the same respect, a lower bound for $\pi_k$ can be formulated. In 22.18.3 it is proven that,
+\begin{equation} \label{34}
+\tau_k(x)-\pi_k(x)\le\displaystyle\sum_{p_1p_2\cdots p_{k-1}^2\le x}1\le\displaystyle\sum_{p_1p_2\cdots p_{k-1}\le x}1:=\Pi_{k-1}(x).
+\end{equation}
+Since $\pi_k(x)\ge \tau_k(x) - \Pi_{k-1}(x)$ and $\pi_k(x)\ge \frac{\Pi_k(x)}{k!}-\Pi_{k-1}(x)$,
+\begin{equation*}
+\pi_k(x)\ge O\left(\frac{x(\log^{(2)} x)^{k-1}}{(k-1)!\log x}\right) - \frac{(k-1)x(\log^{(2)} x)^{k-2}}{\log x} + O\left(\frac{x}{\log x}\right).
+\end{equation*}
+We can improve the upper bound given in \eqref{33} to an equality,
+\begin{equation} \label{36}
+\pi_k(x) \sim \frac{x(\log^{(2)} x)^{k-1}}{(k-1)!\log x}.
+\end{equation}
+By the Erd\H{o}s-Kac Theorem \cite{21}, we can formulate the probability that a number near $x$ has $k$ distinct prime factors using the fact that these numbers are distributed with a mean and variance of $\log^{(2)} x$. Hence, setting $\log^{(2)} x$ as the $\lambda$ of the Poisson distribution $\operatorname P(k;\lambda)$ and taking its limit for any fixed $k$,
+\begin{equation} \label{37}
+\lim_{x\to\infty} \operatorname P(k;\lambda) = \lim_{x\to\infty}\frac{(\log^{(2)} x)^{k-1}\exp\{-\log^{(2)} x\}}{(k-1)!} = 0,
+\end{equation}
+where the asymptotic error bound is given by $O(\frac{1}{\log^{(2)} x})$ \cite{13}. However, we caution the reader to consider that just because the probability of a general composite near $x$ having $k$ distinct prime factors goes to $0$, does not necessarily fully prove that this probability will hold for either $\mathscr{P}_{b,k}(x)$ or $C_k (x)$.
+\subsection{An Alternate Conjecture}
+From Conjecture~\ref{imp1} and Conjecture~\ref{imp2}, it is evident that the $k$-prime pseudoprimes and the $k$-prime Carmichael numbers are much more sparsely distributed than the set of all pseudoprimes and Carmichael numbers, respectively. We hypothesize that if $k$ is minimized for both the $k$-prime pseudoprimes and the $k$-prime Carmichael numbers, then the ratios $\frac{\mathscr{P}_{b,2}(x)}{\mathscr{P}_b(x)}$ and $\frac{C_3(x)}{C(x)}$ will roughly achieve the same values for large enough $x$. We also recommend using the minimum number of distinct prime factors for both the pseudoprimes and the Carmichael numbers because first, there is no overlap between the three-prime Carmichael numbers and two-prime pseudoprimes and second, the distinct prime factors cannot be arbitrarily chosen. This idea leads us to believe that,
+\begin{equation*}
+C(x) \sim \frac{{C_3(x)}{\mathscr{P}_b(x)}}{\mathscr{P}_{b,2}(x)}.
+\end{equation*}
+As a result, assuming Conjecture~\ref{pseudo3}, Conjecture~\ref{pseudo4}, Conjecture~\ref{carm5}, and Conjecture~\ref{result1}, the amount of Carmichael numbers $\le x$ given by the counting function $C(x)$ is conjectured to be for $x$ sufficiently large,
+\begin{equation} \label{39}
+C(x) \sim \frac{\psi'{x^{\frac{5}{6}}}}{\log x \cdot L(x)} \sim \frac{{\psi'_{1}} {x^{\frac{1}{2}}} \log^2 x \displaystyle\int_2^{x^{\frac{1}{3}}}\frac{dt}{\log^3 t}}{L(x)},
+\end{equation}
+where
+\begin{equation} \label{40}
+\psi' = \frac{\tau_3}{C}
+\end{equation}
+and
+\begin{equation} \label{41}
+\psi'_{1} = \frac{\tau_3}{27C}.
+\end{equation}
+In Table~\ref{table8}, the computed values of $\psi'$ and $\psi'_1$ up to $10^{21}$ are given.
+\begin{table}[ht]
+\caption{Values of $\psi'$ and $\psi'_1$}
+\centering
+\begin{tabular}{ || c | c | c | c | c | c || }
+    \hline
+\textbf{Bound} & $C(x)$ & $\frac{69.51{x^{\frac{5}{6}}}}{\log x \cdot L(x)}$ & $\frac{2.57{x^{\frac{1}{2}}} \log^2 x \int_2^{x^{\frac{1}{3}}}\frac{dt}{\log^3 t}}{L(x)}$ & $\psi'$ & $\psi'_1$\\ \hline
+$10^{3}$ & 1 & 301.95 & 1092.82 & 0.2302 & 0.0024\\
+$10^{4}$ & 7 & 594.43 & 2835.17 & 0.8185 & 0.0063\\
+$10^{5}$ & 16 & 1316.29 & 6640.29 & 0.8449 & 0.0062\\
+$10^{6}$ & 43 & 3131.53 & 14806.24 & 0.9545 & 0.0075\\
+$10^{7}$ & 105 & 7826.17 & 32411.27 & 0.9326 & 0.0083\\
+$10^{8}$ & 255 & 20282.91 & 71150.56 & 0.8739 & 0.0092\\
+$10^{9}$ & 646 & 54070.80 & 159157.24 & 0.8305 & 0.0104\\
+$10^{10}$ & 1547 & 147451.71 & 367012.00 & 0.7293 & 0.0108\\
+$10^{11}$ & 3605 & 409716.38 & 878601.38 & 0.6116 & 0.0105\\
+$10^{12}$ & 8241 & 1156637.85 & 2188667.23 & 0.4953 & 0.0097\\
+$10^{13}$ & 19279 & 3309970.24 & 5664006.88 & 0.4049 & 0.0087\\
+$10^{14}$ & 44706 & 9585268.36 & 15162465.67 & 0.3242 & 0.0076\\
+$10^{15}$ & 105212 & 28049810.91 & 41763706.96 & 0.2607 & 0.0065\\
+$10^{16}$ & 246683 & 82852448.55 & 117743387.56 & 0.2070 & 0.0054\\
+$10^{17}$ & 585355 & 246785788.13 & 338238941.70 & 0.1649 & 0.0044\\
+$10^{18}$ & 1401644 & 740679196.52 & 986503770.93 & 0.1315 & 0.0037\\
+$10^{19}$ & 3381806 & 2238429061.23 & 2913197684.15 & 0.1050 & 0.0030\\
+$10^{20}$ & 8220777 & 6807841639.58 & 8692508977.60 & 0.0839 & 0.0024\\
+$10^{21}$ & 20138200 & 20826296835.28 & 26167265004.43 & 0.0672 & 0.0020\\ \hline
+\end{tabular}
+\label{table8}
+\end{table}
+Hence, not only does Corollary~\ref{result2} fit the proven bounds for $C(x)$ given in Theorem~\ref{carm1} and Theorem~\ref{carm3}, but both $\psi'$ and $\psi'_1$ appear to be approaching constant values. However, there are several reasons as to why Corollary~\ref{result2} may not be necessarily borne out by the data in the above table. For instance, the infinite series $\kappa_3$ is slowly convergent, and it is not until $10^{24}$ that $\kappa_3$ appears to approach its estimated value of $2087.5$. However, the primary source of inaccuracy is due to Conjecture~\ref{pseudo3}. Since Pomerance's conjecture for the distribution of pseudoprimes is applicable for sufficiently large $x$ and pseudoprime counts have only recently been conducted to $10^{17}$ by Galway and Feitsma, we are not sure how ``sufficiently large'' $x$ must be for Conjecture~\ref{pseudo3} to be an accurate model for pseudoprime distribution. Lastly, $x$ must also be immensely large in order for $\frac{\mathscr{P}_{b,2}(x)}{\mathscr{P}_b(x)} = o(1)$.
+\subsection{An Improved Heuristic Argument}
+As mentioned before, Pomerance's heuristic arguments supporting his conjecture in \eqref{13} involve the distribution of smooth numbers. And, if secondary terms exist, then it would be worthwhile to sharpen these heuristics to produce a conjecture for $C(x)$. Let $\Psi(x,y)$ denote the number of $y$-smooth numbers $\le x$ and let $\Psi'(x,y)$ denote the number of primes $p \le x$ for which $p-1$ is squarefree and its prime factors are $\le y$ \cite{10}. It is conjectured in \cite{11} that for $\exp\{\frac{1}{2}(\log x)^{\frac{1}{2}}\} \le y \le \exp\{(\log x)^{\frac{1}{2}}\}$,
+\begin{equation} \label{A}
+\frac{1}{x}\Psi(x,y) \sim \frac{1}{\pi(x)}\Psi'(x,y).
+\end{equation}
+If $0 < \alpha < 1$, it is well-known \cite{29} that
+\begin{equation}
+\Psi\left(x,\exp\{c(\log x)^{\alpha}(\log^{(2)} x)^{\beta}\}\right) = x \exp\{-\{(1-\alpha)/c+o(1)\}(\log x)^{1-\alpha}(\log^{(2)} x)^{1-\beta}\}.
+\end{equation}
+Concerning Carmichael numbers, we are interested in the case for which $\alpha = \frac{1}{2}$, $\beta = 0$, and $c = 1$. Hence,
+\begin{equation} \label{B}
+\Psi\left(x,\exp\{(\log x)^{\frac{1}{2}}\}\right) = x \exp\{-\{1/2+o(1)\}(\log x)^{\frac{1}{2}}(\log^{(2)} x)\}.
+\end{equation}
+From \eqref{A} and \eqref{B}, we make the following
+\begin{conj} \label{smooth}
+For $\exp\{\frac{1}{2}(\log x)^{\frac{1}{2}}\} \le y \le \exp\{(\log x)^{\frac{1}{2}}\}$,
+\begin{equation}
+\Psi'(x,y) = \pi(x)\exp\{-\{1/2+o(1)\}(\log x)^{\frac{1}{2}}(\log^{(2)} x)\}.
+\end{equation}
+\end{conj}
+Let $A(x)$ denote the product of the primes $p \le \log x/(\log^{(2)} x)^2$. Thus, $A(x) < x^{2/\log^{(2)} x}$ as in \cite{10}. If we allow $r_1,\ldots,r_q$ to be the primes in the interval $\left(\log x/(\log^{(2)} x)^2,(\log x)^{\log^{(2)} x}\right)$ with $r_i-1 \mid A(x)$. By Conjecture~\ref{smooth} we have for $x$ sufficiently large,
+\begin{equation}
+q = \pi\left((\log x)^{\log^{(2)} x}\right)\exp\{-\{1+o(1)\}\log^{(2)} x \log^{(3)} x\}.
+\end{equation}
+\indent Let $m_1,\ldots,m_{N}$ be the squarefree composite integers $\le x$ composed of $r_i$ and let
+$$
+l = \[\log x/(\log^{(2)} x)^2\].
+$$
+As discussed in \cite{10}, we have
+\begin{equation}
+N \ge \begin{pmatrix}q\\l\end{pmatrix} \ge \left(\frac{q}{l}\right)^{l}.
+\end{equation}
+As a result,
+\begin{equation} \label{C}
+N \ge \left(\frac{(\log^{(2)} x)^2 \pi((\log x)^{\log^{(2)} x})\exp\{-\{1+o(1)\}\log^{(2)} x \log^{(3)} x\}}{\log x}\right)^{\log x/(\log^{(2)} x)^2}.
+\end{equation}
+Since Euler's $\varphi$ function and Carmichael's $\lambda$ function are virtually the same, the lower bound in \eqref{C} should be applicable to $C(x)$. In fact, from the values of $a(x)$ in Table~\ref{table3} and the precision of Conjecture~\ref{smooth}, we have reason to believe that this result is asymptotically close to the actual value of $C(x)$.
+\section{One-Parameter Quadratic-Base Pseudoprimes: A Sidenote}
+As mentioned earlier, the discovery of Carmichael numbers demonstrated the fallability of Fermat's primality test therefore lending to the development of efficient probabilistic primality tests. Baillie, Pomerance, Selfridge, and Wagstaff \cite{10} \cite{25} have determined a primality test that is an amalgamation of the Miller-Rabin test and a Lucas test. However, even though Pomerance \cite{26} presented a heuristic argument that the number of counter-examples up to $x$ was $\gg x^{1-\epsilon}$ for $\epsilon > 0$, we have not been able to find any counter-examples up to $10^{17}$. In fact, no precise probability of error has been given about this test either \cite{24}. \newline
+\indent Grantham \cite{27} has also provided a probable prime test known as the RQFT that has a \emph{known} worst-case probability of error of 1/7710 per iteration. \newline
+\indent An even stronger test known as the One-Parameter Quadratic-Base Test (OPQBT) has been given by Zhang \cite{24}, and is a version of the Baillie-PSW test that not only has a known probability of error but is more efficient than the RQFT except for a thin set of cases. We let $u (\ne \pm 2) \in \mathbb{Z}$, let $T_u = T \pmod{T^2-uT+1}$, and define the ring associated with parameter $u$ as
+\begin{equation*}
+R_u = \mathbb{Z}[T]/(T^2-uT+1) = \{a+bT_u:a,b \in \mathbb{Z}\}.
+\end{equation*}
+We then define an odd integer $n > 1$ as an OPQBT pseudoprime for $0 \le u < n$ with
+\begin{equation*}
+\epsilon = \left(\frac{u^2-4}{n}\right) \in \{-1,1\},
+\end{equation*}
+where in the ring $R_u$, $n$ must pass
+\begin{equation}
+T_{u}^{n-\epsilon} \equiv 1 \pmod n.
+\end{equation}
+\indent Moreover, $n$ is defined as an OPQBT strong pseudoprime if for some $i = 0, 1, \cdots, k-1$, either
+\begin{equation}
+T_q^u \equiv 1 \pmod n,
+\end{equation}
+or
+\begin{equation}
+T_u^{2^i q} \equiv -1 \pmod n,
+\end{equation}
+in which for $q$ odd, $n-\epsilon = 2^k q$ \cite{24}. \newline
+\indent We have verified that there are no OPQBT pseudoprimes up to $10^{17}$. Let the counting function $\mathscr{O}(x)$ denote that number of OPQBT pseudoprimes $\le x$ and let $\mathscr{SO}(x)$ denote the number of strong OPQBT pseudoprimes $\le x$. The best upper bound we are able to prove is
+\begin{equation}
+\mathscr{SO}(x) \le \mathscr{O}(x) \le x \cdot L(x)^{\frac{-1}{2}},
+\end{equation}
+since an upper bound on the pseudoprimes is applicable to an upper bound on the OPQBT pseudoprimes and strong OPQBT pseudoprimes. \newline
+\indent Based upon Erd\H{o}s' construction \cite{17} and Pomerance's heuristics \cite{26}, in the interval $\[H,H^j\]$, for any fixed $j > 4$ and $H$ sufficiently large, there are most likely $\exp\{H^2(1-4/j)\}$ counter-examples to Zhang's primality test, meaning that there are at least $x^{1-4/j}$ counter-examples below $x = \exp\{H^2\}$. Thus, for arbitrary $j$, the number of counter-examples to the OPQBT becomes generalized to $\gg x^{1-\epsilon}$ for $\epsilon > 0$. In other words, there are infinitely many counter-examples to Zhang's OPQBT.
+\section*{Acknowledgements}
+I would like to express my gratitude to Charles R. Greathouse IV who provided invaluable guidance in the direction of this paper; Carl Pomerance who offered helpful comments on this paper in its initial stages; Harvey Dubner who provided guidance on the experimental aspects of this paper; Johan B. Henkens who helped me count the base 2 pseudoprimes and 2-strong pseudoprimes up to $10^{17}$ using Galway and Feitsma's data; Kazimierz Szymiczek who clarified Theorem~\ref{pseudo7}; and David H. Low who assisted me with formatting and typesetting errors. I would also like to thank William F. Galway for sharing his viewpoints regarding the pseudoprimes with $k$ distinct prime factors.
+
+
+\normalsize{\bibliographystyle{amsplain}
+\begin{thebibliography}{13}
+
+\bibitem[1]{29}
+A. Granville, \emph{Smooth numbers: computational number theory and beyond}, Mathematical Sciences Research Institute Publications, \textbf{44} (2008) 1--58. \url{http://www.math.leidenuniv.nl/~psh/ANTproc/09andrew.pdf}.
+
+\bibitem[2]{8}
+A. Granville and C. Pomerance, \emph{Two Contradictory Conjectures Concerning Carmichael Numbers}, Math. Comp. \textbf{71} (2001): 883--908.
+
+\bibitem[3]{15}
+A. Granville, C. Pomerance, and W. R. Alford, \emph{There are Infinitely Many Carmichael Numbers}, Ann. of Math. \textbf{140} (1994): 703--722.
+
+\bibitem[4]{20}
+A. Korselt, \emph{Probl\`{e}me chinois}, L'interm\`{e}diaire de math\'{e}maticiens \textbf{6} (1899): 142--143.
+
+\bibitem[5]{11}
+C. Pomerance, \emph{On the Distribution of Pseudoprimes}, Math. Comp. \textbf{37} (1981): 587--93.
+
+\bibitem[6]{9}
+C. Pomerance, \emph{A New Lower Bound for the Pseudoprime Counting Function}, Illinois J. Math. \textbf{26} (1982): 4--9.
+
+\bibitem[7]{26}
+C. Pomerance, \emph{Are there counter-examples to the Baillie-PSW primality test?}, Dopo Le Parole aangeboden aan Dr. A. K. Lenstra (H. W. Lenstra, jr., J. K. Lenstraand, P. Van Emde Boas, eds.), Amsterdam, 1984.
+
+\bibitem[8]{1}
+C. Pomerance and R. Crandall, \emph{Prime Numbers: A Computational Perspective}, New York: Springer, 2005.
+
+\bibitem[9]{6}
+C. Pomerance and D. M. Gordon, \emph{The Distribution of Lucas and Elliptic Pseudoprimes}, Math. Comp. \textbf{57} (1991): 825--38.
+
+\bibitem[10]{10}
+C. Pomerance, J. L. Wagstaff, and S. S. Wagstaff, jr, \emph{Pseudoprimes to $25 \cdot 10^{9}$}, Math. Comp. \textbf{35} (1980): 1003--026.
+
+\bibitem[12]{23}
+D. Shanks, \emph{Solved and unsolved problems in number theory}, 3rd ed., Chelsea, New York, 1985.
+
+\bibitem[13]{28}
+Emails exchanged between A. Nayebi and C. Pomerance.
+
+\bibitem[14]{7}
+E. M. Wright and G. H. Hardy, \emph{An Introduction to the Theory of Numbers}, Oxford: Clarendon P, Oxford UP, 1998.
+
+\bibitem[15]{18}
+G. Harman, \emph{On the number of Carmichael numbers up to $x$}, Bull. Lond. Math. Soc. \textbf{37} (2005): 641--650.
+
+\bibitem[16]{14}
+G. H. Davies and J. M. Chick, \emph{The Evaluation of $\kappa_3$}, Math. Comp. \textbf{77} (2008): 547--550.
+
+\bibitem[17]{13}
+G. Tenenbaum, \emph{Introduction to Analytic and Probabilistic Number Theory}, Cambridge: Cambridge UP, 1995.
+
+\bibitem[18]{27}
+J. Grantham, \emph{A probable prime test with high confidence}, J. Number Theory, \textbf{72} (1998) 32--47.
+
+\bibitem[19]{12}
+K. Szymiczek, \emph{On Pseudoprimes which are Products of Distinct Primes}, Amer. Math. Monthly \textbf{74} (1967): 35--37.
+
+\bibitem[20]{2}
+P. Erd\H{o}s, \emph{On the Converse of Fermat's Theorem}, Amer. Math. Monthly, \textbf{56} (1949): 623--24.
+
+\bibitem[21]{17}
+P. Erd\H{o}s, \emph{On pseudoprimes and Carmichael numbers}, Publ. Math. Debrecen \textbf{4} (1956): 201--206.
+
+\bibitem[22]{21}
+P. Erd\H{o}s and M. Kac, \emph{The Gaussian law of errors in the theory of additive number theoretic functions}, Amer. J. Math \textbf{62} (1940): 738--742.
+
+\bibitem[23]{25}
+R. Baillie and S. S. Wagstaff, jr., \emph{Lucas pseudoprimes}, Math. Comp. \textbf{35} (1980): 1391--1417.
+
+\bibitem[24]{22}
+R. D. Carmichael, \emph{Note on a new number theory function}, Bull. Amer. Math. Soc. \textbf{16} (1910): 232--238.
+
+\bibitem[25]{16}
+R. G.E. Pinch, \emph{The Carmichael Numbers up to $10^{21}$}, Proceedings Conference on Algorithmic Number Theory, Turku, May 2007. Turku Centre for Computer Science General Publications 46, edited by Anne-Maria Ernvall-Hyt\"{o}nen, Matti Jutila, Juhani Karhum\"{a}ki and Arto Lepist\"{o}.
+
+\bibitem[26]{19}
+R. G.E. Pinch, \emph{The Carmichael Numbers up to $10$ to the $21$}, Eighth Algorithmic Number Theory Symposium ANTS-VIII May 17--22, 2008 Banff Centre, Banff, Alberta (Canada).
+
+\bibitem[27]{5}
+W. F. Galway, \emph{The Pseudoprimes below $2^{64}$}, Simon Fraser University, 2002, \url{http://oldweb.cecm.sfu.ca/pseudoprime/psp-search-slides.pdf}.
+
+\bibitem[28]{4}
+W. F. Galway, \emph{Tables of pseudoprimes and related data}, 2002, \url{http://oldweb.cecm.sfu.ca/pseudoprime/psp1e15.gz}.
+
+\bibitem[29]{3}
+W. F. Galway, \emph{Research Statement}, 2004, \url{http://www.math.uiuc.edu/~galway/research-statement.pdf}.
+
+\bibitem[30]{24}
+Z. Zhang, \emph{A one-parameter quadratic-base version of the Baillie-PSW probable prime test}, Math. Comp. \textbf{71} (2002): 1699--1734.
+
+\end{thebibliography}}
+
+\end{document} 

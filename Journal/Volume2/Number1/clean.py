@@ -11,12 +11,6 @@ for doc_filename in os.listdir('.'):
         if doc_filename.endswith(aux):
             os.remove(os.path.join('.', doc_filename))        
 
-for doc_filename in os.listdir('author_source/coverletter'):
-    for aux in aux_ext:
-        if doc_filename.endswith(aux):
-            os.remove(os.path.join('author_source/coverletter', doc_filename))
-
-
 # Clean tex aux files from each issue
 src_dir = 'author_source'
 for author_dir in os.listdir(src_dir):

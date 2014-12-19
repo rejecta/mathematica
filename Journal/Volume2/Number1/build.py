@@ -27,13 +27,6 @@ class temp_cd():
         os.chdir(self._return_dir)
 
 
-# Compile cover letter
-filename = 'coverletter25june2009.tex'
-doc_dir = 'author_source/coverletter/'
-print 'Compiling', filename, '...'
-with temp_cd(doc_dir):
-    latexwithbib(filename)
-
 # Compile each issue
 src_dir = 'author_source'
 for author_dir in os.listdir(src_dir):
@@ -57,7 +50,7 @@ for author_dir in os.listdir(src_dir):
                     plaintex(filename)
 
 # Build full journal volume
-filename = 'RejectaMathematicaVol1No1.tex'
+filename = 'RejectaMathematicaVol2No1.tex'
 print 'Compiling full volume:', filename, '...'
 latexwithbib(filename)
 
