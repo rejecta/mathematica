@@ -9,7 +9,7 @@ for doc_filename in os.listdir('.'):
         doc_filename.endswith('.bbl') or\
         doc_filename.endswith('.blg') or\
         doc_filename.endswith('.out') or\
-        doc_filename == '.DS_Store' or\
+        doc_filename.endswith('.DS_Store') or\
         doc_filename.endswith('.log'):
 
         os.remove(os.path.join('.', doc_filename))
@@ -19,7 +19,7 @@ for doc_filename in os.listdir('author_source/coverletter'):
         doc_filename.endswith('.bbl') or\
         doc_filename.endswith('.blg') or\
         doc_filename.endswith('.out') or\
-        doc_filename == '.DS_Store' or\
+        doc_filename.endswith('.DS_Store') or\
         doc_filename.endswith('.log'):
 
         os.remove(os.path.join('author_source/coverletter', doc_filename))
@@ -31,7 +31,7 @@ for author_dir in os.listdir(src_dir):
     if author_dir.startswith('.'):
         continue
 
-    doc_types = ['openletter', 'article']
+    doc_types = ['.', 'openletter', 'article']
     for doc_type in doc_types:
         doc_dir = os.path.join(src_dir, author_dir, doc_type)
         if not os.path.isdir(doc_dir):
@@ -42,7 +42,7 @@ for author_dir in os.listdir(src_dir):
                 doc_filename.endswith('.bbl') or\
                 doc_filename.endswith('.blg') or\
                 doc_filename.endswith('.out') or\
-                doc_filename == '.DS_Store' or\
+                doc_filename.endswith('.DS_Store') or\
                 doc_filename.endswith('.log'):
 
                 os.remove(os.path.join(doc_dir, doc_filename))
