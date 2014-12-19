@@ -30,5 +30,5 @@ manually remove `> /dev/null` from the system calls at the top of the file.
 In the same directory as `build.py` you will find `clean.py`, a script
 that removes most of the auxiliary LaTeX files.  
 
-PDF files are *not removed*
+PDF files are **not removed**
 by `clean.py` since several original manuscript files are in this format.
