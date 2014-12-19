@@ -27,6 +27,6 @@ build when executing `build.py`, e.g.,
 The build file suppresses LaTeX's verbose output.  If you want verbose output, 
 manually remove `> /dev/null` from the system calls at the top of the file.
 
-SIn the same directory as `build.py` you will find a `clean.py` script
-that removes most of the auxiliary LaTeX files.  *PDF files are not removed
-by this script since several source files are indeed PDFs.*
+In the same directory as `build.py` you will find `clean.py`, a script
+that removes most of the auxiliary LaTeX files.  **PDF files are not removed
+by this script since several source files are indeed PDFs.**
