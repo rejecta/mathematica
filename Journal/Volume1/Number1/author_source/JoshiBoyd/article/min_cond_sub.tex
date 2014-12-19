@@ -1,0 +1,387 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+
+\pagestyle{empty}
+
+\newcommand{\ie}{{\it i.e.}}%
+\newcommand{\reals}{{\mbox{\bf R}}}%
+\newcommand{\Span}{\mathop{\bf span}}%
+\newcommand{\diag}{\mathop{\bf diag}}%
+
+\title{Subspaces that Minimize the Condition Number of a Matrix}
+\author{Siddharth Joshi \and Stephen Boyd\thanks{The authors are with the department of
+Electrical Engineering at Stanford University. Email addresses: Siddharth
+Joshi: \texttt{sidj@stanford.edu}, Stephen Boyd:
+\texttt{boyd@stanford.edu}.}}
+\date{}
+
+\begin{document}
+\hyphenation{non-singular}
+\maketitle
+\thispagestyle{empty}
+
+
+\begin{abstract}
+We define the condition number of a nonsingular matrix on a
+subspace, and consider the problem of finding
+a subspace of given dimension that minimizes the condition
+number of a given matrix.
+We give a general solution to this problem, and show in particular
+that when the given dimension is less than half the dimension
+of the matrix, a subspace can be found on which the condition
+number of the matrix is one.
+\end{abstract}
+
+
+\section{The problem} 
+
+Suppose $A\in \reals^{n \times n}$ and
+$\mathcal V \subseteq \reals^n$ is a subspace with $\dim \mathcal
+V = k \geq 1$. 
+We define the \emph{maximum gain} (\emph{minimum gain})
+of $A$ on $\mathcal V$, as
+\[
+G_\mathrm{max} =
+\sup_{x \in \mathcal V,~x \neq 0} \frac{\|Ax\|}{\|x\|}, \qquad
+G_\mathrm{min} =
+\inf_{x \in \mathcal V,~x \neq 0} \frac{\|Ax\|}{\|x\|},
+\]
+respectively, where $\|~\|$ denotes the Euclidean norm.
+When $A$ is nonsingular, we define its \emph{condition number
+on the subspace $\mathcal V$} as
+\[
+\kappa_{\mathcal V}(A) = G_\mathrm{max}/G_\mathrm{min}.
+\]
+The condition number of $A$ on any
+one-dimensional subspace is $1$, and its condition number
+on $\mathcal V=\reals^n$ is the (usual) condition number of $A$,
+which we denote $\kappa(A)$.
+The condition number on any subspace is between $1$ and $\kappa(A)$.
+If $\kappa_{\mathcal V}(A)=1$, we say that $A$ is isotropic 
+on $\mathcal V$,
+since its gain $\|Ax\|/\|x\|$ is the same for any nonzero vector
+$x \in \mathcal V$.
+
+In this note we address the following problem:
+Given a nonsingular matrix $A \in \reals^{n \times n}$, and 
+$k \in \{1,\ldots, n\}$, find a subspace $\mathcal V \subseteq \reals^n$
+of dimension $k$ which minimizes $\kappa_{\mathcal V}(A)$.
+The number $\kappa_{\mathcal V}(A)$ is a measure of the
+anisotropy of the linear function induced by $A$, restricted
+to the subspace $\mathcal V$, so
+our problem is to find a subspace of dimension $k$
+on which $A$ is maximally isotropic. 
+
+We will show that the minimum possible condition number of $A$,
+on a subspace of dimension $k$, is given by
+\begin{equation}
+\label{sol}
+\inf_{\mathcal V\;:\;\mathrm{dim} \mathcal V=k}
+\kappa_{\mathcal V} (A) =
+\max \left(\frac{\sigma_{n-k+1}}{\sigma_k}, 1 \right)  =
+\left\{ \begin{array}{ll} 
+1 & \quad  k \leq \lceil n/2 \rceil,\\
+\sigma_{n-k+1} / \sigma_k & \quad  k > \lceil n/2 \rceil,
+\end{array}\right.
+\end{equation}
+where $\sigma_1 \geq \cdots \geq \sigma_n >0$
+are the singular values of $A$.  (The infimum is over all
+subspaces of $\reals^n$ of dimension $k$.)
+This means, in particular, that for $k \leq \lceil n/2 \rceil$,
+we can find a subspace of dimension $k$ on which $A$ is isotropic.
+
+There are many classical results that identify a subspace of a
+given dimension that minimizes or maximizes some quantity that
+depends on the subspace and matrix.
+For example, the Courant-Fischer theorem tells us that the
+minimum value of $G_\mathrm{max}$, over all subspaces of
+dimension $k$, is $\sigma_{n-k+1}$, and the
+maximum value of $G_\mathrm{min}$, over all subspaces of
+dimension $k$, is $\sigma_{k}$. For these and similar results,
+see, e.g., \cite[\S 4.2]{HoJ:85} or \cite{Ber:05}.
+Also, the idea of condition number of a matrix restricted to a
+particular subspace can be seen in \cite{ChanF:88}.
+
+We can give a geometric application (or interpretation) of 
+our problem.
+We are given an ellipsoid $\mathcal E = \{ z \;|\; \|Az \|\leq 1\}$
+in $\reals^n$, where $A \in \reals^{n \times n}$ is nonsingular.
+Our goal is to find a $k$ dimensional subspace $\mathcal V$
+so that the ellipsoid $\mathcal V \cap \mathcal E$ is as spherical
+as possible, \ie, has minimum eccentricity.
+(The eccentricity of $\mathcal V \cap \mathcal E$ is defined as
+the ratio of its maximum semi-axis length to its 
+minimum semi-axis length, which is exactly $\kappa_{\mathcal V}(A)$.)
+The solution is to choose $\mathcal V$ that minimizes the condition
+number of $A$ on $\mathcal V$.
+Our result~(\ref{sol}) can be interpreted in this geometric setting.
+For example, if $k< \lceil n/2 \rceil$, we can always find a subspace
+of dimension $k$ for which $\mathcal V \cap \mathcal E$ is perfectly 
+spherical, \ie, a ball.
+As a very simple special case, we see that for any ellipsoid in 
+$\reals^3$, there is a plane that intersects it in a ball.
+Our general result~(\ref{sol}) can be considered a generalization of
+this simple fact.
+
+\section{The solution}
+
+Suppose $Q$ and $Z$ are $n \times n$ orthogonal matrices,
+\ie, $Q^TQ=Z^TZ=I$.  Then we have
+\[
+\kappa_{\mathcal V} (QAZ) = \kappa_{\mathcal W} (A),
+\]
+where $\mathcal W = Z \mathcal V = \{ Zv \;|\; v \in \mathcal V \}$.
+It follows that
+\[
+\inf_{\mathcal V\;:\; \mathrm{dim} \mathcal V =k}
+\kappa_{\mathcal V} (A) =
+\inf_{\mathcal V\;:\;\mathrm{dim} \mathcal V=k}
+\kappa_{\mathcal V} (QAZ),
+\]
+since the first orthogonal matrix $Q$ has no effect,
+and the second
+orthogonal matrix $Z$ simply changes the parametrization of 
+subspaces of dimension $k$.
+
+Now let $A=U \Sigma V^T$ be a
+singular value decomposition of $A$, \ie,
+$U$ and $V$ are orthogonal, and
+$\Sigma = \diag (\sigma_1, \ldots, \sigma_n)$.
+Our observation above, with $Q=U^T$, $Z=V$, shows that
+\[
+\inf_{\mathcal V\;:\;\mathrm{dim} \mathcal V =k}
+\kappa_{\mathcal V} (A) =
+\inf_{\mathcal V\;:\;\mathrm{dim} \mathcal V =k}
+\kappa_{\mathcal V} (\Sigma).
+\]
+So we can just as well solve the problem for the 
+diagonal matrix $\Sigma$.  
+(To reconstruct a subspace of dimension $k$ on which $A$
+has least condition number, we find a subspace of dimension
+$k$ for which $\Sigma$ has least condition number, and multiply
+it by $V$.)
+
+Now our problem is to find a subspace $\mathcal{V}$ of
+dimension $k$ which minimizes $\kappa_\mathcal{V}(\Sigma)$.
+We will show that 
+\begin{equation}
+\label{sol2}
+\inf_{\mathcal V\;:\; \mathrm{dim} \mathcal V =k}
+\kappa_{\mathcal V} (\Sigma) =
+\max \left(\frac{\sigma_{n-k+1}}{\sigma_k}, 1 \right)
+= \left\{ \begin{array}{ll} 
+1 & \quad  k \leq \lceil n/2 \rceil,\\
+\sigma_{n-k+1} / \sigma_k & \quad  k > \lceil n/2 \rceil,
+\end{array}\right.
+\end{equation}
+
+Let $\{e_1, \ldots, e_n\}$ be the standard basis for $\reals^n$,
+\ie, for $i=1,\ldots, n$, $e_{ij} = 0$ if $i \neq j$ and $e_{ij}
+= 1$ otherwise.
+
+We first give a simple result. 
+Suppose $i<j$, and let $\sigma$ satisfy
+$\sigma_i \geq \sigma \geq \sigma_j$.
+Then there is a unit vector $z \in \Span \{e_i,e_j\}$ for
+which $\|\Sigma z\|=\sigma$.
+This can be seen several ways. For example, we can rotate
+a unit vector $z$ from $e_i$ towards $e_j$.  The norm $\|
+\Sigma z\|$ varies continuously from $\sigma_i$ to $\sigma_j$,
+and therefore has the value $\sigma$ at some rotation angle.
+We can easily construct such a $z$.
+If $\sigma_i = \sigma_j$, we can take $z = e_i$ or $z = e_j$.
+If $\sigma_i > \sigma_j$, we can take
+\[
+z =  \frac{ (\sigma^2 - \sigma_j^2 )^{1/2} e_i +
+(\sigma_i^2 - \sigma^2 )^{1/2} e_j}
+{ ( \sigma_i^2 - \sigma_j^2 )^{1/2} }.
+\]
+It is easily verified that $\|z\| = 1$ and $\| \Sigma z\| =
+\sigma$.
+
+\subsection{Case 1: $k \leq \lceil n/2 \rceil$}
+
+To establish~(\ref{sol2}), we will construct a subspace $\mathcal
+V^*$ of dimension $k$, with $\kappa_{\mathcal V^*}(\Sigma)=1$.
+We will construct an orthonormal basis
+$\left\lbrace z_0, z_1, \ldots ,z_{k-1} \right\rbrace $
+for $\mathcal V^*$. 
+We start with $z_0=e_{\lceil n/2 \rceil }$.
+Note that $\| \Sigma z_0 \| =\sigma_{\lceil n/2 \rceil }$.
+
+Next, we choose a unit vector
+$z_1 \in \Span \{ e_{\left\lceil n/2 \right\rceil -1}, e_{\lceil
+(n+1)/2\rceil +1} \}$ that satisfies 
+$\|\Sigma z_1 \| = \sigma_{\lceil n/2 \rceil }$.
+We can do this using our simple result above,
+noting that
+\[
+\sigma_{\left\lceil n/2 \right\rceil-1}\geq 
+\sigma_{\lceil n/2 \rceil }
+\geq \sigma_{\left\lceil (n+1)/2 \right\rceil+1}.
+\]
+We note that $z_1 \perp z_0$
+and $\Sigma z_1 \perp \Sigma z_0$.
+
+
+We continue the construction, taking $z_2$ as any unit vector
+\[
+z_2 \in \Span \{ e_{\left\lceil n/2 \right\rceil -2},e_{\lceil
+(n+1)/2\rceil +2}\}
+\]
+that satisfies $\| \Sigma z_2\|=\sigma_{\lceil n/2 \rceil }$.
+This continues, until we have unit vectors $z_0, \ldots, z_{k-1}$.
+These vectors are mutually orthogonal, since each one is in the span
+of two standard basis vectors, and these pairs of standard basis
+vectors are disjoint. Since $\Sigma$ is a diagonal matrix,
+the vectors $\Sigma z_0, \ldots, \Sigma z_{k-1}$ are
+mutually orthogonal.
+
+We now show that $\kappa_{\mathcal V^*}(\Sigma) = 1$.
+\iffalse 
+Let $b$ be any nonzero vector in
+$\mathcal V^*$, say, 
+$b = \beta_0 z_0 + \cdots + \beta_{k-1} z_{k-1}$.
+The gain of $A$ in the direction $b$ is
+\begin{eqnarray*}
+\frac{\|Ab\|}{\|b\|} &=& 
+\left( \frac{\beta_0^2  \|A z_0\|^2 + \cdots + \beta_{k-1}^2 \|A
+z_{k-1} \|^2}
+{\beta_0^2 \|z_0\|^2 + \cdots + \beta_{k-1}^2  \|z_{k-1}\|^2}
+\right)^{1/2} \\
+&=& 
+\left( \frac{\beta_0^2 \sigma_{\lceil n/2 \rceil }^2 + \cdots +
+\beta_{k-1}^2 \sigma_{\lceil n/2 \rceil }^2}
+{\beta_0^2+ \cdots + \beta_{k-1}^2 }\right) ^{1/2}\\
+&=& \sigma_{\lceil n/2 \rceil }.
+\end{eqnarray*}
+\fi
+For any nonzero vector $b \in \mathcal V^*$, the gain of $\Sigma$
+in the direction of $b$,  ${\|\Sigma b\| / \|b\|} =
+\sigma_{\lceil n/2 \rceil }$, because the gain of $\Sigma$ in
+the direction of any unit vector in the orthonormal basis
+$\{z_0, \ldots, z_{k-1} \}$  of $\mathcal V^*$ is $\sigma_{\lceil
+n/2 \rceil}$.
+Thus $G_\mathrm{max} =G_\mathrm{min} = \sigma_{\lceil
+n/2\rceil}$, and therefore ${\kappa_{\mathcal V^*}}(\Sigma) = 1$.
+
+
+\subsection{Case II: $k > \lceil n/2 \rceil$}
+To establish~(\ref{sol2}), we first construct a subspace
+$\mathcal V^*$ of dimension $k$, with
+$\kappa_{\mathcal V^*}(\Sigma)$ $=\sigma_{n-k+1} / \sigma_k$, and
+then show that for any subspace $\mathcal V$ of dimension $k$,
+$\kappa_{\mathcal V}(\Sigma) \geq \kappa_{\mathcal V^*}(\Sigma)$.
+
+We will construct an orthonormal basis for $\mathcal V^*$. 
+We start with the $2k-n$ vectors
+$\{ e_{n-k+1}, e_{n-k}, \ldots, e_{k-1}, e_{k} \}$.
+We will choose $n-k$ unit vectors, $z_1, \ldots, z_{n-k}$,
+such that
+\[
+\{ z_1, \ldots, z_{n-k}, e_{n-k+1},  \ldots, e_{k-1},e_{k} \}
+\] 
+forms an orthonormal basis for $\mathcal V^*$. 
+The $n-k$ unit vectors $z_1, \ldots, z_{n-k}$ will be chosen in
+$\Span \{ e_{1}, \ldots, e_{n-k},
+e_{k+1}, \ldots, e_{n} \}$, and will therefore
+be orthogonal to $\{e_{n-k+1},  \ldots, e_{k} \}$.
+
+Choose a unit vector $z_1 \in \Span\{e_1, e_n\}$, satisfying
+$\|\Sigma z_1\| = \sigma_{k}$. We can do this using
+the simple result given earlier, since
+$\sigma_{1} \geq \sigma_{k} \geq \sigma_{n}$.
+We note that $z_1 \perp e_j$,
+and $\Sigma z_1 \perp  \Sigma e_j$,  $j=n-k+1, \ldots, k$.
+
+We continue the construction, choosing a unit vector $z_2 \in
+\Span\{e_2, e_{n-1}\}$,
+satisfying $\| \Sigma z_2\| =\sigma_{k}$.
+This continues, until we have chosen a unit vector 
+$z_{n-k}$ in $\Span\{e_{n-k}, e_{k+1}\}$, satisfying
+$\|\Sigma z_{n-k}\| =\sigma_{k}$.
+
+The vectors $z_1, \ldots, z_{n-k}$ are mutually orthogonal, since each
+one is in the span of two standard basis vectors, and these pairs
+of standard basis vectors are disjoint.
+Also $z_i \perp e_j$ for $i = 1,\ldots, n-k$ and
+$j = n-k+1, \ldots, k$, since each vector $z_i$ is in the
+span of two standard basis vectors which are not in the set
+$\{e_{n-k+1}, \ldots, e_{k} \}$.
+Thus $\{ z_1, \ldots, z_{n-k}$, $e_{n-k+1}, e_{n-k}, \ldots,
+e_{k-1},e_{k} \}$ forms an orthonormal basis for $\mathcal V^*$.
+Similarly, since $\Sigma$ is a diagonal matrix, the
+vectors $\Sigma z_1, \ldots, \Sigma z_{n-k}, \Sigma e_{n-k+1},
+\ldots, \Sigma e_{k}$ are mutually orthogonal.
+
+
+We now show $\kappa_{\mathcal V^*}(\Sigma) =\sigma_{n-k+1} /
+\sigma_k$.
+Let $b$ any nonzero vector in $\mathcal V^*$, say, 
+\[
+b = \beta_1 z_1 +
+\cdots + \beta_{n-k} z_{n-k} + \beta_{n-k+1} e_{n-k+1} + \cdots +
+\beta_{k} e_{k}.
+\]
+The gain of $\Sigma$ in the direction $b$ is
+\begin{eqnarray*}
+\frac{\|\Sigma b\|}{\|b\|}&=&
+\left( \frac
+{\sum_{i=1}^{n-k}  \beta_i^2 \|\Sigma z_i\|^2 +
+\sum_{j=n-k+1}^{k} \beta_j^2 \|\Sigma e_j\|^2}
+{\sum_{i=1}^{n-k} \beta_i^2 \|z_i\|^2 +
+\sum_{j=n-k+1}^{k} \beta_j^2\|e_j\|^2}
+\right) ^{1/2}\\
+&=&
+\left( \frac
+{\sum_{i=1}^{n-k}  \beta_i^2 \sigma_k^2 +
+\sum_{j=n-k+1}^{k} \beta_j^2 \sigma_j^2}
+{\sum_{i=1}^{n} \beta_i^2}
+\right) ^{1/2},
+\end{eqnarray*}
+and therefore
+$\sigma_{n-k+1} \geq \|\Sigma b\|/\|b\| \geq \sigma_{k}$.
+For $b = e_{n-k+1}$, $\|\Sigma b\| / \|b\| = \sigma_{n-k+1} $,
+so $G_\mathrm{max} =  \sigma_{n-k+1}$;
+for $b = e_{k}$, we have $\| \Sigma b\| / \|b\| = \sigma_{k} $,
+so $G_\mathrm{min} = \sigma_{k}$.
+It follows that $\kappa_{\mathcal V^*}(\Sigma) 
+= \sigma_{n-k+1} / \sigma_k$.
+
+Now we will show that for any subspace $\mathcal V$ of dimension
+$k$, $\kappa_{\mathcal V} (\Sigma)\geq \sigma_{n-k+1} /
+\sigma_k$.
+By the Courant-Fischer theorem, for any subspace
+$\mathcal{V}$ of dimension $k$, $G_\mathrm{max} \geq
+\sigma_{n-k+1}$ and $G_\mathrm{min} \leq \sigma_{k}$.
+It follows that
+$\kappa_{\mathcal V}(\Sigma) =  G_\mathrm{max}/{G_\mathrm{min}}
+\geq \sigma_{n-k+1}/\sigma_k$.
+This establishes~(\ref{sol2}), and therefore~(\ref{sol}).
+
+\bibliographystyle{plain}
+%\bibliography{min_cond_sub}
+\begin{thebibliography}{1}
+
+\bibitem{Ber:05}
+D.~S. Bernstein.
+\newblock {\em Matrix Mathematics: {T}heory, facts, and formulas,
+with
+  application to linear systems theory}.
+\newblock Princeton University Press, 2005.
+
+\bibitem{ChanF:88}
+T.~F. Chan and D.~E. Foulser.
+\newblock Effectively well-conditioned linear systems.
+\newblock {\em SIAM Journal on Scientific and Statistical
+Computing},
+  9(6):963--968, November 1988.
+
+\bibitem{HoJ:85}
+R.~A. Horn and C.~A. Johnson.
+\newblock {\em Matrix Analysis}.
+\newblock Cambridge University Press, 1985.
+
+\end{thebibliography}
+
+\end{document}

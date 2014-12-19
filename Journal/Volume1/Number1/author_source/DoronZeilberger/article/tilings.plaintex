@@ -1,0 +1,466 @@
+
+%tilings.tex:
+%%a Plain TeX file by Doron Zeilberger (7 pages)
+
+%begin macros
+\def\L{{\cal L}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\baselineskip=14pt
+\parskip=10pt
+\def\halmos{\hbox{\vrule height0.15cm width0.01cm\vbox{\hrule height
+  0.01cm width0.2cm \vskip0.15cm \hrule height 0.01cm width0.2cm}\vrule
+  height0.15cm width 0.01cm}}
+\font\eightrm=cmr8 \font\sixrm=cmr6
+\font\eighttt=cmtt8
+\magnification=\magstephalf
+\def\P{{\cal P}}
+\def\Q{{\cal Q}}
+\def\1{{\overline{1}}}
+\def\2{{\overline{2}}}
+\parindent=0pt
+\overfullrule=0in
+\def\Tilde{\char126\relax}
+\def\frac#1#2{{#1 \over #2}}
+%\headline={\rm  \ifodd\pageno  \RightHead  \else  \LeftHead  \fi}
+%\def\RightHead{\centerline{
+%Title
+%}}
+%\def\LeftHead{ \centerline{Doron Zeilberger}}
+%end macros
+\bf
+\centerline
+{
+Automatic CounTilings
+}
+\rm
+\bigskip
+\centerline{ {\it
+Doron 
+ZEILBERGER}\footnote{$^1$}
+{\eightrm  \raggedright
+Department of Mathematics, Rutgers University (New Brunswick),
+Hill Center-Busch Campus, 110 Frelinghuysen Rd., Piscataway,
+NJ 08854-8019, USA.
+%\break
+{\eighttt zeilberg  at math dot rutgers dot edu} ,
+\hfill \break
+{\eighttt http://www.math.rutgers.edu/\~{}zeilberg} .
+First version: Jan. 20, 2006.
+Accompanied by Maple packages {\eighttt TILINGS} and
+{\eighttt RecTILINGS}
+downloadable from Zeilberger's website.
+Supported in part by the NSF.
+}
+}
+
+{\bf I Have a Dream}
+
+One day it would be possible to write in English,
+or in an English-like super-high-level programming language,
+the following command:
+
+{\tt Write a Maple program that inputs an arbitrary positive integer k,
+a symbol n, and an arbitrary set $T$ of tiles, as well as a symbol
+t, and outputs the rational function of t whose 
+Maclaurin series's coefficient
+of $t^n$ is the number of different tilings of a k by n rectangle
+by the tiles of $T$.}
+
+{\bf But Yesterday's Dream Came To Pass}
+
+This day hasn't arrived yet, so I had to spend a few weeks
+writing such a program myself. This is the human-generated
+Maple package {\tt TILINGS} accompanying this article.
+
+But, this is already a great step forward. Once I wrote
+the program, my beloved servant, Shalosh B. Ekhad, can
+solve (potentially) infinitely many enumeration problems,
+completely rigorously, for enumerating tilings of rectangles of
+{\it arbitrary} width and using an {\it arbitrary} set of tiles
+(the tiles even do not have to  be connected).
+
+Traditionally, a human would have had to tackle each specific
+width ($k$) and each specific set of tiles ($T$), (even the 
+set consisting of the two dimers,
+the vertical and horizontal 1 by 2 rectangles) {\it one at a time}.
+He or she would have had to figure out the combinatorics of the
+situation, establish a ``structure theorem'', then deduce
+from this a {\it set of equations}, and finally, solve
+this set of equations (this very last part,
+starting in the seventies, was  possibly aided
+by Maple or Mathematica). Of course, the human will only
+be able to do it for very small $k$, and very simple sets of tiles, since
+very soon the structure theorem, and consequently the
+set of equations, would be too hard to {\it derive} by hand,
+let alone solve.
+
+Once the meta-program above would be realized, I would become
+superfluous. But even at the present level,
+the human-made Maple program {\tt TILINGS} can generate, in principle,
+infinitely many articles, and Ph.D. theses, proving
+general, rigorous and {\it interesting} results.
+Except for very simple cases, of course, the complexity of
+the proofs and results are beyond mere humans.
+
+{\bf The Simplest Not-Completely-Trivial Example}
+
+Let $a(n)$ be the number of ways of tiling a
+$2 \times n$ rectangle using the horizontal and vertical
+dominoes, i.e. the set of tiles is:
+$$
+\matrix{
+XX\cr
+} \quad , \quad
+\matrix{
+X\cr
+X\cr
+} \quad .
+$$
+
+
+Let $\A(n)$ be the set of tilings of a $2 \times n$ rectangular board
+by the above two tiles. 
+Of course, if $n=0$, then $\A(n)$ consists of one tiling only:
+the {\bf empty tiling}, but if $n>0$ then there are two cases to consider,
+regarding the bottom-left cell.
+
+{\bf Case I:} It participates in the vertical tile, in which case the board looks like
+$$
+\matrix{
+10000\dots 0\cr
+10000\dots 0\cr
+} \quad ,
+$$
+where $1$ means an occupied cell and $0$ means a still-untiled cell.
+
+
+{\bf Case II:} It participates in the horizontal tile, in which case the board looks like
+$$
+\matrix{
+00000\dots 0\cr
+11000\dots 0\cr
+} \quad .
+$$
+
+Now the first case is clearly ``isomorphic'' to $\A(n-1)$, and the isomorphism is
+obtained by ``chop the $1$'s'' (i.e. remove the vertical tile), reducing the
+problem to that of tiling a $2 \times (n-1)$ board. But Case II requires us
+to introduce a new {\bf auxiliary} set, let's call it $\B(n)$, that of tiling
+a ``jagged'' rectangle with the two leftmost cells of the bottom row removed.
+
+So now we forget about the original problem, and try to find a ``structure theorem''
+for $\B(n)$. Of course, if $n=0,1$, then $\B(n)$ is the empty set, but
+if $n \geq 2$ then, we consider the leftmost unoccupied cell of the top row.
+Now there is only one case to consider: it is tiled by a horizontal tile, getting a board of the
+form
+$$
+\matrix{
+11000\dots 0\cr
+11000\dots 0\cr
+} \quad ,
+$$
+which is trivially ``isomorphic'' to $\A(n-2)$.
+
+We now have two ``structure theorems'':
+$$
+\A(n) \equiv \A(n-1) \cup B(n) \quad (n>0) \quad ,
+$$
+$$
+\B(n)\equiv A(n-2)  \quad .
+\eqno(MarkovianScheme)
+$$
+Now taking cardinalities, calling $a(n):=|\A(n)|$,
+$b(n):=|\B(n)|$, we have the system of {\bf linear recurrences}
+$$
+a(n) = a(n-1) + b(n) \quad (n>0) \quad ,
+$$
+$$
+b(n)= a(n-2)  \quad ,
+$$
+with the obvious initial conditions $a(-2)=0, a(-1)=0, a(0)=1$.
+
+Doing the usual generatingfunctionology, we get the generating functions
+$$
+f(t):=\sum_{n=0}^{\infty} a(n)t^n= {{1} \over {1-t-t^2}} \quad,
+$$
+$$
+g(t):=\sum_{n=0}^{\infty} b(n)t^n= {{t^2} \over {1-t-t^2}} \quad.
+$$
+Equivalently, we can use {\bf Polya's Picture Writing}[P] and use
+{\bf weight-enumerators} to deduce the system
+$$
+f(t)=1+tf(t)+g(t) \quad,
+$$
+$$
+g(t)=t^2f(t) \quad ,
+$$
+and solve the system of {\bf two linear equations } in the {\bf two unknowns}
+$f(t), g(t)$. But we can do better still: keep track of the number
+of occurrences of each tile. Introducing the variables $h$ and $v$ for
+a horizontal and vertical tile respectively, and defining the {\bf weight}
+of a tiling to be $h^{\#horizontal\_tiles}v^{\#vertical\_tiles}t^n$,
+where $n$ is its length, and defining $F(t,h,v)$ to be the sum of
+all the weights of all tilings, and analogously $G(t,h,v)$ for the set $\B$, we get
+the system
+$$
+F(t,h,v)=1+tvF(t,h,v)+hG(t,h,v) \quad,
+$$
+$$
+G(t,h,v)=t^2hF(t,h,v) \quad ,
+$$
+and solving this system gives:
+$$
+F(t,h,v):= {{1} \over {1-vt-h^2t^2}} \quad,
+$$
+$$
+G(t,h,v):={{t^2h} \over {1-vt-h^2t^2}} \quad.
+$$
+
+Note that $f(t)$, $g(t)$, and $F(t,h,v)$, $G(t,h,v)$ are {\bf rational functions}.
+In particular, taking the {\bf partial-fraction} decomposition of $f(t)$, over
+the reals, one easily gets the {\bf asymptotics} for $a(n)$, namely
+$(\sqrt{5}/\phi) \cdot \phi^n$, where $\phi$ is the Golden Ratio. Also by differentiating w.r.t. $h$ and
+$v$ and then plugging-in $h=1$ and $v=1$ one gets the generating function
+for ``the total number of horizontal tiles'' and ``the total number of vertical tiles''
+respectively, from which once again, we can deduce asymptotics and get
+the asymptotic averages by dividing by the already-known asymptotic
+``number of tilings''. Ditto for the higher moments and correlation (of course in this
+toy problem the correlation is tautologically $-1$).
+
+But there is more!
+Now that we have quick ways for computing $a(n)$ and $b(n)$, 
+up to very large $n$, either via the generating function or directly by
+$(MarkovianScheme)$, we can use the latter, with the help
+of {\bf Wilf's methodology}[W] to do {\bf sequencing}, {\bf ranking},
+and {\bf random selection}. Let's just consider the last, that of
+generating {\bf uniformly at random}, such a tiling of the $2 \times n$ rectangular board.
+Use a loaded coin, with probabilities $a(n-1)/a(n)$ and $b(n)/a(n)$ to decide
+whether to cover the leftmost-bottommost cell with a vertical or horizontal tile respectively.
+In the former case, continue recursively. In the latter case, use a very biased coin
+with probabilities $b(n)/a(n-2)=1$ and $0$ to decide whether to tile the 
+leftmost 0 at the top row, with a horizontal tile or vertical tile respectively, and then
+continue recursively.
+
+
+{\bf The General Case}
+
+The same reasoning applies to an {\bf arbitrary} (but fixed, i.e. numeric) width $k$
+and an {\it arbitrary} (but of course finite) set of (finite) ``tiles''. Here a tile
+is any finite set of lattice points, that does not need to be connected, and
+a tiling is a covering by translations of the tiles.
+
+The logic is the same as above, but instead of only one `auxiliary' set $\B(n)$
+(that was trivially isomorphic to $\A(n-2)$) we get many more such `stepping-stones'.
+These auxiliary sets are tilings of jagged rectangular boards that can
+be represented as, for example, (here the width, $k$, is $4$) :
+
+$$
+\matrix{
+0101\dots 0\cr
+1001\dots 0\cr
+0000\dots 0\cr
+1110\dots 0\cr
+} \quad ,
+$$
+where $\dots$ stands for $0$'s (i.e. still unoccupied cells).
+We can code such jagged boards on the computer just as above as matrices of $0$'s and $1$'s
+leaving the $\dots$ implicit, and making it right-justified (in addition to 
+left-justified), and hence there should be at least one $1$ in the rightmost column.
+We also assume that the leftmost column has at least one $0$, or else it is
+equivalent to a smaller board with that leftmost column removed (giving the removed
+column its due weight by multiplying by $t$ when we do the equations).
+For each such jagged board we (or rather the computer) locates the
+{\bf fundamental free cell} which is the lowest $0$ in the leftmost column.
+We then consider which of the tiles in the set of tiles can cover that cell,
+and in what relative position of the considered tile. For each such scenario, the computer places that
+tile, getting a different jagged board, that may be a previously-encountered
+one or a brand-new one.  For each new board, we do it again.
+The computer checks at each stage whether each and every
+jagged-board encountered so-far already has a structure theorem expressing it
+a a union of isomorphic copies of other jagged boards, and if not, keeps
+creating new structure theorems,
+that in turn usually bring in new kinds of jagged boards. Eventually there won't be any new ones
+(pigeonhole!) and then the process halts. 
+
+Next, to get generating functions, the computer (all by itself)  takes
+weight-enumerators, getting a (usually very large) system of
+linear equations for the set of unknown weight-enumerators for these
+jagged boards, that includes, in its midst, the original, non-jagged
+rectangular board. Then, Maple {\tt solve}s this system, giving
+in particular the generating function for the original set, the
+rational function, (in $t$, or in $t$ as well as in the tile-variables)
+whose Maclaurin series's coefficient of $t^n$ is the number of (or weight-enumerating polynomial for)
+tilings of a $k \times n$ rectangular board by the given set of tiles.
+
+Once the generating function is known, we can process it, using Maple's built-in
+partial-fraction (over the reals) ({\tt parfrac}) and
+differentiation, {\tt diff}, to get asymptotic size, and asymptotic averages, variance,
+covariance, and higher moments for the random variables ``number of occurrences of a given tile-type''.
+
+{\bf Disclaimer}: This last part involves floating-point calculations and may not be
+entirely rigorous. In principle, of course, one can stay within algebraic
+numbers, but the output would not be insightful to human eyes.
+
+{\bf The Maple Package TILINGS}
+
+
+All this (and more!) is implemented in the Maple package {\tt TILINGS}, that can be
+downloaded from
+
+{\tt http://www.math.rutgers.edu/\~{}zeilberg/tokhniot/TILINGS} .
+
+Once you downloaded it into a directory in your computer, calling it
+{\tt TILINGS} (and {\bf not} {\tt TILINGS.txt}), go into Maple,
+and type:
+
+{\tt read TILINGS:}
+
+and then follow the instructions given there. In particular, for a list
+of the main functions, type {\tt ezra();} and for help with
+a specific function, type {\tt ezra(FunctionName);}.
+
+Also available is a precursor Maple package {\tt RecTILINGS} that only handles
+rectangular tiles. It can be downloaded from:
+
+{\tt http://www.math.rutgers.edu/\~{}zeilberg/tokhniot/RecTILINGS} .
+
+{\bf A Very Quick Overview}
+
+Full details are given on-line, but for the benefit of the lazy reader
+who does not use Maple, let me just mention that the main functions are:
+
+{\tt GFt(k,Tiles,t)} and  {\tt GFtH(k,Tiles,t,H)} .
+
+The former computes the generating function (in $t$ only) and the
+latter the  weight-enumerator
+(in $t$ and in the variables $H[tile]$, one for each tile).
+
+$Rt(a,b)$ is the package's shorthand for a $b \times a$ rectangular tile. For example,
+the toy problem we did above by hand is reproduced by:
+
+{\tt  GFt(2,[Rt(1,2),Rt(2,1)],t);} and
+
+{\tt  GFtH(2,[Rt(1,2),Rt(2,1)],t,H);} .
+
+
+{\tt Sidra(k,ListOfTiles,N);} gives you the first $N+1$ terms of the enumerating sequence
+(that can automatically be sent to Sloane's database), while
+{\tt SidraW(k,H,ListOfTiles,N);} gives you the first
+$N+1$ terms in the sequence of weight-enumerators, that are polynomials in
+$H[tile]$'s.
+
+{\tt Astat(k,ListOfTiles,n);} gives you the asymptotic statistics:
+average number of occurrences for each tile, the variance, and the
+asymptotic covariance matrix for these random variables (in the order of appearance
+in the list {\tt ListOfTiles}). {\tt AstatV} is a verbose version of {\tt Astat}.
+
+Finally, {\tt RandTiling(ListOfTiles,k0,n0);} gives you a (uniformly) random tiling
+of a $k0 \times n0$ rectangular board, using the given tiles
+(e.g. try: {\tt RandTiling([Rt(1,2),Rt(2,1)],4,10);}),
+and 
+
+{\tt RandTilingNice(ListOfTiles,k0,n0);} gives you the same in nice, 
+matrix form.
+
+
+{\tt BuildTree} and {\tt BuildTreeH} actually gives you the 
+Markovian Enumeration Scheme, complete
+with generating functions, and
+{\tt Sipur} and {\tt SipurArokh} tell you everything you always wanted to 
+know about the tilings.
+
+{\bf Sample Input and Output}
+
+The webpage of this article,
+
+{\tt http://www.math.rutgers.edu/\~{}zeilberg/mamarim/mamarimhtml/tilings.html} ,
+
+contains several sample input and output files. Readers can
+generate their own output for their favorite set of tiles and for their
+favorite width.
+
+{\bf An ``Almost'' Automatic Proof of Kasteleyn's Formula}
+
+In the very special case of two dimer tiles ($1 \times 2$ and $2 \times 1$),
+Kasteleyn and Fisher\&Temperley ([K][FT], see [AS] for a beautiful
+recent survey) gave their
+deservedly celebrated beautiful formula for the weight-enumerator of an $m \times n$ rectangle for
+{\it arbitrary} (i.e. symbolic) $m$ and $n$. To wit,  if $m$ and $n$ are both even
+positive integers,
+and $z$ and $z'$ the variables for the horizontal and vertical dimers respectively
+(what we called $h$ and $v$ above), then
+$$
+Z_{m,n}(z,z')=
+2^{mn/2} \prod_{r=1}^{m/2}\prod_{s=1}^{n/2}
+\left [ z^2 \cos^2 { {r\pi} \over {m+1}}+
+z'^2 \cos^2 { {s\pi} \over {n+1}} \right ] \quad,
+\eqno(K)
+$$
+with a similar formula when $n$ is odd.
+At this time of writing, computers can't prove this formula in general. But
+for any {\it specific} $m$ (but general(!) $n$), it is now a routine verification, thanks to our Maple
+package {\tt TILINGS}. Of course, in practice, it can only be done for small values
+of $m$ ($m \leq 10$ on  our computer), but with bigger and future computers, one would be
+able to go further.
+The proof  is a beautiful example of (rigorous!) generalization from finitely
+many cases, combined with `general-nonsense' linear algebra {\it handwaving}, that
+is nevertheless fully rigorous.
+
+Let's call the right side of $(K)$ $W_{m,n}(z,z')$.
+We have to prove, for our given $m$, that $W_{m,n}(z,z')=Z_{m,n}(z,z')$ for {\it all $n$}.
+For a fixed even $m$ it is readily seen that $W_{m,n}(z,z')$ is expressible as a product 
+of $m/2$ different dilations of $U_n(z)$, the Tchebycheff polynomials of the second
+kind. It is well-known (and easily seen) that $U_n(z)$ satisfies
+a (homogeneous) {\it linear recurrence equation with constant (i.e. not depending on $n$) coefficients} of
+order $2$, and hence so does any of its dilations $U_n(\beta z)$, and the product
+of $m/2$ of these creatures consequently satisfies a linear recurrence equation with constant
+coefficients of order $2^{m/2}$. Hence its generating function, in $t$, is a rational function
+whose denominator has degree $2^{m/2}$ and numerator degree $\leq 2^{m/2}-1$.
+We have to prove that this generating function coincides with the `real thing', the rational function
+outputted by procedure {\tt GFtH} of {\tt TILINGS}, that also turns out to have the same degrees.
+But to prove that two rational functions whose numerator-degree is $p$ and
+denominator-degree is $q$ are identical, we only have to check, by elementary
+linear algebra, that the first $p+q+1$ terms in their Maclaurin series
+coincide (in our case $2^{m/2+1}$), and this is a routine check, done in our package
+{\tt TILINGS} by typing {\tt ProveKasteleyn(m);}, for the general case (with $z$ and $z'$),
+and {\tt ProveKasteleyn1(m);}, for the straight-enumeration case ( $z=z'=1$).
+
+By hindsight, Kasteleyn and Fisher\&Temperley were extremely lucky, since
+in the very special case of the two dimer tiles, they were able to use graph theory and Pfaffians.
+The general case seems, at present, out of reach.
+Even the monomer-dimer problem is still wide open, let alone 
+an ``explicit'' expression for the weight-enumerators for tilings of
+an $m \times n$ rectangle using other sets of
+tiles. Our Maple package {\tt TILINGS} is a {\it research tool} that can automatically
+discover and rigorously prove results for {\bf specific} $m$ but general $n$.
+Let's hope that the human can use it to discover new {\bf ansatzes} by which
+to conjecture and hopefully prove some ``explicit'' form for the
+monomer-dimer and more general sets of tiles, where {\it both} 
+$m$ and $n$ are {\bf symbolic}.
+From this, one should be able to extract, at least, an ``explicit'' expression
+for the so-called {\it thermodynamic limit}, or at the very least, determine
+rigorously the {\it critical exponent}.
+
+I hope to explore these speculations in a subsequent article.
+
+{\bf References}
+
+[AS] Frederico Ardila and Richard S. Stanley, {\it Tilings},
+preprint, {\tt www.arxiv.org/math.CO/0501170}, 2005.
+
+[FT] M. Fisher and H. Temperley, {\it Dimer Problems in Statistical
+Mechanics-an exact result}, Philos. Mag. {\bf 6} (1961), 1061-1063.
+
+[K] P. W. Kasteleyn, {\it The statistics of dimers on a lattice: I. The number of
+dimer arrangements in a quadratic lattice}, Physica {\bf 27} (1961), 1209-1225.
+
+[P] G. Polya, {\it On Picture Writing}, Amer. Math. Monthly {\bf 63} (1956), 689-697.
+
+[W] Herbert S. Wilf, {\it A Unified Setting for Sequencing, Ranking, and
+Selection Algorithms for Combinatorial Objects}, Adv. in Math. {\bf 24} (1977),
+281-291.
+
+\end
+
+

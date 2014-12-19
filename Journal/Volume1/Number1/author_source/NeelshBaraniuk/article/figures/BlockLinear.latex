@@ -1,0 +1,31 @@
+\setlength{\unitlength}{2647sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(6631,4219)(2745,-5533)
+\thicklines
+\put(6976,-1936){\circle{618}}
+\put(6826,-1936){\line( 1, 0){300}}
+\put(6976,-1786){\line( 0,-1){300}}
+\put(6076,-1936){\vector( 1, 0){600}}
+\put(6976,-2836){\vector( 0, 1){600}}
+\put(6976,-4636){\vector( 0, 1){600}}
+\put(6376,-4036){\framebox(1200,1200){}}
+\put(7276,-1936){\vector( 1, 0){900}}
+\put(3976,-1936){\vector( 1, 0){900}}
+\put(4876,-2536){\framebox(1200,1200){}}
+\put(6976,-3286){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}LTI system}}}
+\put(6976,-5011){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}Noise}}}
+\put(3376,-1786){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}Gray-scale}}}
+\put(3451,-2236){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$x(\nnnx,\nnny)$}}}
+\put(8776,-1786){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}Halftone}}}
+\put(8776,-2236){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$y(\nnnx,\nnny)$}}}
+\put(6976,-5461){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\gamma(\nnnx,\nnny)$}}}
+\put(5476,-1786){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}LTI system}}}
+\put(5476,-2161){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\cP$}}}
+\put(6976,-3661){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\cQ$}}}
+\end{picture}

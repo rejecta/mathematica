@@ -1,0 +1,2018 @@
+\documentclass[11pt]{article}
+\usepackage{epsfig,amsfonts,cite,epsfig,fullpage,graphicx,multirow,latexsym,citesort,amsfonts,amssymb,rotating,supertabular,amsmath,fancyhdr,verbatim}
+\usepackage{epstopdf}
+\pagestyle{empty}
+\def\nnnx {n_1}
+\def\nnny {n_2}
+\def\nnkx {k_1}
+\def\nnky {k_2}
+\def\nnbothk {k}
+\def\fffx {f_1}
+\def\fffy {f_2}
+\def\tttx {t_1}
+\def\ttty {t_2}
+
+
+\def\hhfill{~\hspace*{1mm}\hfill}
+\def\forward{F\lowercase{or}W\lowercase{a}RD}
+
+\def\NORNSQ{\sqrt{N}}
+\def\NtimesN{N}
+\def\NSQ{N}
+
+
+
+\def\bhX { {\pmb {\sf X}}}
+\newcommand{\expect}{{\rm I \mkern-2.5mu \nonscript\mkern-.5mu E}}
+\newcommand{\nn} {\nonumber}
+\newcommand{\bi}        {\begin{itemize}}
+\newcommand{\ei}        {\end{itemize}}
+\newcommand{\ben}       {\begin{enumerate}}
+\newcommand{\een}       {\end{enumerate}}
+\newcommand{\ii}        {\item}
+\newcommand{\be}        {\begin{equation}}
+\newcommand{\ee}        {\end{equation}}
+\newcommand{\bea}       {\begin{eqnarray}}
+\newcommand{\eea}       {\end{eqnarray}}
+\newcommand{\beas}      {\begin{eqnarray*}}
+\newcommand{\eeas}      {\end{eqnarray*}}
+\newcommand{\bc}        {\begin{center}}
+\newcommand{\ec}        {\end{center}}
+\newcommand{\da}        {\frac{d}{d\alpha}}
+\newcommand{\al}        {\alpha }
+\newcommand{\si}        {\sigma}
+\newcommand{\tht}       {\theta_{k,j}}
+\newcommand{\sij}       {\sigma_{j}}
+\newcommand{\xp}       {{\bf{\it{E}}}}
+\newcommand{\prob}       {{\bf{P}[|\theta_{(i,j)}| \le \sigma_{j,\alpha}] }}
+\newcommand{\probge}       {{\bf{P}[|\theta_{(i,j)}| \ge \sigma_{j,\alpha}] }}
+\newcommand{\probgej}       {{\bf{P}[|\theta_{j}| \ge \sigma_{j,\alpha}] }}
+\newcommand{\probj}       {{\bf{P}[|\theta_{j}| \le \sigma_{j,\alpha}] }}
+\newcommand{\sija}      {\sigma_{j}(\alpha)}
+\newcommand{\sijap}      {\sigma_{j}(\alpha_j)}
+\newcommand{\sijapp}      {\sigma_{j}^{2}(\alpha_j)}
+\newcommand{\wdwf}        {\frac{\theta^2(\alpha)\sigma^2(\alpha)} {\theta^2(\alpha)+ \sigma^2(\alpha)}}
+\newcommand{\ga}        {\frac{|H(f)|^{2}P_{XX}^{2}(f)}{(|H(f)|^{2}P_{XX}(f) + \alpha\sigma^{2})^{2}}}
+\newcommand{\ca}	{C(f_i)}
+\newcommand{\partalp}    {\frac{\partial}{\partial\alpha_j}}
+\newcommand{\partalj}    {\frac{\partial}{\partial\alpha_j}}
+\newcommand{\disterr}     {\mbox{D}\left(\alpha_{j_0},\ldots,\alpha_{J}\right)}
+\newcommand{\therr}
+{\mbox{O}\left(\alpha_{j_0},\ldots,\alpha_{J}\right)}
+\def\real    {\hbox{\sf I}\kern-0.130em \hbox{\sf R}}  % use 0.1667 with roman
+\def\natural {\hbox{\sf I}\kern-0.140em \hbox{\sf N}}
+\def\integer {\hbox{\sf Z}\kern-0.430em \hbox{\sf Z}}  % use 0.35 with roman
+\def\dT      {\hbox{\sf T}\kern-0.530em \hbox{\sf T}}
+\def\sinteger {\mbox{\scriptsize\sf Z}\kern-0.430em \mbox{\scriptsize\sf Z}} 
+
+\newcommand{\intinf}{\int_{- \infty}^{\infty} \! }
+\newcommand{\hint}{\int_{0}^{\infty}}
+\newcommand{\dint}{\int \! \! \! \int}
+\newcommand{\tint}{\int \! \! \! \int \! \! \! \int}
+
+\newcommand{\lp}{\left(}
+\newcommand{\rp}{\right)}
+\newcommand{\lb}{\left[}
+\newcommand{\rb}{\right]}
+\newcommand{\lc}{\left\{ }
+\newcommand{\rc}{\right\} }
+\newcommand{\lip}{\left\langle}
+\newcommand{\rip}{\right\rangle}
+\newcommand{\lbar}{\left|}
+\newcommand{\rbar}{\right|}
+
+\newcommand{\wh}{\widehat}
+\def\ol{\overline}
+
+\newtheorem{theorem}    {Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}      {Lemma}
+
+
+%   = with triangle for definition
+\def\deff { \stackrel{\triangle}{=} }
+%\def\define { \stackrel{{\rm def}}{=} }
+\def\define {\equiv}
+
+%   Bold-faced b and B for "basis element"
+\def\bb { \hbox{\bf b} }
+\def\BB { \hbox{\bf B} }
+
+%   Bold-faced e for eigenfunction
+\def\ef { \hbox{\bf u} }
+
+%   Bold-faced a and b for V warp
+\def\aw { \hbox{\bf a}(p,q) }
+\def\bw { \hbox{\bf b}(p,q) }
+\def\pw { \hbox{\bf p}(a,b) }
+\def\qw { \hbox{\bf q}(a,b) }
+
+%\def\Ltwo      {L^2(\real)}
+\def\Ltwoo      {L^2}
+\def\Ltwo       {L^2(\real)}
+%\def\Ltwo      {L^2(\real, dx)}
+\def\Ltwop      {L^2(\real_+)} %% {L^2(\real_+, dx)}
+\def\Ltwopp     {L^2(\real_+, dx/x)}
+
+\def\half       {\frac{1}{2}}
+
+% Group operation
+\def\go         {\bullet}
+\def\dgo        {\circ}
+
+
+%   This looks better than ||
+\newcommand{\dbar}{| \! |}
+
+%\newcommand{\si}{{\rm sign}}
+%\newcommand{\si}{{\rm sgn}} `: CHANGED BY NEELSH
+\newcommand{\sgn}{{\rm sgn}}
+
+%   Latex French accents
+\def\ea {\'{e}}
+
+
+%---------------------------------------------------------------%
+% Operators
+
+%---------------------------------------------------------------%
+%*** Script letters (Hermitian operators)
+
+\def\cA { {\cal{A}} }
+\def\cB { {\cal{B}} }
+\def\cC { {\cal{C}} }
+\def\cD { {\cal{D}} }
+\def\cE { {\cal{E}} }
+\def\cF { {\cal{F}} }
+\def\cG { {\cal{G}} }
+\def\cH { {\cal{H}} }
+\def\cI { {\cal{I}} }
+\def\cJ { {\cal{J}} }
+\def\cK { {\cal{K}} }
+\def\cL { {\cal{L}} }
+\def\cM { {\cal{M}} }
+\def\cN { {\cal{N}} }
+\def\cO { {\cal{O}} }
+\def\cP { {\cal{P}} }
+\def\cQ { {\cal{Q}} }
+\def\cR { {\cal{R}} }
+\def\cS { {\cal{S}} }
+\def\cT { {\cal{T}} }
+\def\cU { {\cal{U}} }
+\def\cV { {\cal{V}} }
+\def\cW { {\cal{W}} }
+\def\cX { {\cal{X}} }
+\def\cY { {\cal{Y}} }
+\def\cZ { {\cal{Z}} }
+
+% Warped versions
+
+\def\wcA { {\widetilde{\cA}} }
+\def\wcB { {\widetilde{\cB}} }
+\def\wcC { {\widetilde{\cC}} }
+\def\wcD { {\widetilde{\cD}} }
+\def\wcE { {\widetilde{\cE}} }
+\def\wcF { {\widetilde{\cF}} }
+\def\wcG { {\widetilde{\cG}} }
+\def\wcH { {\widetilde{\cH}} }
+\def\wcI { {\widetilde{\cI}} }
+\def\wcJ { {\widetilde{\cJ}} }
+\def\wcK { {\widetilde{\cK}} }
+\def\wcL { {\widetilde{\cL}} }
+\def\wcM { {\widetilde{\cM}} }
+\def\wcN { {\widetilde{\cN}} }
+\def\wcO { {\widetilde{\cO}} }
+\def\wcP { {\widetilde{\cP}} }
+\def\wcQ { {\widetilde{\cQ}} }
+\def\wcR { {\widetilde{\cR}} }
+\def\wcS { {\widetilde{\cS}} }
+\def\wcT { {\widetilde{\cT}} }
+\def\wcU { {\widetilde{\cU}} }
+\def\wcV { {\widetilde{\cV}} }
+\def\wcW { {\widetilde{\cW}} }
+\def\wcX { {\widetilde{\cX}} }
+\def\wcY { {\widetilde{\cY}} }
+\def\wcZ { {\widetilde{\cZ}} }
+%---------------------------------------------------------------%
+
+%---------------------------------------------------------------%
+%*** Sans serif (Helvetica) letters (Unitary group representations)
+
+\def\sA { {\sf A} }
+\def\sB { {\sf B} }
+\def\sC { {\sf C} }
+\def\sD { {\sf D} }
+\def\sE { {\sf E} }
+\def\sF { {\sf F} }
+\def\sG { {\sf G} }
+\def\sH { {\sf H} }
+\def\sI { {\sf I} }
+\def\sJ { {\sf J} }
+\def\sK { {\sf K} }
+\def\sL { {\sf L} }
+\def\sM { {\sf M} }
+\def\sN { {\sf N} }
+\def\sO { {\sf O} }
+\def\sP { {\sf P} }
+\def\sQ { {\sf Q} }
+\def\sR { {\sf R} }
+\def\sS { {\sf S} }
+\def\sT { {\sf T} }
+\def\sU { {\sf U} }
+\def\sV { {\sf V} }
+\def\sW { {\sf W} }
+\def\sX { {\sf X} }
+\def\sY { {\sf Y} }
+\def\sZ { {\sf Z} }
+
+% Warped versions:
+
+\def\wsA { {\widetilde{\sA}} }
+\def\wsB { {\widetilde{\sB}} }
+\def\wsC { {\widetilde{\sC}} }
+\def\wsD { {\widetilde{\sD}} }
+\def\wsE { {\widetilde{\sE}} }
+\def\wsF { {\widetilde{\sF}} }
+\def\wsG { {\widetilde{\sG}} }
+\def\wsH { {\widetilde{\sH}} }
+\def\wsI { {\widetilde{\sI}} }
+\def\wsJ { {\widetilde{\sJ}} }
+\def\wsK { {\widetilde{\sK}} }
+\def\wsL { {\widetilde{\sL}} }
+\def\wsM { {\widetilde{\sM}} }
+\def\wsN { {\widetilde{\sN}} }
+\def\wsO { {\widetilde{\sO}} }
+\def\wsP { {\widetilde{\sP}} }
+\def\wsQ { {\widetilde{\sQ}} }
+\def\wsR { {\widetilde{\sR}} }
+\def\wsS { {\widetilde{\sS}} }
+\def\wsT { {\widetilde{\sT}} }
+\def\wsU { {\widetilde{\sU}} }
+\def\wsV { {\widetilde{\sV}} }
+\def\wsW { {\widetilde{\sW}} }
+\def\wsX { {\widetilde{\sX}} }
+\def\wsY { {\widetilde{\sY}} }
+\def\wsZ { {\widetilde{\sZ}} }
+%---------------------------------------------------------------%
+
+%---------------------------------------------------------------%
+%*** MATH Boldface cap letters (Unitary transformations)
+
+\def\bmA { {\mbox{\boldmath $A$}} }
+\def\bmB { {\mbox{\boldmath $B$}} }
+\def\bmC { {\mbox{\boldmath $C$}} }
+\def\bmD { {\mbox{\boldmath $D$}} }
+\def\bmE { {\mbox{\boldmath $E$}} }
+\def\bmF { {\mbox{\boldmath $F$}} }
+\def\bmG { {\mbox{\boldmath $G$}} }
+\def\bmH { {\mbox{\boldmath $H$}} }
+\def\bmI { {\mbox{\boldmath $I$}} }
+\def\bmJ { {\mbox{\boldmath $J$}} }
+\def\bmK { {\mbox{\boldmath $K$}} }
+\def\bmL { {\mbox{\boldmath $L$}} }
+\def\bmM { {\mbox{\boldmath $M$}} }
+\def\bmN { {\mbox{\boldmath $N$}} }
+\def\bmO { {\mbox{\boldmath $O$}} }
+\def\bmP { {\mbox{\boldmath $P$}} }
+\def\bmQ { {\mbox{\boldmath $Q$}} }
+\def\bmR { {\mbox{\boldmath $R$}} }
+\def\bmS { {\mbox{\boldmath $S$}} }
+\def\bmT { {\mbox{\boldmath $T$}} }
+\def\bmU { {\mbox{\boldmath $U$}} }
+\def\bmV { {\mbox{\boldmath $V$}} }
+\def\bmW { {\mbox{\boldmath $W$}} }
+\def\bmX { {\mbox{\boldmath $X$}} }
+\def\bmY { {\mbox{\boldmath $Y$}} }
+\def\bmZ { {\mbox{\boldmath $Z$}} }
+
+% Warped versions:
+
+\def\wbmA { {\widetilde{\bmA}} }
+\def\wbmB { {\widetilde{\bmB}} }
+\def\wbmC { {\widetilde{\bmC}} }
+\def\wbmD { {\widetilde{\bmD}} }
+\def\wbmE { {\widetilde{\bmE}} }
+\def\wbmF { {\widetilde{\bmF}} }
+\def\wbmG { {\widetilde{\bmG}} }
+\def\wbmH { {\widetilde{\bmH}} }
+\def\wbmI { {\widetilde{\bmI}} }
+\def\wbmJ { {\widetilde{\bmJ}} }
+\def\wbmK { {\widetilde{\bmK}} }
+\def\wbmL { {\widetilde{\bmL}} }
+\def\wbmM { {\widetilde{\bmM}} }
+\def\wbmN { {\widetilde{\bmN}} }
+\def\wbmO { {\widetilde{\bmO}} }
+\def\wbmP { {\widetilde{\bmP}} }
+\def\wbmQ { {\widetilde{\bmQ}} }
+\def\wbmR { {\widetilde{\bmR}} }
+\def\wbmS { {\widetilde{\bmS}} }
+\def\wbmT { {\widetilde{\bmT}} }
+\def\wbmU { {\widetilde{\bmU}} }
+\def\wbmV { {\widetilde{\bmV}} }
+\def\wbmW { {\widetilde{\bmW}} }
+\def\wbmX { {\widetilde{\bmX}} }
+\def\wbmY { {\widetilde{\bmY}} }
+\def\wbmZ { {\widetilde{\bmZ}} }
+
+% Inverses:
+
+\def\bmAi { \bmA^{-1} }
+\def\bmBi { \bmB^{-1} }
+\def\bmCi { \bmC^{-1} }
+\def\bmDi { \bmD^{-1} }
+\def\bmEi { \bmE^{-1} }
+\def\bmFi { \bmF^{-1} }
+\def\bmGi { \bmG^{-1} }
+\def\bmHi { \bmH^{-1} }
+\def\bmIi { \bmI^{-1} }
+\def\bmJi { \bmJ^{-1} }
+\def\bmKi { \bmK^{-1} }
+\def\bmLi { \bmL^{-1} }
+\def\bmMi { \bmM^{-1} }
+\def\bmNi { \bmN^{-1} }
+\def\bmOi { \bmO^{-1} }
+\def\bmPi { \bmP^{-1} }
+\def\bmQi { \bmQ^{-1} }
+\def\bmRi { \bmR^{-1} }
+\def\bmSi { \bmS^{-1} }
+\def\bmTi { \bmT^{-1} }
+\def\bmUi { \bmU^{-1} }
+\def\bmVi { \bmV^{-1} }
+\def\bmWi { \bmW^{-1} }
+\def\bmXi { \bmX^{-1} }
+\def\bmYi { \bmY^{-1} }
+\def\bmZi { \bmZ^{-1} }
+
+%---------------------------------------------------------------%
+%*** Boldface cap letters (Unitary transformations)
+
+\def\bA { {\bf A} }
+\def\bB { {\bf B} }
+\def\bC { {\bf C} }
+\def\bD { {\bf D} }
+\def\bE { {\bf E} }
+\def\bF { {\bf F} }
+\def\bG { {\bf G} }
+\def\bH { {\bf H} }
+\def\bI { {\bf I} }
+\def\bJ { {\bf J} }
+\def\bK { {\bf K} }
+\def\bL { {\bf L} }
+\def\bM { {\bf M} }
+\def\bN { {\bf N} }
+\def\bO { {\bf O} }
+\def\bP { {\bf P} }
+\def\bQ { {\bf Q} }
+\def\bR { {\bf R} }
+\def\bS { {\bf S} }
+\def\bT { {\bf T} }
+\def\bU { {\bf U} }
+\def\bV { {\bf V} }
+\def\bW { {\bf W} }
+\def\bX { {\bf X} }
+\def\bY { {\bf Y} }
+\def\bZ { {\bf Z} }
+
+% Warped versions:
+
+\def\wbA { {\widetilde{\bA}} }
+\def\wbB { {\widetilde{\bB}} }
+\def\wbC { {\widetilde{\bC}} }
+\def\wbD { {\widetilde{\bD}} }
+\def\wbE { {\widetilde{\bE}} }
+\def\wbF { {\widetilde{\bF}} }
+\def\wbG { {\widetilde{\bG}} }
+\def\wbH { {\widetilde{\bH}} }
+\def\wbI { {\widetilde{\bI}} }
+\def\wbJ { {\widetilde{\bJ}} }
+\def\wbK { {\widetilde{\bK}} }
+\def\wbL { {\widetilde{\bL}} }
+\def\wbM { {\widetilde{\bM}} }
+\def\wbN { {\widetilde{\bN}} }
+\def\wbO { {\widetilde{\bO}} }
+\def\wbP { {\widetilde{\bP}} }
+\def\wbQ { {\widetilde{\bQ}} }
+\def\wbR { {\widetilde{\bR}} }
+\def\wbS { {\widetilde{\bS}} }
+\def\wbT { {\widetilde{\bT}} }
+\def\wbU { {\widetilde{\bU}} }
+\def\wbV { {\widetilde{\bV}} }
+\def\wbW { {\widetilde{\bW}} }
+\def\wbX { {\widetilde{\bX}} }
+\def\wbY { {\widetilde{\bY}} }
+\def\wbZ { {\widetilde{\bZ}} }
+
+% Inverses:
+
+\def\bAi { \bA^{-1} }
+\def\bBi { \bB^{-1} }
+\def\bCi { \bC^{-1} }
+\def\bDi { \bD^{-1} }
+\def\bEi { \bE^{-1} }
+\def\bFi { \bF^{-1} }
+\def\bGi { \bG^{-1} }
+\def\bHi { \bH^{-1} }
+\def\bIi { \bI^{-1} }
+\def\bJi { \bJ^{-1} }
+\def\bKi { \bK^{-1} }
+\def\bLi { \bL^{-1} }
+\def\bMi { \bM^{-1} }
+\def\bNi { \bN^{-1} }
+\def\bOi { \bO^{-1} }
+\def\bPi { \bP^{-1} }
+\def\bQi { \bQ^{-1} }
+\def\bRi { \bR^{-1} }
+\def\bSi { \bS^{-1} }
+\def\bTi { \bT^{-1} }
+\def\bUi { \bU^{-1} }
+\def\bVi { \bV^{-1} }
+\def\bWi { \bW^{-1} }
+\def\bXi { \bX^{-1} }
+\def\bYi { \bY^{-1} }
+\def\bZi { \bZ^{-1} }
+
+% For compatibility with older stuff:
+
+\def\AA { \bA }
+\def\BB { \bB }
+\def\CC { \bC }
+\def\DD { \bD }
+\def\EE { \bE }
+\def\FF { \bF }
+\def\GG { \bG }
+\def\HH { \bH }
+\def\II { \bI }
+\def\JJ { \bJ }
+\def\KK { \bK }
+\def\LL { \bL }
+\def\MM { \bM }
+\def\NN { \bN }
+\def\OO { \bO }
+\def\PP { \bP }
+\def\QQ { \bQ }
+\def\RR { \bR }
+\def\SS { \bS }
+\def\TT { \bT }
+\def\UU { \bU }
+\def\VV { \bV }
+\def\WW { \bW }
+\def\XX { \bX }
+\def\YY { \bY }
+\def\ZZ { \bZ }
+
+% Warped versions:
+
+\def\wAA { {\widetilde{\bA}} }
+\def\wBB { {\widetilde{\bB}} }
+\def\wCC { {\widetilde{\bC}} }
+\def\wDD { {\widetilde{\bD}} }
+\def\wEE { {\widetilde{\bE}} }
+\def\wFF { {\widetilde{\bF}} }
+\def\wGG { {\widetilde{\bG}} }
+\def\wHH { {\widetilde{\bH}} }
+\def\wII { {\widetilde{\bI}} }
+\def\wJJ { {\widetilde{\bJ}} }
+\def\wKK { {\widetilde{\bK}} }
+\def\wLL { {\widetilde{\bL}} }
+\def\wMM { {\widetilde{\bM}} }
+\def\wNN { {\widetilde{\bN}} }
+\def\wOO { {\widetilde{\bO}} }
+\def\wPP { {\widetilde{\bP}} }
+\def\wQQ { {\widetilde{\bQ}} }
+\def\wRR { {\widetilde{\bR}} }
+\def\wSS { {\widetilde{\bS}} }
+\def\wTT { {\widetilde{\bT}} }
+\def\wUU { {\widetilde{\bU}} }
+\def\wVV { {\widetilde{\bV}} }
+\def\wWW { {\widetilde{\bW}} }
+\def\wXX { {\widetilde{\bX}} }
+\def\wYY { {\widetilde{\bY}} }
+\def\wZZ { {\widetilde{\bZ}} }
+%---------------------------------------------------------------%
+
+%---------------------------------------------------------------%
+%*** Plain Roman cap letters
+
+\def\rA { {\rm A} }
+\def\rB { {\rm B} }
+\def\rR { {\rm R} }
+\def\rD { {\rm D} }
+\def\rE { {\rm E} }
+\def\rF { {\rm F} }
+\def\rG { {\rm G} }
+\def\rH { {\rm H} }
+\def\rI { {\rm I} }
+\def\rJ { {\rm J} }
+\def\rK { {\rm K} }
+\def\rL { {\rm L} }
+\def\rM { {\rm M} }
+\def\rN { {\rm N} }
+\def\rO { {\rm O} }
+\def\rP { {\rm P} }
+\def\rQ { {\rm Q} }
+\def\rR { {\rm R} }
+\def\rS { {\rm S} }
+\def\rT { {\rm T} }
+\def\rU { {\rm U} }
+\def\rV { {\rm V} }
+\def\rW { {\rm W} }
+\def\rX { {\rm X} }
+\def\rY { {\rm Y} }
+\def\rZ { {\rm Z} }
+
+% Warped versions:
+
+\def\wrA { {\widetilde{\rA}} }
+\def\wrB { {\widetilde{\rB}} }
+\def\wrR { {\widetilde{\rR}} }
+\def\wrD { {\widetilde{\rD}} }
+\def\wrE { {\widetilde{\rE}} }
+\def\wrF { {\widetilde{\rF}} }
+\def\wrG { {\widetilde{\rG}} }
+\def\wrH { {\widetilde{\rH}} }
+\def\wrI { {\widetilde{\rI}} }
+\def\wrJ { {\widetilde{\rJ}} }
+\def\wrK { {\widetilde{\rK}} }
+\def\wrL { {\widetilde{\rL}} }
+\def\wrM { {\widetilde{\rM}} }
+\def\wrN { {\widetilde{\rN}} }
+\def\wrO { {\widetilde{\rO}} }
+\def\wrP { {\widetilde{\rP}} }
+\def\wrQ { {\widetilde{\rQ}} }
+\def\wrR { {\widetilde{\rR}} }
+\def\wrS { {\widetilde{\rS}} }
+\def\wrT { {\widetilde{\rT}} }
+\def\wrU { {\widetilde{\rU}} }
+\def\wrV { {\widetilde{\rV}} }
+\def\wrW { {\widetilde{\rW}} }
+\def\wrX { {\widetilde{\rX}} }
+\def\wrY { {\widetilde{\rY}} }
+\def\wrZ { {\widetilde{\rZ}} }
+%---------------------------------------------------------------%
+
+%---------------------------------------------------------------%
+% Warped normal math caps:
+
+\def\wA { {\widetilde{A}} }
+\def\wB { {\widetilde{B}} }
+\def\wR { {\widetilde{R}} }
+\def\wD { {\widetilde{D}} }
+\def\wE { {\widetilde{E}} }
+\def\wF { {\widetilde{F}} }
+\def\wG { {\widetilde{G}} }
+\def\wH { {\widetilde{H}} }
+\def\wI { {\widetilde{I}} }
+\def\wJ { {\widetilde{J}} }
+\def\wK { {\widetilde{K}} }
+\def\wL { {\widetilde{L}} }
+\def\wM { {\widetilde{M}} }
+\def\wN { {\widetilde{N}} }
+\def\wO { {\widetilde{O}} }
+\def\wP { {\widetilde{P}} }
+\def\wQ { {\widetilde{Q}} }
+\def\wR { {\widetilde{R}} }
+\def\wS { {\widetilde{S}} }
+\def\wT { {\widetilde{T}} }
+\def\wU { {\widetilde{U}} }
+\def\wV { {\widetilde{V}} }
+\def\wW { {\widetilde{W}} }
+\def\wX { {\widetilde{X}} }
+\def\wY { {\widetilde{Y}} }
+\def\wZ { {\widetilde{Z}} }
+%---------------------------------------------------------------%
+
+%---------------------------------------------------------------%
+% Warped variables
+
+\def\waa  { {\widetilde{a}} }
+\def\wbb  { {\widetilde{b}} }
+\def\wcc  { {\widetilde{c}} }
+\def\wdd  { {\widetilde{d}} }
+\def\wee  { {\widetilde{e}} }
+\def\wff  { {\widetilde{f}} }
+\def\wgg  { {\widetilde{g}} }
+\def\whh  { {\widetilde{h}} }
+\def\wii  { {\widetilde{i}} }
+\def\wjj  { {\widetilde{j}} }
+\def\wkk  { {\widetilde{k}} }
+\def\wll  { {\widetilde{l}} }
+\def\wmm  { {\widetilde{m}} }
+\def\wnn  { {\widetilde{n}} }
+\def\woo  { {\widetilde{o}} }
+\def\wpp  { {\widetilde{p}} }
+\def\wqq  { {\widetilde{q}} }
+\def\wrr  { {\widetilde{r}} }
+\def\wss  { {\widetilde{s}} }
+\def\wtt  { {\widetilde{t}} }
+\def\wuu  { {\widetilde{u}} }
+\def\wvv  { {\widetilde{v}} }
+\def\www  { {\widetilde{w}} }
+\def\wxx  { {\widetilde{x}} }
+\def\wyy  { {\widetilde{y}} }
+\def\wzz  { {\widetilde{z}} }
+%---------------------------------------------------------------%
+
+
+
+%---------------------------------------------------------------%
+% OLDER, NONSTANDARD STUFF
+
+%   Fourier transform operator
+%\def\FT         { {\bf F} }
+%\def\FT         { {\aleph} }
+\def\FT          {\hbox{\sf I}\kern-0.130em \hbox{\sf F}}
+\def\FTi         { {\FT}^{-1} }
+
+\def\FTa         { {\FT}_\bA }
+\def\FTb         { {\FT}_\bB }
+\def\FTt         { {\FT}_\bT }
+\def\FTf         { {\FT}_\bF }
+\def\FTd         { {\FT}_\bD }
+
+\def\FTG         { {\FT}_G }
+\def\FTGi        { {\FT}_G^{-1} }
+
+%   Special operators
+\def\Uc         { {\bf{U}}_c }
+\def\Uci        { {\bf{U}}_c^{-1} }
+\def\Ucf        { \widehat{\bf{U}}_c }
+\def\Ucfi       { \widehat{\bf{U}}_c^{-1} }
+\def\Vc         { {\bf{V}}_c }
+\def\Vci        { {\bf{V}}_c^{-1} }
+\def\Uh         { {\bf{U}}_{\rm hyp} }
+\def\Uhi        { {\bf{U}}_{\rm hyp}^{-1} }
+\def\Ul         { {\bf{U}}_{\log} }
+\def\Uli        { {\bf{U}}_{\log}^{-1} }
+
+\def\UUi        { {\bf{U}}^{-1} }
+
+\def\DDp        { {\DD^\prime} }
+\def\AAh        { {\AA^\prime} }
+\def\BBh        { {\BB^\prime} }
+
+%   Tf plane variables
+\def\tf { (\tau, \nu) }
+
+%   Warped tf plane variables
+%\def\wt                { \widetilde{\tau} }
+%\def\wf                { \widetilde{\nu} }
+%\def\wtf       { (\wt, \wf) }
+\def\wt         { \tau }
+\def\wf         { \nu }
+\def\wtf        { (\wt, \wf) }
+
+%   Warped AF plane variables
+%\def\wa                { \widetilde{\alpha} }
+%\def\wb                { \widetilde{\beta} }
+%\def\waf       { \left(\wa, \wb \right) }
+\def\wa         { \alpha }
+\def\wb         { \beta }
+\def\waf        { \left(\wa, \wb \right) }
+
+%   Doubly warped tf plane variables
+\def\dwt        { p }
+\def\dwf        { q }
+\def\dwtf       { (\dwt, \dwf) }
+
+%   Forward, doubly warped (\tau, \nu) plane substitution functions for V
+%\def\dwtt      { \! \! \mbox{ \boldmath $\widetilde{\tau}$ } \! \dwtf }
+%\def\dwff      { \! \! \mbox{ \boldmath $\widetilde{\nu}$ } \! \dwtf }
+%\def\dwsub     { \left( \dwtt, \dwff \right) }
+%\def\btau      { \! \! \mbox{ \boldmath $\widetilde{\tau}$ } \! }
+%\def\bnu       { \! \! \mbox{ \boldmath $\widetilde{\nu}$ } \! }
+%
+\def\dwtt       { \! \! \mbox{ \boldmath $\tau$ } \! \! \dwtf }
+\def\dwff       { \! \! \mbox{ \boldmath $\nu$ } \! \! \dwtf }
+\def\dwsub      { \left( \dwtt, \; \dwff \right) }
+%\def\btau       { \! \! \mbox{ \boldmath $\tau$ } \! \!}
+%\def\bnu        { \! \! \mbox{ \boldmath $\nu$ } \! \! }
+% TMP:
+\def\btau       { \underline{\tau} }
+\def\bnu        { \underline{\nu} }
+
+% TMP UNDERLINE
+\def\dwtt       { \underline{\tau}\dwtf }
+\def\dwff       { \underline{\nu}\dwtf }
+\def\dwsub      { \left( \dwtt, \: \dwff \right) }
+
+
+%   Reverse, doubly warped (p, q) plane substitution functions for V
+\def\dwttt       { \! \! \mbox{ \boldmath $p$ } \! \! \wtf }
+\def\dwfff       { \! \! \mbox{ \boldmath $q$ } \! \! \wtf }
+\def\dwsubb      { \left( \dwttt, \; \dwfff \right) }
+%\def\bp          { \! \! \mbox{ \boldmath $p$ } \! \! }
+%\def\bq          { \! \! \mbox{ \boldmath $q$ } \! \! }
+\def\up          { \underline{p} }
+\def\uq          { \underline{q} }
+% TMP:
+\def\bp          { \underline{p} }
+\def\bq          { \underline{q} }
+
+% TMP UNDERLINE
+\def\dwttt       { \underline{p}\wtf }
+\def\dwfff       { \underline{q}\wtf }
+\def\dwsubb      { \left( \dwttt, \: \dwfff \right) }
+
+
+\def\gdelay             { \rho (\wf, \dwt) }
+\def\ifreq              { \theta (\wt, \dwf) }
+
+
+
+% Group stuff
+
+\def\dG         {d\mu_G}
+\def\LtwoGm     {L^2(G, \dG)}
+\def\LtwoGsm    {L^2(G^*, d\mu_{G^*})}
+\def\LtwoG      {L^2(G)}
+\def\LtwoGs     {L^2(G^*)}
+
+%\def\tG         {{\hbox{\Large\boldmath$\tau$\unboldmath}}^G}
+%\def\tGs        {{\hbox{\Large\boldmath$\tau$\unboldmath}}^{G^*}}
+\def\tG         {{\dT}^G}
+\def\tGs        {{\dT}^{G^*}}
+
+\def\dual       {{\rm d}}
+
+\def\ThA        { \Theta_{\! \AA} }
+\def\ThAi       { \Theta_{\! \AA}^{-1} }
+\def\ThB        { \Theta_\BB }
+\def\ThC        { \Theta_\CC }
+\def\LamG       { \Lambda^{\! G} }
+\def\LamGs      { \Lambda^{\! G^*} }
+
+\def\ah         { {\widehat{a}} }
+\def\bh         { {\widehat{b}} }
+\def\th         { {\widehat{t}} }
+\def\fh         { {\widehat{f}} }
+
+\def\STFT       {{\rm STFT}}
+\def\WT         {{\rm WT}}
+\def\AF         {{\rm AF}}
+
+
+
+\begin{document}
+\begin{titlepage}
+
+
+\title{\LARGE\bf \mbox{WInHD}: Wavelet-based Inverse
+ Halftoning\\[-2mm] via Deconvolution\protect\\[-2mm]}
+ \author{{\Large\it Ramesh Neelamani\thanks{Contact author: R. Neelamani. 
+neelsh@gmail.com.}  ~and Richard
+ Baraniuk} \\ 
+ \date{}}
+%\textheight 242truemm %\topmargin -8truemm % 
+
+\maketitle 
+\vspace*{-0mm}
+\begin{abstract}
+\small \noindent \sloppy We propose the {\em Wavelet-based Inverse
+Halftoning via Deconvolution} (\mbox{WInHD}) algorithm to perform
+inverse halftoning of error-diffused halftones. \mbox{WInHD} is
+motivated by our realization that inverse halftoning can be formulated
+as a deconvolution problem under Kite et~al.'s linear approximation
+model for error diffusion halftoning. Under the linear model, the
+error-diffused halftone comprises the original gray-scale image
+blurred by a convolution operator and colored noise; the convolution
+operator and noise coloring are determined by the error diffusion
+technique.  \mbox{WInHD} performs inverse halftoning by first
+inverting the model-specified convolution operator and then
+attenuating the residual noise using scalar wavelet-domain
+shrinkage. Since \mbox{WInHD} is model-based, it is easily adapted to
+different error diffusion halftoning techniques.  Using simulations,
+we verify that \mbox{WInHD} is competitive with state-of-the-art
+inverse halftoning techniques in the mean-squared-error sense and that
+it also provides good visual performance. We also derive and analyze
+bounds on \mbox{WInHD}'s mean-squared-error performance as the image
+resolution increases.
+\end{abstract} 
+\setcounter{page}{1} 
+\setcounter{footnote}{0}
+\vspace{10mm}
+{\bf Key words:} inverse halftoning, error diffusion, deconvolution,  wavelets,
+wavelet-vaguelette.
+
+\thispagestyle{empty}
+\end{titlepage}
+\setcounter{page}{2} 
+\def\acknowledgments{\vspace{1ex}\begin{center}{\Large\bf Acknowledgments}\end{center}
+\vspace{-0.75ex}}
+
+
+\section{Introduction}
+\label{Intro}
+
+\sloppy {\em Digital halftoning} is a common technique used to render
+a sampled gray-scale image using only black or white dots
+\cite{Ulichney} (see Figures \ref{imagesnew}(a) and (b)); the rendered
+bi-level image is referred to as a halftone. {\em Inverse halftoning}
+is the process of retrieving a gray-scale image from a given
+halftone. Applications of inverse halftoning include rehalftoning,
+halftone resizing, halftone tone correction, and facsimile image
+compression \cite{kernel_halftoning,halftoning_applications}. In this
+paper, we focus on inverse halftoning images that are halftoned using
+popular error diffusion techniques such as those of Floyd et~al.\
+\cite{Floyd}, and Jarvis et~al.\ \cite{Jarvis} (hereby referred to as
+Floyd and Jarvis respectively).
+
+
+
+
+Error-diffused halftoning is non-linear because it uses a quantizer to
+generate halftones.  Recently, Kite et~al.\ proposed an accurate
+linear approximation model for error diffusion halftoning (see Figure
+\ref{block_fig}) \cite{Kite,KiteJournal}. Under this model, the
+halftone $y(\nnnx,\nnny)$ is expressed in terms of the original
+gray-scale image $x(\nnnx,\nnny)$ and additive white noise
+$\gamma(\nnnx,\nnny)$ as (see Figure~\ref{basicLinear})
+\begin{eqnarray}
+y(\nnnx,\nnny) &=& \cP x(\nnnx,\nnny) + \cQ
+\gamma(\nnnx,\nnny) \nn\\ &=&(p\ast x)(\nnnx,\nnny) + (q\ast\gamma)(\nnnx,\nnny),
+\label{basic_eqn}
+\end{eqnarray}
+with $\ast$ denoting convolution and $(\nnnx,\nnny)$ indexing the pixels.
+The $\cP$ and $\cQ$ are the linear time-invariant (LTI) systems with
+respective impulse responses $p(\nnnx,\nnny)$ and $q(\nnnx,\nnny)$ determined
+by the error diffusion technique.
+
+From (\ref{basic_eqn}), we infer that inverse halftoning can be posed
+as the classical {\em deconvolution} problem because the gray-scale
+image $x(\nnnx,\nnny)$ can be obtained from the halftone
+$y(\nnnx,\nnny)$ by deconvolving the filter $\cP$ in the presence of
+the colored noise $\cQ \gamma(\nnnx,\nnny)$.  Conventionally,
+deconvolution is performed in the Fourier domain.  The Wiener
+deconvolution filter, for example, would estimate $x(\nnnx,\nnny)$ by
+inverting $\cP$ and {\em regularizing} the resulting noise with scalar
+Fourier shrinkage.  As we will see, inverse halftoning using a
+Gaussian low-pass filter (GLPF) \cite{Gaussian-LPF-halftoning} can be
+interpreted as a naive Fourier deconvolution approach to inverse
+halftoning.
+
+Unfortunately, all Fourier-based deconvolution techniques induce
+ringing and blurring artifacts due to the fact that the energy of edge
+discontinuities spreads over many Fourier coefficients.  As a result
+of this uneconomical representation, the desirable edge Fourier
+coefficients are easily confounded with those due to the noise
+\cite{Donoho5,nonlin-soln-don,mallat-new}.
+
+In contrast, the wavelet transform provides an economical
+representation for images with sharp edges \cite{DeVore3}.  This
+economy makes edge wavelet coefficients easy to distinguish from those
+due to the noise and has led to powerful image estimation algorithms
+based on scalar wavelet shrinkage
+\cite{donoho-ideal-adaptation,mallat-new}.
+
+\begin{figure}[tb]
+\begin{center}
+\begin{tabular}{c}
+\input{figures/BlockLinear.latex}
+\end{tabular}
+\end{center}
+\caption{\small \sl {Linear approximation for error diffusion
+halftoning. Under the linear model of \cite{Kite,KiteJournal}, the
+error-diffused halftone $y(\nnnx,\nnny)$ comprises the original
+gray-scale image $x(\nnnx,\nnny)$ passed through an LTI system $\cP$
+and white noise $\gamma(\nnnx,\nnny)$ colored by an LTI system
+$\cQ$. The systems $\cP$ and $\cQ$ are determined by the error
+diffusion technique.}}
+\label{basicLinear}
+\end{figure}
+
+
+The wavelet transform was first exploited in inverse halftoning by J.\
+Luo et~al.\ \cite{DeQueiroz}. Xiong et~al.\ extended this algorithm
+using non-orthogonal, redundant wavelets to obtain improved results
+for error-diffused halftones \cite{Xiong}. Both these algorithms rely
+on a variety of steps such as clipping and edge-adapted noise
+attenuation in the wavelet subbands to exploit different empirical
+observations. However, these steps and their implications are not
+theoretically well-justified.
+
+To simultaneously exploit the economy of wavelet representations and
+the interplay between inverse halftoning and deconvolution, we propose
+the {\em Wavelet-based Inverse Halftoning via Deconvolution}
+(\mbox{WInHD}) algorithm (see Figure \ref{IHT})
+\cite{neelsh_iht_icip}. \mbox{WInHD} provides robust estimates by
+first inverting the convolution operator $\cP$ determined by the
+linear model (\ref{basic_eqn}) for error diffusion and then
+effectively attenuating the residual colored noise using
+wavelet-domain scalar shrinkage operations
+\cite{donoho-ideal-adaptation,Donoho1}. Since \mbox{WInHD} is
+model-based, it easily adapts to different error diffusion halftoning
+techniques. See Figure \ref{imagesnew} for simulation results.
+\begin{figure}[tb]
+\begin{center}
+\begin{tabular}{c}
+\input{figures/NewWVDIHT.latex}
+\end{tabular}
+\end{center}
+\caption{\small \sl {Wavelet-based Inverse Halftoning via
+Deconvolution (\mbox{WInHD}). \mbox{WInHD} inverts the convolution
+operator $\cP$ to obtain a noisy estimate $\widetilde{x}(\nnnx,\nnny)$
+of the gray-scale image. Subsequent scalar shrinkage with
+$\lambda^{\rm w}$ in the wavelet domain (for example, level-dependent
+hard thresholding) effectively attenuates the residual noise
+corrupting $\widetilde{x}(\nnnx,\nnny)$ to yield the \mbox{WInHD}
+estimate $\widehat{x}_{\lambda^{\rm w}}(\nnnx,\nnny)$.}}
+\label{IHT}
+\end{figure}
+
+
+\begin{figure}[tbp]
+\begin{center}
+\begin{tabular}{cc}
+\epsfig{figure=figures/OrgLena.eps,width=3.1in}&
+\epsfig{figure=figures/HTLena.eps,width=3.1in}\\
+(a) Original $x(\nnnx,\nnny)$ & (b) Floyd halftone $y(\nnnx,\nnny)$ \\
+\epsfig{figure=figures/EvansLena.eps,width=3.1in}&\epsfig{figure=figures/WDWFLenacwt.eps,width=3.1in}\\
+(c) Gradient estimate \cite{gradient_halftoning} (PSNR = 31.3 dB) & (d) \mbox{WInHD} estimate (PSNR = 32.1 dB) 
+\end{tabular}
+\end{center}
+\caption[Original model]{\small \sl {(a) Original Lena image ($512
+\times 512$ pixels). (b) Floyd halftone. (c) Multiscale gradient-based
+estimate \cite{gradient_halftoning}, PSNR = 31.3 dB.  (d) \mbox{WInHD}
+yields competitive PSNR performance (32.1 dB) and visual
+performance. (All documents including the above images undergo
+halftoning during printing. To minimize the halftoning effect, the
+images have been reproduced at the maximum size possible.) See Figure
+\ref{imagesnewzoom} for image close-ups.}}
+\label{imagesnew}
+\end{figure}
+
+
+Unlike previous inverse halftoning algorithms, we can analyze the
+theoretical performance of \mbox{WInHD} under certain conditions. For
+images in a Besov smoothness space, we derive the minimum rate at
+which the \mbox{WInHD} estimate's mean-squared-error (MSE) decays as
+the resolution increases; that is, as number of pixels in the
+gray-scale image tends to infinity. We assume that the linear model
+for error diffusion (\ref{basic_eqn}) is exact and that the noise
+$\gamma(\nnnx,\nnny)$ is Gaussian. Further, if the gray-scale image
+$x(\nnnx,\nnny)$ contains some additive noise (say, scanner noise)
+before halftoning that is Gaussian, then we show that the MSE decay
+rate enjoyed by \mbox{WInHD} in estimating the noise-free
+$x(\nnnx,\nnny)$ is optimal; that is, no other inverse halftoning
+algorithm can have a better error decay rate for every Besov space
+image as the number of image pixels increases.
+
+
+Section \ref{LinearModel} describes Kite et al.'s linear model for
+error diffusion halftoning from \cite{Kite,KiteJournal}.  Section
+\ref{IHTDecon} clarifies the equivalence between inverse halftoning
+and deconvolution and also analyzes Fourier-domain inverse
+halftoning. Section \ref{wavelets} presents a brief overview of
+wavelets. Section \ref{WVDDecon} discusses the proposed \mbox{WInHD}
+algorithm and its theoretical performance. Section \ref{Results}
+illustrates the experimental performance of \mbox{WInHD}. Section
+\ref{Conclusions} provides conclusions and future
+directions. A technical proof in Appendix~\ref{app:p1} completes the
+paper.
+
+
+
+
+\section{Linear Model for Error Diffusion}		
+\label{LinearModel}
+
+In this section, we describe the non-linear error diffusion halftoning
+and the linear approximation proposed in \cite{Kite,KiteJournal}.
+
+\begin{figure}[bt]
+\begin{center}
+\begin{tabular}{cc}
+\input{figures/NewOrgErrDiff.latex} \\
+(a) Error diffusion halftoning\\[4mm]
+ \input{figures/NewLinErrDiff.latex}\\
+ (b) Linear approximation 
+\end{tabular}
+\end{center}
+\vspace{-2mm}
+\caption[Original model]{\small \sl {(a) Error diffusion
+halftoning. The gray-scale image pixels $x(\nnnx,\nnny)$ are quantized to
+yield $y(\nnnx,\nnny)$ and the quantization error $e(\nnnx,\nnny)$ is diffused
+over a causal neighborhood by the error filter $\cH$. (b) The linear
+model approximates the quantizer with gain $K$ and additive white
+noise $\gamma(\nnnx,\nnny)$ \cite{Kite}.}}
+\label{block_fig}
+\vspace{-2mm}
+\end{figure}
+
+\begin{figure}[bt]
+\begin{center}
+\begin{tabular}{cc}
+\epsfig{figure=figures/FloydFilt.eps,height=0.5in} \\
+$h(\nnnx,\nnny)$  for Floyd \cite{Floyd} \\[5mm]
+\epsfig{figure=figures/JarvisFilt.eps,height=0.75in}\\
+$h(\nnnx,\nnny)$  for  Jarvis \cite{Jarvis}
+\end{tabular}
+\end{center}
+\vspace{-2mm}
+\caption[Original model]{\small \sl {Error filters $h(\nnnx,\nnny)$ for Floyd
+\cite{Floyd} and Jarvis \cite{Jarvis} error diffusion. The
+quantization error at the black dot is diffused over a causal
+neighborhood according the displayed weights.}}
+\label{EDfilters}
+\vspace{-2mm}
+\end{figure}
+
+\sloppy Digital halftoning is a process that converts a given
+gray-scale digital image (for example, each pixel value $\in
+[0,1,\ldots,255]$) into a bi-level image (for example, each pixel
+value $=0$ or $255$) \cite{Ulichney}. Error diffusion halftoning is
+one popular approach to perform digital halftoning. The idea is to
+take the error from quantizing a gray-scale pixel to a bi-level pixel
+and diffuse this quantization error over a causal neighborhood. The
+error diffusion ensures that the spatially-localized average pixel
+values of the halftone and original gray-scale image are similar;
+therefore, the halftone visually resembles the gray-scale image.
+Figure \ref{block_fig}(a) illustrates the block diagram for error
+diffusion halftoning. The $x(\nnnx,\nnny)$ denote the pixels of the
+input gray-scale image and $y(\nnnx,\nnny)$ denote the bi-level pixels
+of the output halftone. The $x'(\nnnx,\nnny)$, which yields
+$y(\nnnx,\nnny)$ after quantization, is obtained by diffusing the
+quantization error $e(\nnnx,\nnny)$ over a causal neighborhood of
+$x(\nnnx,\nnny)$ using the error filter $\cH$. The quantizer makes
+error-diffused halftoning a non-linear technique. Error diffusion
+techniques such as Floyd \cite{Floyd} and Jarvis \cite{Jarvis} are
+characterized by their choice of $\cH$'s impulse response
+$h(\nnnx,\nnny)$ (see Figure \ref{EDfilters}).
+
+\sloppy Recently, Kite et~al.\ proposed an accurate linear model for
+error diffusion halftoning \cite{Kite,KiteJournal}. This model
+accurately predicts the ``blue noise'' (high-frequency noise) and edge
+sharpening effects observed in various error-diffused halftones. As
+shown in Figure~\ref{block_fig}(b), this model approximates the
+effects of quantization using a gain $K$ followed by the addition of
+white noise $\gamma(\nnnx,\nnny)$.  The halftone $y(\nnnx,\nnny)$ can
+then be written in terms of the gray-scale image $x(\nnnx,\nnny)$ and
+the additive white noise $\gamma(\nnnx,\nnny)$ as in (\ref{basic_eqn});
+the error diffusion technique determines the 2-dimensional (2-D)
+frequency responses of the LTI filters $\cP$ and $\cQ$ as
+\begin{eqnarray}
+P(\fffx,\fffy)&:=&\frac{K}{1+(K-1)H(\fffx,\fffy)},\label{modelfilters1}\\[2mm]
+Q(\fffx,\fffy)&:=&\frac{1-H(\fffx,\fffy)}{1+(K-1)H(\fffx,\fffy)}
+\label{modelfilters2}
+\end{eqnarray} with $P(\fffx,\fffy)$, $Q(\fffx,\fffy)$, and $H(\fffx,\fffy)$ denoting the
+respective 2-D Fourier transforms of $p(\nnnx,\nnny)$,
+$q(\nnnx,\nnny)$, and $h(\nnnx,\nnny)$. For any given error diffusion
+technique, Kite et~al.\ found that the gain $K$ is almost constant for
+different images. However, the $K$ varied with the error diffusion
+technique \cite{Kite}; for example, $K = 2.03$ for Floyd,  while $K =
+4.45$ for Jarvis. Figure \ref{floydfreq}~(a)~and~(b) illustrate the
+radially-averaged frequency response magnitudes of the filters $\cP$
+and $\cQ$ for Floyd and Jarvis respectively; these responses are obtained by
+averaging over an annulus of constant radius in the 2-D frequency
+domain \cite{Ulichney}. In \cite{KiteJournal}, Kite et~al.\ further
+generalized the linear model of (\ref{basic_eqn}) by using different
+gains $K_s$ and $K_n$ in the signal transfer function $P(\fffx,\fffy)$
+and the noise transfer function $Q(\fffx,\fffy)$ respectively:
+$P(\fffx,\fffy):=\frac{K_s}{1+(K_s-1)H(\fffx,\fffy)}$ and
+$Q:=\frac{1-H(\fffx,\fffy)}{1+(K_n-1)H(\fffx,\fffy)}$. In this paper,
+we assume a single gain factor $K$ for both the signal and noise
+transfer functions as proposed in \cite{Kite}.
+
+
+\begin{figure}[tb]
+\begin{center}
+\begin{tabular}{ccc}
+\epsfig{figure=figures/FloydFreq.eps,width=3in}&\hspace{5mm}&\epsfig{figure=figures/JarvisFreq.eps,width=3in}\\
+(a) Floyd & &(b) Jarvis
+\end{tabular}
+\end{center}
+\caption[Original model]{\small \sl {Plots (a) and (b) respectively
+illustrate the radially-averaged frequency response magnitudes
+$|P(\fffx,\fffy)|$ (solid line) and $|Q(\fffx,\fffy)|$ (dotted line)
+for Floyd and Jarvis. The high-pass $|P(\fffx,\fffy)|$ explains the
+sharpened edges, while the high-pass $|Q(\fffx,\fffy)|$ explains the
+``blue noise'' behavior in the halftones.}}
+\label{floydfreq}
+\end{figure}
+
+\begin{comment}
+\begin{figure}[tb]
+\begin{center}
+\epsfig{figure=figures/FloydFreq.eps,width=3in}
+\end{center}
+\caption[Original model]{\small \sl {Radially-averaged frequency
+response magnitudes $|P(\fffx,\fffy)|$ (solid line) and
+$|Q(\fffx,\fffy)|$ (dotted line) of the filters used in the linear
+approximation model (with $K=2.03$) \cite{Kite} for Floyd
+\cite{Floyd}. The high-pass $|P(\fffx,\fffy)|$ explains the sharpened
+edges, while the high-pass $|Q(\fffx,\fffy)|$ explains the ``blue
+noise'' behavior in Floyd halftones.}}
+\label{floydfreq}
+\end{figure}
+\end{comment}
+
+
+\section{Inverse Halftoning $\approx$ Deconvolution}
+\label{IHTDecon}
+Given a halftone $y(\nnnx,\nnny)$ (see Figure \ref{block_fig}(a)),
+inverse halftoning aims to estimate the gray-scale image
+$x(\nnnx,\nnny)$. In the classical deconvolution problem, given the
+blurred and noisy observation $y(\nnnx,\nnny)$ as in
+(\ref{basic_eqn}) with known LTI filters responses $p(\nnnx,\nnny)$
+and $q(\nnnx,\nnny)$, we seek to estimate $x(\nnnx,\nnny)$. Thus,
+under the linear model of \cite{Kite,KiteJournal}, inverse halftoning
+can be posed as a deconvolution problem.
+
+
+\subsection{Deconvolution}
+\label{deconvolution}
+\sloppy Due to the interplay between inverse halftoning and
+deconvolution, the well-studied deconvolution literature
+\cite{akjain,katman-book,Neelamani1} can be exploited to understand
+inverse halftoning as well.  Deconvolution algorithms conceptually
+consist of the following steps:
+\begin{enumerate}
+\item {\em Operator inversion}\\
+Invert the convolution operator $\cP$ to obtain a noisy
+estimate $\widetilde{x}(\nnnx,\nnny)$ of the input signal\footnote{For
+non-invertible $\cP$, we replace $\cP^{-1}$ by its pseudo-inverse and
+$x(\nnnx,\nnny)$ by its orthogonal projection onto the range of $\cP$
+in~(\ref{noisy_est}).} 
+\begin{equation}\widetilde{x}(\nnnx,\nnny) :=
+\cP^{-1}y(\nnnx,\nnny) = x(\nnnx,\nnny) + \cP^{-1}\cQ\gamma(\nnnx,\nnny).
+\label{noisy_est}
+\end{equation}
+\item {\em Transform-domain shrinkage}\\ 
+Attenuate the colored noise
+$\cP^{-1}\cQ\gamma(\nnnx,\nnny)$ by expressing $\widetilde{x}(\nnnx,\nnny)$ in
+terms of a chosen  orthonormal basis
+$\{b_k\}_{k=0}^{\NSQ -1}$  and shrinking the $k$-th component with a scalar
+$\lambda_k$, $ 0\le \lambda_k \le 1$ \cite{james-stein}
+\begin{equation} 
+\widehat{x}_{\lambda} := \sum_k \langle \widetilde{x},b_k\rangle \lambda_k\, b_k = \sum_k \left(\langle x,b_k\rangle + \langle
+\cP^{-1}\cQ\gamma,b_k\rangle\right) \lambda_k\, b_k 
+\label{general-estimate}
+\end{equation}
+to obtain the deconvolution estimate $\widehat{x}_{\lambda}$.
+\end{enumerate}
+
+The $\sum_k \langle x,b_k\rangle \lambda_k\, b_k$ in
+(\ref{general-estimate}) denotes the {\em retained part} of the signal
+$x(\nnnx,\nnny)$ that shrinkage preserves from (\ref{noisy_est}),
+while $\sum_k \langle \cP^{-1}\cQ\gamma,b_k\rangle \lambda_k\, b_k$
+denotes the {\em leaked part} of the colored noise
+$\cP^{-1}\cQ\gamma(\nnnx,\nnny)$ that shrinkage fails to attenuate.
+Clearly, we should set $\lambda_k \approx 1$ if the variance
+$\sigma_k^2 := \expect(|\langle \cP^{-1}\cQ\gamma,b_k\rangle|^2)$ of
+the $k$-th colored noise component is small relative to the energy
+$|\langle x,b_k\rangle|^2$ of the corresponding signal component and
+set $\lambda_k \approx 0$ otherwise. The shrinkage by $\lambda_k$ can
+also be interpreted as a form of {\em regularization} for the
+deconvolution inverse problem \cite{katman-book}.
+
+
+The choice of transform domain to perform the shrinkage in
+deconvolution (see Step 2 above) critically influences the MSE of the
+deconvolution estimate. An important fact is that for a given
+transform domain, even with the best possible $\lambda_k$'s, the
+estimate $\widehat{x}_\lambda$'s MSE is lower-bounded within a
+factor \mbox{of~2} by \cite{nonlin-soln-don,mallat-new,Donoho5}
+\begin{equation}
+\sum_k \min\left(|\langle x,b_k\rangle|^2, \sigma_k^2\right).
+\label{bound}
+\end{equation}
+From (\ref{bound}), $\widetilde{x}_\lambda$
+can have small MSE only when most of the signal energy ($ =
+\sum_k|\langle x,b_k\rangle|^2$) and colored noise energy ($= \sum_k
+\sigma_k^2$) is captured by just a few transform-domain coefficients --- we term such a representation {\em economical} --- and when the
+energy-capturing coefficients for the signal and noise are
+different. Otherwise, the $\widetilde{x}_\lambda$ is either
+excessively noisy due to leaked noise components or distorted due to
+lost signal components.
+
+
+Traditionally, the Fourier domain (with sinusoidal $b_k$) is used to
+estimate $x(\nnnx,\nnny)$ from $\widetilde{x}(\nnnx,\nnny)$ because it
+represents the colored noise $\cP^{-1}\cQ \gamma(\nnnx,\nnny)$ in
+(\ref{noisy_est}) most economically. That is, among orthonormal
+transforms, the Fourier transform captures the maximum colored noise
+energy using a fixed number of coefficients because it diagonalizes
+convolution operators \cite{Davis1}. Fourier-based deconvolution
+performs both the operator inversion and the shrinkage simultaneously
+in the Fourier domain as
+\begin{equation}\widehat{X}_{\lambda^{\rm f}}
+:= Y(\fffx,\fffy) \;\frac{1}{P(\fffx,\fffy)}\;\lambda^{\rm f}_{\fffx,\fffy}
+\label{FourierDeconEst}
+\end{equation}
+with shrinkage
+\begin{equation}
+\lambda^{\rm f}_{\fffx,\fffy}
+:= 
+\frac{|P(\fffx,\fffy)|^{2}}{|P(\fffx,\fffy)|^{2}~+~\Upsilon(\fffx,\fffy)|Q(\fffx,\fffy)|^{2}}
+\label{Fouriershrinkage}
+\end{equation}
+at the different frequencies. The $Y(\fffx,\fffy)$ and
+$\widehat{X}_{\lambda^{\rm f}}(\fffx,\fffy)$ denote the 2-D Fourier
+transforms of $y(\nnnx,\nnny)$ and the deconvolution estimate
+$\widehat{x}_{\lambda^{\rm f}}(\nnnx,\nnny)$ respectively. The
+$\Upsilon(\fffx,\fffy)$ in (\ref{Fouriershrinkage}) is called the {\em
+regularization term} and is set appropriately during deconvolution
+\cite{katman-book}. For example, using the signal to noise ratio to
+set
+$\Upsilon(\fffx,\fffy)=\frac{\expect(|\Gamma(\fffx,\fffy)|^2)}{|X(\fffx,\fffy)|^2}$
+in (\ref{FourierDeconEst}) yields the Wiener deconvolution estimate
+\cite{castleman}; the $\Gamma(\fffx,\fffy)$ and $X(\fffx,\fffy)$
+denote the respective Fourier transforms of $\gamma(\nnnx,\nnny)$ and
+$x(\nnnx,\nnny)$.  The $\frac{1}{P(\fffx,\fffy)}\;\lambda^{\rm
+f}_{\fffx,\fffy}$ in (\ref{FourierDeconEst}) constitutes the frequency
+response of the so-called {\em deconvolution filter}.
+
+Fourier-based deconvolution suffers from the drawback that its
+estimates for images with sharp edges are unsatisfactory either due to
+excessive noise or due to distortions such as blurring or ringing.
+Since the energy due to the edge discontinuities spreads over many
+image Fourier coefficients, as dictated by the MSE bound
+in~(\ref{bound}), any estimate obtained via Fourier-domain shrinkage
+suffers from a large MSE.
+
+\subsection{Inverse halftoning via Gaussian low-pass filtering (GLPF)}
+\label{glpfsection}
+Conventionally, inverse halftoning has been performed using a finite
+impulse response (FIR) Gaussian filter with coefficients
+$g(\nnnx,\nnny) \propto \exp[-(\nnnx^2+\nnny^2)/(2\sigma_g^2)]$, where
+$-4\le \nnnx,\nnny\le 4$, and $\sigma_g$ determines the bandwidth
+\cite{Gaussian-LPF-halftoning}.  We can interpret inverse halftoning
+using GLPF as a naive Fourier-domain deconvolution approach to inverse
+halftoning. This is substantiated by our observation that the
+deconvolution filter $\frac{1}{P(\fffx,\fffy)}\;\lambda^{\rm
+f}_{\fffx,\fffy}$ (see (\ref{FourierDeconEst}) and
+(\ref{Fouriershrinkage})) constructed with the linear model filters
+$\cP$ and $\cQ$ for Floyd and with regularization
+$\Upsilon(\fffx,\fffy) \propto \frac{1}{{\fffx^2+\fffy^2}}$ has a
+frequency response that closely matches the frequency response of the
+GLPF (see Figure \ref{GauVsFdecon}) \cite{Gaussian-LPF-halftoning}.
+The corresponding inverse halftone estimates obtained using
+simulations are also nearly identical. Predictably, GLPF estimates
+suffer from the same drawbacks that afflict any Fourier-based
+deconvolution estimate --- excessive noise (when $\sigma_g$ is small)
+or significant blurring (when $\sigma_g$ is large).  Exploiting the
+insights provided by the deconvolution perspective, we can infer that
+unsatisfactory GLPF estimates result because the Fourier domain does
+not economically represent images with edges.
+\begin{figure}[tb]
+\begin{center}
+\begin{tabular}{cc}
+\epsfig{figure=figures/GaussianFourierDeconLog.eps,width=3in}
+\end{tabular}
+\end{center}
+\caption[Original model]{\small \sl {Comparison of radially-averaged
+frequency response magnitudes of the FIR GLPF (dashed line) used for
+inverse halftoning in \cite{Gaussian-LPF-halftoning} with the response
+of the deconvolution filter (solid line) constructed with filters
+$\cP$ and $\cQ$ for Floyd and with $\Upsilon(\fffx,\fffy) \propto
+\frac{1}{{\fffx^2+\fffy^2}}$ (see (\ref{FourierDeconEst}) and
+(\ref{Fouriershrinkage})).  Ripples in the GLPF frequency response
+result because the filter is truncated in space.}}
+\label{GauVsFdecon}
+\end{figure}
+
+
+
+\section{Background on Wavelets}
+\label{wavelets}
+
+In contrast to Fourier representations, wavelets provide economical
+representations for a diverse class of signals including images with
+edges \cite{DeVore3,mallat-new}.
+\subsection{Wavelet transform}
+\label{wavelettransform}
+The 2-D discrete wavelet transform (DWT) represents a
+spatially-continuous image $x(\tttx,\ttty) \in L^2([0,1)^{2})$ in terms of
+shifted versions of a low-pass scaling function $\phi$ and
+shifted and dilated versions of prototype bandpass wavelet functions
+$\{\psi^{LH},\psi^{HL},\psi^{HH}\}$
+\cite{mallat-new,burrus-wlet-intro}.  For special choices of $\phi$
+and $\psi$'s, the shifted and dilated functions
+$\phi_{j,\nnkx,\nnky}(\tttx,\ttty):=2^{j}\phi(2^{j}\tttx-\nnkx,2^{j}\ttty-\nnky)$,
+and $\psi^{b}_{j,\nnkx,\nnky}:=2^{j}\psi^{b}(2^{j}\tttx-\nnkx,2^{j}\ttty-\nnky)$ with
+$b\in{\mathcal{B}}:=\{LH,HL,HH\}$, where the $LH$, $HL$, and $HH$
+denote the {\em subbands} of the wavelet decomposition, form an
+orthonormal basis. The~ $j$ parameter corresponds to the {\em scale}
+of the analysis, while the $\nnkx,\nnky$ parameters correspond to the {\em
+location}.  A finite-resolution approximation $x^J(\tttx,\ttty)$ to $x(\tttx,\ttty)$ is given by
+\begin{equation} 
+x^J(\tttx,\ttty) = \sum_{\nnkx,\nnky\in\integer}
+s_{j_0,\nnkx,\nnky}\phi_{j_{0},\nnkx,\nnky}(\tttx,\ttty) +
+ \sum_{b\in\mathcal{B}}\sum_{j=j_0}^{J}\sum_{\nnkx,\nnky\in\integer}
+w^{b}_{j,\nnkx,\nnky}\psi^{b}_{j,\nnkx,\nnky}(\tttx,\ttty), \nn
+\label{wavelet_approx}
+\end{equation}
+with scaling coefficients $s_{j_0,\nnkx,\nnky} := \langle x,
+\phi_{j_0,\nnkx,\nnky}\rangle$ and wavelet coefficients $w_{j,\nnkx,\nnky}^{b}
+:= \langle x,\psi_{j,\nnkx,\nnky}^{b}\rangle$.  The parameter $J$ controls
+the resolution of the wavelet reconstruction $x^J(\tttx,\ttty)$ of
+$x(\tttx,\ttty)$; in fact, the $L_2$ error $\|x^J - x\|_2 \rightarrow 0$ as
+$J \rightarrow \infty$.
+
+The DWT can be extended to transform sampled images as well. Consider,
+for example, a sampled image obtained by sampling $x(\tttx,\ttty)$
+uniformly as
+\begin{equation}
+x(\nnnx,\nnny) = \NSQ  \int_{\frac{\nnny}{\NORNSQ}}^{\frac{\nnny+1}{\NORNSQ}}
+\int_{\frac{\nnnx}{\NORNSQ}}^{\frac{\nnnx+1}{\NORNSQ}} x(\tttx,\ttty) \;d\tttx\;d\ttty,
+~~~~~~~~~~~\mbox{$ 0\le \nnnx,\nnny \le \NORNSQ-1$}.
+\label{samplingmodel}
+\end{equation}
+For such $\NtimesN$-pixel images, the $\NSQ $ wavelet coefficients
+can be efficiently computed in $O(\NSQ )$ operations using a filter bank
+consisting of low-pass filters, high-pass filters, and decimators
+\cite{mallat-new}.
+
+Purely for notational convenience, we henceforth refer to the location
+parameters $\nnkx,\nnky$ by $k$ and do not explicitly specify the
+different wavelet subbands: $w_{j,\nnkx,\nnky}^{b}$ and
+$\psi_{j,\nnkx,\nnky}^{b}$ for $b\in{\mathcal{B}}:=\{LH,HL,HH\}$ will
+be referred to simply as $w_{j,\nnbothk}$ and
+$\psi_{j,\nnbothk}$. Further, we discuss the processing of only the
+wavelet coefficients, but all steps are replicated on the scaling
+coefficients as well.
+\subsection{Economy of wavelet representations}
+Wavelets provide economical representations for images in smoothness
+spaces such as Besov spaces \cite{DeVore3,Donoho5}. Roughly speaking,
+a Besov space $B_{p,q}^{s}$ contains functions with ``$s$ derivatives
+in $L_p$,'' with $q$ measuring finer smoothness distinctions
+\cite{DeVore3}. Besov spaces with different $s$, $p$, and $q$
+characterize many classes of functions; for example,
+$B_{1,\infty}^{1}$ contains piece-wise polynomial images
+\cite{Kalifaannals}. If a continuous-space image $x(\tttx,\ttty) \in
+B_{p,q}^{s}$, $s > \frac{2}{p} - 1$, $ 1 \le p,q \le \infty$, then the
+DWT coefficients computed using the image samples (see
+(\ref{samplingmodel})) satisfies (for all~$N$)
+\begin{equation} 
+\frac{1}{\NORNSQ}\left(\sum_j
+2^{jq(s+1-\frac{2}{p}))} \left(\sum_{\nnbothk}
+|w_{j,\nnbothk}|^{p}\right)^{\frac{q}{p}}\right)^\frac{1}{q} < \infty,  
+\label{besovnorm}
+\end{equation}
+assuming the underlying wavelet basis functions are sufficiently
+smooth \cite{Donoho1,donoho99asymptotic,nonlin-soln-don}.\footnote{The
+traditional Besov space characterizing equation in
+\cite{Donoho1,donoho99asymptotic,nonlin-soln-don} assumes
+$L_2$-normalized wavelet coefficients $w_{j,\nnbothk}$; that is,
+$\sum_{j,\nnbothk} |w_{j,\nnbothk}|^2 =
+\|x(\tttx,\ttty)\|^2_2$. Because the $w_{j,\nnbothk}$ used in
+(\ref{besovnorm}) are computed using signal samples $x(\nnnx,\nnny)$
+that satisfy $\sum_{j,\nnbothk} |w_{j,\nnbothk}|^2 =
+\sum_{\nnnx,\nnny} |x(\nnnx,\nnny)|^2 \approx
+N\|x(\tttx,\ttty)\|^2_2$, a normalization factor of $\sqrt{N}$ is
+required.} From (\ref{besovnorm}), we can infer that the wavelet
+coefficients of Besov space images decay exponentially fast with
+increasing scale~$j$.  Further, among all orthogonal transforms,
+the wavelet transform captures the maximum (within a constant
+factor) signal energy using a fixed number of coefficients for the
+worst-case Besov space signal \cite{Donoho5}.
+
+
+\subsection{Wavelet-based signal estimation}
+\label{sect:wavesigest}
+The wavelet transform's economical representations have been exploited
+in many fields \cite{mallat-new}. For example, wavelets provide an
+effective solution to the problem of estimating signal samples
+$x(\nnnx,\nnny)$ from additive white Gaussian noise (AWGN) corrupted
+observations\cite{donoho-minimax,donoho99asymptotic,Donoho1}
+\begin{equation}
+\widetilde{x}(\nnnx,\nnny) = x(\nnnx,\nnny) + \gamma(\nnnx,\nnny),
+\label{whitenoisesetup}
+\end{equation} 
+with $\gamma(\nnnx,\nnny)$ denoting AWGN samples of variance
+$\sigma^2$.  Such a setup is similar to estimating $x(\nnnx,\nnny)$
+from (\ref{noisy_est}) but with $\cP^{-1}\cQ$ equal to
+identity. Simple shrinkage in the wavelet domain with scalars
+$\lambda^{\rm w}$ can provide excellent estimates of
+$x(\nnnx,\nnny)$. This shrinkage is illustrated by
+(\ref{general-estimate}) with wavelet basis functions as $b_k$'s and
+with identity $\cP^{-1}\cQ$. For example, {\em hard thresholding}
+shrinks the wavelet coefficients of $\widetilde{x}(\nnnx,\nnny)$ with
+scalars
+\begin{eqnarray}
+\lambda^{\rm w}_{j,\nnbothk} ~&=&~ \left\{\begin{array}{ll} 1,
+~~~~~~~~~~~~~~~& \mbox{ if
+$ |\widetilde{w}_{j,\nnbothk}|>
+\rho_j\sigma_{j}$},\\[2mm] 0, ~~~~~~~~~~~~~~~& \mbox{ if
+$ |\widetilde{w}_{j,\nnbothk}|\le
+\rho_j\sigma_{j}$},\end{array} \right.
+\label{hardthresholding}
+\end{eqnarray}
+with $\widetilde{w}_{j,\nnbothk} :=
+\left\langle\widetilde{x}\;,\psi_{j,\nnbothk}\right\rangle$,
+$\sigma_{j}^2$ the noise variance at wavelet scale~$j$, and $\rho_j$
+the scale-dependent threshold factor (for examples, see \cite[p.\
+442]{mallat-new}) . When the pixels $x(\nnnx,\nnny)$ arise from a
+continuous-space image $x(\tttx,\ttty) \in B_{p,q}^{s}$ with $s >
+\frac{2}{p} - 1$ and $ 1 \le p,q \le \infty$, hard thresholding (with
+judiciously chosen $\rho_j$ \cite{donoho-minimax}) provides estimates
+whose MSE-per-pixel decays at least as fast as $N^{\frac{-s}{s+1}}$ as
+$N \rightarrow \infty$ \cite{donoho99asymptotic,Donoho1}. Further, no
+estimator can achieve a better error decay rate for every
+$x(\tttx,\ttty) \in B_{p,q}^{s}$. If the threshold factor $\rho_j$ is
+chosen to be scale-independent, then the MSE decay rate is decelerated
+by an additional $\log{N}$ factor.
+
+
+In practice, the {\em Wavelet-domain Wiener Filter} (WWF) improves on
+the MSE performance of hard thresholding by employing Wiener
+estimation on each wavelet coefficient  \cite{sandeep,choi}. WWF chooses
+\begin{eqnarray}
+\lambda_{j,\nnbothk}^{\rm w}=\frac{|{w}_{j,\nnbothk}|^2}{|{w}_{j,\nnbothk}|^2 +
+\sigma_j^2}.
+\label{WWSthresholding}
+\end{eqnarray}
+However, the coefficients ${w}_{j,\nnbothk}$ required to construct the
+$\lambda_{j,\nnbothk}^{\rm w}$ are unknown. Hence, a ``pilot''
+estimate of the unknown signal is first computed using hard
+thresholding. Then, using $\lambda^{\rm w}$ constructed with the pilot
+estimate's wavelet coefficients in (\ref{WWSthresholding}), WWF
+shrinkage is performed. Sufficiently different wavelet basis functions
+must be used in the two steps \cite{sandeep,choi}.
+
+
+
+\section{Wavelet-based Inverse Halftoning Via Deconvolution (\mbox{WInHD}) }
+\label{WVDDecon}
+\sloppy To simultaneously exploit the economy of wavelet
+representations and our realization about the interplay between
+inverse halftoning and deconvolution, we propose the \mbox{WInHD}
+algorithm \cite{neelsh_iht_icip}.  \mbox{WInHD} adopts the wavelet-based
+deconvolution approach of \cite{nonlin-soln-don} to perform inverse
+halftoning.
+
+
+
+\subsection{\mbox{WInHD} algorithm}
+\label{winhdalgo}
+\mbox{WInHD} employs scalar shrinkage in the
+wavelet domain to perform inverse halftoning as follows (see
+Figure~\ref{IHT}):.
+\begin{enumerate} 
+\item {\em Operator inversion}\\As in (\ref{noisy_est}), obtain a
+noisy estimate $\widetilde{x}(\nnnx,\nnny)$ of the input image by inverting
+$\cP$.
+\item {\em Wavelet-domain shrinkage}\\ Employ scalar shrinkage in the
+wavelet domain to attenuate the noise $\cP^{-1}\cQ\gamma(\nnnx,\nnny)$ in
+$\widetilde{x}(\nnnx,\nnny)$ and obtain the \mbox{WInHD} estimate
+$\widehat{x}_{\lambda^{\rm w}}(\nnnx,\nnny)$ as follows:
+\begin{enumerate}
+\item Compute the DWT of the noisy $\widetilde{x}$ to obtain $\widetilde{w}_{j,\nnbothk}:=\left\langle\widetilde{x}\;,\psi_{j,\nnbothk}\right\rangle$.
+\item Shrink the noisy $\widetilde{w}_{j,\nnbothk}$ with scalars
+$\lambda^{\rm w}_{j,\nnbothk}$ (using (\ref{hardthresholding}) or
+(\ref{WWSthresholding})) to obtain
+$\widehat{w}_{j,\nnbothk;\lambda^{\rm w}} :=
+\widetilde{w}_{j,\nnbothk}\,\lambda^{\rm w}_{j,\nnbothk}$.  The
+colored noise variance at each scale $j$ determining the $\lambda^{\rm
+w}_{j,\nnbothk}$ is given by $\sigma_j^2 := \expect\left(\left|
+\left\langle \cP^{-1}\,\cQ\,\gamma
+\;,\psi_{j,\nnbothk}\right\rangle\right|^2\right)$.
+\item Compute the inverse DWT with the shrunk
+$\widehat{w}_{j,\nnbothk;\lambda^{\rm w}}$ to obtain the \mbox{WInHD} estimate
+$\widehat{x}_{\lambda^{\rm w}}(\nnnx,\nnny)$.
+\end{enumerate} 
+\end{enumerate} 
+
+For error diffusion systems, $\cP^{-1}$ is an FIR filter. Hence, the
+noisy estimate $\widetilde{x}(\nnnx,\nnny)$ obtained in Step~1 using
+$\cP^{-1}$ is well-defined. The subsequent wavelet-domain shrinkage in
+Step~2 effectively extracts the few dominant wavelet components of the
+desired gray-scale image $x(\nnnx,\nnny)$ from the noisy
+$\widetilde{x}(\nnnx,\nnny)$ because the residual noise
+$\cP^{-1}\,\cQ\, \gamma(\nnnx,\nnny)$ corrupting the wavelet
+components is not excessive.
+
+\begin{comment}
+Figure \ref{floydnoise} illustrates the
+power spectrum $\frac{|Q(\fffx,\fffy)|^2}{|P(\fffx,\fffy)|^2}\sigma^2$
+of the residual noise $\cP^{-1}\,\cQ\, \gamma(\nnnx,\nnny)$ corrupting
+$\widetilde{x}(\nnnx,\nnny)$. 
+\begin{figure}[tb]
+\begin{center}
+\begin{tabular}{ccc}
+\epsfig{figure=figures/FloydNoise.eps,width=3in}&\hspace{5mm}&\epsfig{figure=figures/JarvisNoise.eps,width=3in}\\
+(a) Floyd & &(b) Jarvis
+\end{tabular}
+\end{center}
+\caption[Noise Spectrum]{\small \sl {Plots (a) and (b) respectively
+illustrate the radially-averaged power spectrum
+$\frac{|Q(\fffx,\fffy)|^2}{|P(\fffx,\fffy)|^2}\sigma^2$ of the noise
+attenuated by WInHD's wavelet-domain shrinkage (Step 2) while inverse
+halftoning Floyd and Jarvis halftones.}}
+\label{floydnoise}
+\end{figure}
+\end{comment}
+
+\mbox{WInHD} can be easily adapted to different error diffusion
+techniques simply by choosing the gain $K$
+recommended by \cite{Kite} and the error filter response
+$h(\nnnx,\nnny)$ for the target error diffusion technique. $K$ and
+$h(\nnnx,\nnny)$ determine the filters $\cP$ and $\cQ$ (see
+(\ref{modelfilters1}) and (\ref{modelfilters2})) required to
+perform \mbox{WInHD}. In contrast, the gradient-based
+inverse halftoning method \cite{gradient_halftoning} adapts to a given
+error diffusion technique by employing a set of smoothing filters that
+need to be designed carefully.
+
+
+
+\sloppy
+\subsection{Asymptotic performance of \mbox{WInHD}}
+\label{Optimality}
+
+With advances in technology, the spatial resolution of digital images
+(controlled by the number of pixels $\NSQ $) has been steadily increasing.
+Hence any inverse halftoning algorithm should not only perform well
+at a fixed resolution but should also guarantee good performances at
+higher spatial resolutions. In this section, under some assumed
+conditions, we deduce the rate at which the per-pixel MSE for 
+\mbox{WInHD} decays as number of pixels $N \rightarrow \infty$.
+
+
+
+
+
+Invoking established results in wavelet-based image estimation in
+Gaussian noise, we prove the following proposition in Appendix
+\ref{app:p1} about the asymptotic performance of \mbox{WInHD}.
+\begin{proposition}
+\sloppy Let $x(\nnnx,\nnny)$ be a $N$-pixel gray-scale image obtained
+as in (\ref{samplingmodel}) by uniformly sampling a continuous-space
+image $x(\tttx,\ttty) \in B_{p,q}^s$ with $\tttx,\ttty\in [0,1)$, 
+$s>\frac{2}{p} -1$, and $1\le p,q,\le \infty$. Let $p(\nnnx,\nnny)$ and
+$q(\nnnx,\nnny)$ denote known filter impulse responses that are
+invariant with $N$ and with Fourier transform magnitudes
+$|P(\fffx,\fffy)| \ge \epsilon > 0$ and $|Q(\fffx,\fffy)| <
+\infty$. Let $y(\nnnx,\nnny)$ be observations obtained as in
+(\ref{basic_eqn}) with $\gamma(\nnnx,\nnny)$ zero-mean AWGN samples
+with variance $\sigma^2$. Then, the per-pixel MSE of the
+\mbox{WInHD} estimate $\widehat{x}(\nnnx,\nnny)$ obtained from
+$y(\nnnx,\nnny)$ using hard thresholding behaves as
+\begin{equation}
+\frac{1}{\NSQ }\expect\left(\sum_{\nnnx,\nnny}
+\left|\widehat{x}(\nnnx,\nnny) - x(\nnnx,\nnny)\right|^2\right) \le C\,
+N^{\frac{-s}{s+1}},~~~~~~~~N\rightarrow \infty,
+\label{prop1:eqn1}
+\end{equation} 
+with constant $C > 0$ independent of $N$.
+\label{proposition1}
+\end{proposition}
+The above proposition affirms that the per-pixel MSE of the \mbox{WInHD}
+estimate decays as $N^\frac{-s}{s+1}$ with increasing spatial
+resolution ($N \rightarrow \infty$) under the mild assumptions
+discussed below. 
+
+The central assumption in Proposition \ref{proposition1} is that the
+linear model (\ref{basic_eqn}) for error diffusion is accurate. This
+is well-substantiated in \cite{Kite,KiteJournal}. The conditions
+$|P(\fffx,\fffy)| \ge \epsilon > 0$ and $|Q(\fffx,\fffy)| < \infty$
+respectively ensure that $\cP$ is invertible and that the variance of
+the colored noise $Q\gamma(\nnnx,\nnny)$ is bounded. We have verified that
+for common error diffusion halftoning techniques such as Floyd and
+Jarvis, the filters $\cP$ and $\cQ$ recommended by the linear model of
+Kite et~al.\ satisfy these conditions (see Figure
+\ref{floydfreq}). The final assumption is that the noise
+$\gamma(\nnnx,\nnny)$ is Gaussian; this is required to invoke the
+established results on the asymptotics of wavelet-based estimators
+\cite{Donoho1}.  However, recently, wavelet-domain thresholding has
+been shown to be optimal for many other noise distributions as well
+\cite{Averkamp,Gao}. Hence the noise Gaussianity assumption in
+Proposition \ref{proposition1} could be relaxed.
+
+
+Often, gray-scale digital images are corrupted with some noise before
+being subjected to halftoning. For example, sensor noise corrupts
+images captured by charged coupled device (CCD) based digital
+cameras. In such cases as well, \mbox{WInHD} can effectively estimate
+the noise-free gray-scale image with an MSE decay rate of
+$N^\frac{-s}{s+1}$ as in Proposition \ref{proposition1}. Further,
+\mbox{WInHD}'s MSE decay rate can be shown to be optimal. The
+noise-free gray-scale image and resulting halftone can be related
+using the linear model of \cite{Kite,KiteJournal} as
+\begin{equation}y(\nnnx,\nnny) = \cP\left[x(\nnnx,\nnny)+\beta(\nnnx,\nnny)\right]
++ \cQ\gamma(\nnnx,\nnny),
+\label{addnoise}
+\end{equation}
+with $\beta(\nnnx,\nnny)$ denoting the noise corrupting the gray-scale
+image before halftoning. If the $\beta(\nnnx,\nnny)$ is AWGN with
+non-zero variance, then we can easily infer that the residual noise
+after inverting $\cP$ in Step 1 of \mbox{WInHD} can be analyzed like
+white noise because its variance is bounded but non-zero
+\cite{nonlin-soln-don}. Hence we can invoke well-established results
+on the performance of wavelet-based signal estimation in the presence
+of white noise \cite{Donoho1,donoho99asymptotic,donoho-minimax} to
+conclude that no estimator can achieve a better error decay rate than
+\mbox{WInHD} for every Besov space image. Thus, \mbox{WInHD} is an
+optimal estimator for inverse halftoning error-diffused halftones of
+noisy images.
+
+
+
+
+
+\section{Results}
+\label{Results}
+\begin{figure}[tbp]
+\begin{center}
+\begin{tabular}{ccc}
+\epsfig{figure=figures/HTLenazoom.eps,width=2in}&\epsfig{figure=figures/EvansLenazoom.eps,width=2in}&\epsfig{figure=figures/WDWFLenacwtzoom.eps,width=2in}\\
+(a) Floyd halftone& (b) Gradient estimate \cite{gradient_halftoning} & (c)\mbox{WInHD} estimate 
+\end{tabular}
+\end{center}
+\caption[Original model]{\small \sl {Close-ups (128 $\times$ 128 pixels) of (a) Floyd halftone, (b) Gradient estimate, and (c) \mbox{WInHD} estimate.}}
+\label{imagesnewzoom}
+\end{figure}
+
+\sloppy We illustrate \mbox{WInHD}'s performance using $512 \times
+512$-pixel {\em Lena } and {\em Peppers} test images halftoned using
+the Floyd algorithm \cite{Floyd} (see Figure \ref{imagesnew} and
+\ref{imagesnewzoom}).  All WInHD estimates and software are available
+at {\tt www.dsp.rice.edu/software}. We set the gain $K = 2.03$, as
+calculated for Floyd in \cite{Kite,KiteJournal}, and use the Floyd
+error filter response $h(\nnnx,\nnny)$ (see Figure \ref{EDfilters}) to
+characterize the impulse responses $p(\nnnx,\nnny)$ and
+$q(\nnnx,\nnny)$. Inverting the operator $\cP$ (Step 2) requires
+$O(\NSQ)$ operations and memory for a $\NSQ$-pixel image since
+$\cP^{-1}$ is FIR. To perform the wavelet-domain shrinkage (Step 2),
+we choose the WWF because it yields better estimates compared to
+schemes such as hard thresholding.
+
+Estimates obtained by shrinking DWT coefficients are not
+shift-invariant; that is, translations of $y(\nnnx,\nnny)$ will result
+in different estimates. Hence, we exploit the {\em complex wavelet
+transform} (CWT) instead of the usual DWT to perform the WWF. The CWT
+expands images in terms of shifted and dilated versions of {\em
+complex-valued} basis functions instead of the real-valued basis
+functions used by the DWT \cite{kingsbury01co,justinchmt}; the
+expansion coefficients are also complex-valued. Wavelet-domain
+shrinkage using WWF on the CWT coefficient magnitudes yields
+significantly improved near shift-invariant estimates with just
+$O(\NSQ)$ operations and memory. (The redundant, shift-invariant DWT
+can also be used instead of the CWT to obtain shift-invariant
+estimates \cite{mallat-new}, but the resulting WInHD algorithm
+requires $O(\NSQ \,\log{N})$ operations and memory.) The standard
+deviation of the noise $\gamma(\nnnx,\nnny)$, which is required during
+wavelet shrinkage, is calculated using the standard deviation of
+$y(\nnnx,\nnny)$'s finest scale CWT coefficients.
+
+
+
+
+
+\sloppy Figures \ref{imagesnew} and \ref{imagesnewzoom} compares the
+\mbox{WInHD} estimate with the multiscale gradient-based estimate
+\cite{gradient_halftoning} for the Lena image. We quantify the
+\mbox{WInHD}'s performance by measuring the peak signal-to-noise ratio
+PSNR $:= 20\log_{10}{\frac{512\times255}{\|\widehat{x}-x\|_2}}$ (for
+$512 \times 512$-pixel images with gray levels $\in [0,1,\ldots,255]$)
+with $\widehat{x}(\nnnx,\nnny)$ the estimate. Table \ref{table}
+summarizes the PSNR performance and computational complexity of
+\mbox{WInHD} compared to published results for inverse halftoning with
+Gaussian filtering \cite{Gaussian-LPF-halftoning}, kernel estimation
+\cite{kernel_halftoning}, gradient estimation
+\cite{gradient_halftoning}, and wavelet denoising with edge-detection
+\cite{Xiong}. We can see that \mbox{WInHD} is competitive with the
+best published results.
+\begin{table}[tb]
+\begin{center}
+\caption{ \small \sl {PSNR and computational complexity of inverse halftoning algorithms ($\NtimesN$ pixels).}}
+\vspace*{2mm}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Inverse halftoning & \multicolumn{2}{c|}{PSNR (dB)}& Computational \\\cline{2-3}
+algorithm&{\em ~~Lena~~} & {\em Peppers}&complexity \\
+\hline
+Gaussian \cite{Gaussian-LPF-halftoning} & 28.6 & 27.6 &$O(\NSQ )$\\
+\hline
+Kernel \cite{kernel_halftoning}& 32.0 & 30.2 &$O(\NSQ  )$\\
+\hline
+Gradient \cite{gradient_halftoning} & 31.3 & 31.4&$O(\NSQ  )$\\
+\hline
+Wavelet denoising \cite{Xiong} & 31.7 & 30.7&$O(\NSQ  \,\log{N})$\\
+\hline
+\mbox{WInHD} & 32.1 & 31.2&$O(\NSQ)$\\\hline
+\end{tabular}
+\label{table}
+\end{center}
+\end{table}
+
+The \mbox{WInHD} estimate yields competitive visual performance as
+well. We quantify visual performance using two metrics: weighted SNR
+(WSNR) \cite{Mitsa,imagequality} and the {\em Universal Image Quality
+Index} (UIQI) \cite{Bovik}. Both metrics were computed using the
+halftoning toolbox of \cite{httoolbox}. The WSNR is obtained by
+weighting the SNR in the frequency domain according to a linear model
+of the human visual system \cite{Mitsa,imagequality}. The WSNR numbers
+in Table \ref{visual} are calculated at a
+spatial Nyquist frequency of 60 cycles/degree.  The recently proposed
+UIQI metric of Wang et al.\ effectively models image distortion with a
+combination of correlation loss, luminance distortion, and contrast
+distortion \cite{Bovik}; UIQI $\in [-1,1]$ with larger values implying
+better image quality. For the Lena image, \mbox{WInHD}'s
+performance in terms of both the visual metrics is competitive with
+the gradient estimate's performance (see Table \ref{visual}).
+
+
+\begin{table}[tb]
+\begin{center}
+\caption{ \small \sl {Visual metrics for inverse halftoned estimates of Lena.}}
+\vspace*{2mm}
+\begin{tabular}{|c|c|c|}
+\hline 
+Algorithm& WSNR (dB)&  UIQI \\
+\hline
+Gradient \cite{gradient_halftoning} & 34.0 & 0.62\\
+\hline
+\mbox{WInHD} & 35.9 & 0.62\\\hline
+\end{tabular}
+\label{visual}
+\end{center}
+\end{table}
+
+
+
+
+\section{Conclusions}
+\label{Conclusions}
+\sloppy
+
+
+Using the linear error diffusion model of \cite{Kite,KiteJournal}, we
+have demonstrated that inverse halftoning can be posed as a
+deconvolution problem in the presence of colored noise. Exploiting
+this new perspective, we have proposed the simple {\em Wavelet-based Inverse
+Halftoning via Deconvolution} (\mbox{WInHD}) 
+algorithm based on wavelet-based deconvolution to perform inverse
+halftoning. Since \mbox{WInHD} is model-based, it is easily tunable to
+the different error diffusion halftoning techniques. \mbox{WInHD}
+yields state-of-the-art performance in the MSE sense and visually.
+
+\mbox{WInHD} also enjoys desirable theoretical properties under
+certain mild conditions.  For images in a Besov space, \mbox{WInHD}
+estimate's MSE is guaranteed to decay rapidly as the spatial
+resolution of the input gray-scale image increases. Further, if the
+gray-scale image lies in a Besov space and is noisy before halftoning,
+then \mbox{WInHD}'s MSE decay rate cannot be improved upon by any
+estimator.
+
+We have assumed {\em a priori} knowledge of the error diffusion filter in
+this paper. However, the error diffusion filter is not always
+known. Under such circumstances, the error diffusion filter
+coefficients could be estimated by integrating adaptive techniques
+such as the one proposed by Wong \cite{kernelestimation} into our
+algorithm. However, this remains a topic of future study.
+
+
+To facilitate efficient hardware implementation, in addition to
+requiring minimal memory and computations, an inverse halftoning
+algorithm should also be compatible with fixed-point digital signal
+processors. For example, the gradient-based algorithm
+\cite{gradient_halftoning} is optimized for hardware implementation
+while still obtaining good inverse halftoning results. Since our focus
+in this paper has been primarily theoretical, we have not specifically
+addressed any hardware optimization issues. The design of a
+hardware-compatible inverse halftoning algorithm based on \mbox{WInHD}
+is a topic of interesting future study.
+
+
+
+
+\appendix
+\section{Decay Rate of \mbox{WInHD}'s MSE}
+\label{app:p1}
+
+We deduce the asymptotic performance of \mbox{WInHD}  as
+claimed in Proposition \ref{proposition1}.
+
+Instead of analyzing the problem of estimating $x(\nnnx,\nnny)$ from
+$y(\nnnx,\nnny)$, we can equivalently analyze the estimation of
+$x(\nnnx,\nnny)$ from the noisy observation
+$\widetilde{x}(\nnnx,\nnny)$ obtained after inverting $\cP$ (see
+(\ref{noisy_est})). The reduction is equivalent because
+$P(\fffx,\fffy)$ is known and invertible (since $|P(\fffx,\fffy)| \ge
+\epsilon > 0$).\footnote{Since the filter $\cP^{-1}$ is FIR for error
+diffusion systems, boundary effects are negligible asymptotically
+because only a finite number of boundary pixels are corrupted.}
+
+
+The frequency components of the colored noise $\cP^{-1}\cQ
+\gamma(\nnnx,\nnny)$ corrupting the $\widetilde{x}(\nnnx,\nnny)$ in
+(\ref{noisy_est}) is given by
+\mbox{$\frac{Q(\fffx,\fffy)\Gamma(\fffx,\fffy)}{P(\fffx,\fffy)}$}. These
+frequency components are independent and Gaussian because the Fourier
+transform diagonalizes convolution operators. Since $|P(\fffx,\fffy)|$
+is strictly non-zero and $|Q(\fffx,\fffy)|$ is bounded, the variance
+of \mbox{$\frac{Q(\fffx,\fffy)\Gamma(\fffx,\fffy)}{P(\fffx,\fffy)}$}
+is uniformly bounded --- say with variance $\varsigma^2$ --- at all frequencies.
+
+Because the estimation error due to wavelet-domain hard thresholding
+is monotone with respect to noise variance \cite{nonlin-soln-don}, the
+error in estimating ${x}(\nnnx,\nnny)$ from~(\ref{noisy_est}) using
+wavelet-domain hard thresholding is less than the error in estimating
+${x}(\nnnx,\nnny)$ observed in white noise as in
+(\ref{whitenoisesetup}) but with variance $\varsigma^2$. Hence the
+per-pixel MSE in estimating ${x}(\nnnx,\nnny)$ from~(\ref{noisy_est})
+can be bounded with the decay rate $N^{\frac{-s}{s+1}}$ established
+for the white noise setup (see Section~\ref{sect:wavesigest}) to yield
+(\ref{prop1:eqn1}) with a constant $C > 0$ independent of $N$
+\cite{donoho99asymptotic,donoho-minimax}. \hfill$\Box$
+
+
+
+
+{\acknowledgments We thank Dr.\ Brian Evans for his many constructive
+comments.}  
+\sloppy\bibliographystyle{ieeetr}
+\newcommand{\noopsort}[1]{} \newcommand{\printfirst}[2]{#1}
+  \newcommand{\singleletter}[1]{#1} \newcommand{\switchargs}[2]{#2#1}
+\begin{thebibliography}{10}
+
+\bibitem{Ulichney}
+R.~Ulichney, {\em Digital Halftoning}.
+\newblock Cambridge, MA: MIT Press, 1987.
+
+\bibitem{kernel_halftoning}
+P.~Wong, ``Inverse halftoning and kernel estimation for error diffusion,'' {\em
+  IEEE Trans. Image Processing}, vol.~6, pp.~486--498, Apr. 1995.
+
+\bibitem{halftoning_applications}
+M.~Y. Ting and E.~A. Riskin, ``Error-diffused image compression using a
+  binary-to-gray scale decoder and predictive pruned tree-structured vector
+  quantization,'' {\em IEEE Trans. Image Processing}, vol.~3, pp.~854--857,
+  Nov. 1994.
+
+\bibitem{Floyd}
+R.~W. Floyd and L.~Stienberg, ``An adaptive algoritm for spatial grayscale,''
+  {\em Proc. Soc. Image Display}, vol.~17, no.~2, pp.~75--77, 1976.
+
+\bibitem{Jarvis}
+J.~Jarvis, C.~Judice, and W.~Ninke, ``A survey of techniques for the display of
+  continuous tone pictures on bilevel displays,'' {\em Comput. Graph and Image
+  Process.}, vol.~5, pp.~13--40, 1976.
+
+\bibitem{Kite}
+T.~D. Kite, B.~L. Evans, A.~C. Bovik, and T.~L. Sculley, ``Digital halftoning
+  as 2-{D} delta-sigma modulation,'' {\em Proc. IEEE ICIP~'97}, vol.~1,
+  pp.~799--802, Oct. 26--29 1997.
+
+\bibitem{KiteJournal}
+T.~D. Kite, B.~L. Evans, A.~C. Bovik, and T.~L. Sculley, ``Modeling and quality
+  assessment of halftoning by error diffusion,'' {\em IEEE Trans. Image
+  Processing}, vol.~9, pp.~909--922, May 2000.
+
+\bibitem{Gaussian-LPF-halftoning}
+S.~Hein and A.~Zakhor, ``Halftone to continuous-tone conversion of
+  error-diffusion coded images,'' {\em IEEE Trans. Image Processing}, vol.~4,
+  pp.~208--216, Feb. 1995.
+
+\bibitem{Donoho5}
+D.~L. Donoho, ``Unconditional bases are optimal bases for data compression and
+  for statistical estimation,'' {\em Appl. Comput. Harmon. Anal.}, vol.~1,
+  pp.~100--115, Dec. 1993.
+
+\bibitem{nonlin-soln-don}
+D.~L. Donoho, ``Nonlinear solution of linear inverse problems by
+  {W}avelet-{V}aguelette {D}ecomposition,'' {\em Appl. Comput. Harmon. Anal.},
+  vol.~2, pp.~101--126, 1995.
+
+\bibitem{mallat-new}
+S.~Mallat, {\em A Wavelet Tour of Signal Processing}.
+\newblock Academic Press, 1998.
+
+\bibitem{DeVore3}
+R.~A. DeVore, B.~Jawerth, and B.~J. Lucier, ``Image compression through wavelet
+  transform coding,'' {\em IEEE Trans. Inform. Theory}, vol.~38, pp.~719--746,
+  Mar. 1992.
+
+\bibitem{donoho-ideal-adaptation}
+D.~L. Donoho and I.~M. Johnstone, ``Ideal spatial adaptation via wavelet
+  shrinkage,'' {\em Biometrika}, vol.~81, pp.~425--455, 1994.
+
+\bibitem{DeQueiroz}
+J.~Luo, R.~{de~Queiroz}, and Z.~Fan, ``A robust technique for image descreening
+  based on the wavelet transform,'' {\em IEEE Trans. Signal Processing},
+  vol.~46, pp.~1179--1184, Apr. 1998.
+
+\bibitem{Xiong}
+Z.~Xiong, M.~T. Orchard, and K.~Ramchandran, ``Inverse halftoning using
+  wavelets,'' {\em IEEE Trans. Signal Processing}, vol.~8, pp.~1479--1482, Oct.
+  1999.
+
+\bibitem{neelsh_iht_icip}
+R.~Neelamani, R.~D. Nowak, and R.~G. Baraniuk, ``Model-based inverse halftoning
+  with {W}avelet-{V}aguelette {D}econvolution,'' in {\em Proc. IEEE ICIP~'00},
+  (Vancouver, Canada), pp.~973--976, Sept. 2000.
+
+\bibitem{Donoho1}
+D.~L. Donoho, ``De-noising by soft-thresholding,'' {\em IEEE Trans. Inform.
+  Theory}, vol.~41, pp.~613--627, May 1995.
+
+\bibitem{gradient_halftoning}
+T.~D. Kite, N.~Damera-Venkata, B.~L. Evans, and A.~C. Bovik, ``A fast,
+  high-quality inverse halftoning algorithm for error diffused halftones,''
+  {\em IEEE Trans. Image Processing}, vol.~9, pp.~1583--1592, Sept. 2000.
+
+\bibitem{akjain}
+A.~K. Jain, {\em Fundamentals of Digital Image Processing}.
+\newblock Englewood Cliffs, NJ: Prentice-Hall, 1989.
+
+\bibitem{katman-book}
+A.~K. {Katsaggelos (Ed.)}, {\em Digital Image Restoration}.
+\newblock New York: Springer-Verlag, 1991.
+
+\bibitem{Neelamani1}
+R.~Neelamani, H.~Choi, and R.~G. Baraniuk, ``Wavelet-based deconvolution using
+  optimally regularized inversion for ill-conditioned systems,'' in {\em
+  Wavelet Applications in Signal and Image Processing VII, Proc. SPIE},
+  vol.~3813, pp.~58--72, July 1999.
+
+\bibitem{james-stein}
+W.~James and C.~Stein, ``Estimation with quadratic loss,'' in {\em Proc. Fourth
+  Berkeley Symp. Math. Statist. Probab.}, vol.~1, pp.~361--380, Univ.
+  California Press, 1961.
+
+\bibitem{Davis1}
+G.~Davis and A.~Nosratinia, ``Wavelet-based image coding: {A}n overview,'' in
+  {\em Appl. Comput. Control Signals Circuits} (B.~N. Datta, ed.), vol.~1,
+  Birkhauser, 1999.
+
+\bibitem{castleman}
+K.~R. Castleman, {\em Digital Image Processing}.
+\newblock New Jersey: Prentice Hall, 1996.
+
+\bibitem{burrus-wlet-intro}
+C.~S. Burrus, R.~A. Gopinath, and H.~Guo, {\em Introduction to Wavelets and
+  Wavelet Transforms: {A} Primer}.
+\newblock Prentice-Hall, 1998.
+
+\bibitem{Kalifaannals}
+J.~Kalifa and S.~Mallat, ``Thresholding estimators for linear inverse
+  problems,'' {\em Ann. Statist.}, vol.~31, Feb. 2003.
+
+\bibitem{donoho99asymptotic}
+D.~L. Donoho and I.~M. Johnstone, ``Asymptotic minimaxity of wavelet estimators
+  with sampled data,'' {\em Statist. Sinica}, vol.~9, no.~1, pp.~1--32, 1999.
+
+\bibitem{donoho-minimax}
+D.~L. Donoho and I.~Johnstone, ``Minimax estimation by wavelet shrinkage,''
+  {\em Ann. Statist.}, vol.~26, pp.~879--921, 1998.
+
+\bibitem{sandeep}
+S.~Ghael, A.~M. Sayeed, and R.~G. Baraniuk, ``Improved wavelet denoising via
+  empirical {W}iener filtering,'' in {\em Wavelet Applications in Signal and
+  Image Processing V, Proc. SPIE}, vol.~3169, pp.~389--399, Oct. 1997.
+
+\bibitem{choi}
+H.~Choi and R.~G. Baraniuk, ``Analysis of wavelet domain {W}iener filters,'' in
+  {\em IEEE Int. Symp. Time-Frequency and Time-Scale Analysis}, (Pittsburgh),
+  Oct. 1998.
+
+\bibitem{Averkamp}
+R.~Averkamp and C.~Houdre, ``Wavelet thresholding for non (necessarily)
+  {G}aussian noise: {F}unctionality,'' {\em Ann. Statist.}, vol.~31, Feb. 2003.
+
+\bibitem{Gao}
+H.-Y. Gao, ``Choice of thresholds for wavelet shrinkage estimate of the
+  spectrum,'' {\em Journal of Time Series Analysis}, vol.~18, pp.~231--251,
+  1997.
+
+\bibitem{kingsbury01co}
+N.~G. Kingsbury, ``Complex wavelets for shift invariant analysis and filtering
+  of signals,'' {\em Appl. Comput. Harmon. Anal.}, vol.~10, pp.~234--253, May
+  2001.
+
+\bibitem{justinchmt}
+J.~K. Romberg, H.~Choi, R.~G. Baraniuk, and N.~G. Kingsbury, ``A hidden
+  {M}arkov tree model for the complex wavelet transform,'' {\em IEEE Trans.
+  Signal Processing}, 2002.
+\newblock Submitted.
+
+\bibitem{Mitsa}
+T.~Mitsa and K.~Varkur, ``Evaluation of contrast sensitivity functions for the
+  formulation of quality measures incorporated in halftoning algorithms,'' in
+  {\em Proc. IEEE ICASSP~'93}, vol.~5, pp.~301--304, 1993.
+
+\bibitem{imagequality}
+T.~D. Kite, N.~Damera-Venkata, B.~L. Evans, and A.~C. Bovik, ``Image quality
+  assessment based on a degradation model,'' {\em IEEE Trans. Image
+  Processing}, vol.~9, pp.~636--650, Apr. 2000.
+
+\bibitem{Bovik}
+Z.~Wang and A.~C. Bovik, ``A universal image quality index,'' {\em IEEE Signal
+  Processing Lett.}, vol.~9, pp.~81--84, Mar. 2002.
+
+\bibitem{httoolbox}
+V.~Monga, N.~Damera-Venkata, and B.~L. Evans., {\em Halftoning Toolbox for
+  MATLAB}.
+\newblock 2002.
+\newblock Available:
+  www.ece.utexas.edu/$^\sim$bevans/projects/halftoning/toolbox.
+
+\bibitem{kernelestimation}
+P.~W. Wong, ``Inverse halftoning and kernel estimation for error diffusion,''
+  {\em IEEE Trans. Image Processing}, vol.~4, pp.~486--498, Apr. 1995.
+
+\end{thebibliography}
+\end{document}
+
+
+

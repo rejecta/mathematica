@@ -1,0 +1,25 @@
+\setlength{\unitlength}{2547sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(7541,1244)(2231,-6383)
+\thicklines
+\put(3901,-6361){\framebox(1200,1200){}}
+\put(6301,-6361){\framebox(1200,1200){}}
+\put(5101,-5761){\vector( 1, 0){1200}}
+\put(3001,-5761){\vector( 1, 0){900}}
+\put(7501,-5761){\vector( 1, 0){900}}
+\put(5701,-5536){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\widetilde{x}(\nnnx,\nnny)$}}}
+\put(8926,-5611){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}WInHD estimate}}}
+\put(8926,-6061){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\widehat{x}_{\lambda^{\rm w}}(\nnnx,\nnny)$}}}
+\put(4501,-5836){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$~~\cP^{-1}$}}}
+\put(6901,-5511){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}Wavelet}}}
+\put(6901,-5836){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}shrinkage}}}
+\put(6901,-6161){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$\lambda^{\rm w}$}}}
+\put(2701,-5611){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}Halftone}}}
+\put(2701,-6061){\makebox(0,0)[b]{\smash{\SetFigFont{10}{16.8}{\sfdefault}{\mddefault}{\updefault}$y(\nnnx,\nnny)$}}}
+\end{picture}

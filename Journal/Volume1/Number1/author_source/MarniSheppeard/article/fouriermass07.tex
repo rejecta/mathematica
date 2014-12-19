@@ -1,0 +1,251 @@
+%Fourier Transform and Circulant Mass Matrices - M. D. Sheppeard 2007
+%
+%Copyright (c) 2001 The American Physical Society.
+% This is a template for producing manuscripts for use with REVTEX 4.0
+% For Phys. Rev. appearance, change preprint to twocolumn.
+% Choose pra, prb, prc, prd, pre, prl, prstab, or rmp for journal
+% Add 'draft' option to mark overfull boxes with black boxes
+% Add 'showpacs' option to make PACS codes appear
+% Add 'showkeys' option to make keywords appear
+%----------------------------------------------------------------
+\documentclass[aps,prl,onecolumn,showpacs,address,11pt]{revtex4}
+%\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\title{Mass matrix transforms in qubit field theory}
+
+\author{M. D. Sheppeard}
+\affiliation{Department of Physics and Astronomy \\ University of
+Canterbury, Christchurch, New Zealand}
+
+\begin{abstract}
+Circulant mass matrices for triples of charged and neutral leptons
+have been studied in the context of qubit quantum field theory.
+This note describes the discrete Fourier transform behind such
+matrices, and discusses a category theoretic interpretation of
+these operators.
+\end{abstract}
+
+\pacs{03.67.-a, 03.67.Lx, 04.60.-m}
+
+
+\maketitle
+\thispagestyle{empty}
+
+%----------------------------------------------------------------
+\section{Introduction}
+
+Using a measurement algebra approach to QFT, Brannen
+\cite{Brannen} recently recovered the Koide \cite{Koide1} formula
+\begin{equation} (\sqrt{m_{e}} + \sqrt{m_{\mu}} + \sqrt{m_{\tau}})^{2} = \frac{3}{2}
+(m_{e} + m_{\mu} + m_{\tau}) \end{equation} for charged lepton
+masses in the form of a $3 \times 3$ circulant complex matrix,
+whose eigenvalues squared give the lepton masses to experimental
+precision. This analysis was extended to a set of three neutrinos,
+and the mass ratio predictions agree with preliminary neutrino
+oscillation data.
+
+Here it is observed that the discrete Fourier transform
+\cite{AdrovBook} provides a further interpretation of the mass
+matrices, both as a duality between operators and eigenvalues and
+also as a link to the theory of quantum computation
+\cite{NielsenChuang}.
+
+It is expected that other triples of Standard Model particles,
+namely baryons and mesons, will also be associated with $3 \times
+3$ matrix operators of the same kind in accord with their preon
+structure \cite{Brannen} and the association of spatial directions
+to the number of particle generations, given by the three
+primitive idempotents of the measurement algebra.
+
+%----------------------------------------------------------------
+\section{Fourier transforms and mass matrices}
+
+A {\em circulant} matrix is built from its first row by adding
+cyclic permutations. In particular, a $3 \times 3$ circulant takes
+the form \begin{equation} \left( \begin{array}{ccc} A & B & C \\ C & A & B \\
+B & C & A \end{array} \right) \end{equation} where $A$, $B$ and
+$C$ will be complex numbers. Note that any such circulant is a
+combination of the three permutations $(123)$, $(231)$ and
+$(312)$. For real eigenvalues $\lambda_k$ it is essential that $A$
+be real and $C = \overline{B}$. Thus a mass matrix \cite{Brannen}
+takes the form
+\begin{equation}\label{BrannenMat} C = \eta
+\left( \begin{array}{ccc} 1 & r e^{i \theta}
+& r e^{- i \theta} \\ r e^{- i \theta} & 1 & r e^{i \theta} \\ r
+e^{i \theta} & r e^{- i \theta} & 1 \end{array} \right)
+\end{equation} for real $\eta$, $r$ and $\theta$. In terms of
+these parameters, the eigenvalues are given by
+\[ \lambda_{k} = \eta (1 + 2r \textrm{cos}(\theta + \frac{2 \pi k}{3}))
+\] The Koide formula (1) follows when $r^2 = \frac{1}{2}$ and this
+choice may be applied also to the neutrino matrix.
+
+In the $n \times n$ case, the discrete Fourier transform
+\cite{AdrovBook}\cite{NielsenChuang} interchanges the set of
+eigenvalues $\lambda_{k}$ (assumed distinct) and matrix entries
+$A_1 , A_2, A_3 , \cdots , A_n$ via
+\begin{eqnarray} \lambda_k = \sum_{j} e^{\frac{2 \pi i jk}{n}}
+A_{j} \\ \nonumber A_j = \frac{1}{n} \sum_{k} e^{- \frac{2 \pi i
+jk}{n}} \lambda_{k} \end{eqnarray} Viewing the eigenvalues as a
+diagonal matrix, the transform interchanges the bases of
+projection operators and cyclic permutations. For real eigenvalues
+$(m_1 , m_2 , m_3)$ with $m_i = \lambda_{i}^{2}$ in the above, and
+letting $\omega = e^{\frac{2 \pi i}{3}}$, the transform takes the
+diagonal matrix to the circulant {\small
+\[ \left( \begin{array}{ccc} m_1 + m_2 + m_3
+& m_1 \omega + m_2 \omega^{2} + m_3 & m_1 \omega^{2} + m_2 \omega
++ m_3 \\ m_1 \omega^{2} + m_2 \omega
++ m_3 & m_1 + m_2 + m_3 & m_1 \omega + m_2 \omega^{2} + m_3 \\
+m_1 \omega + m_2 \omega^{2} + m_3 & m_1 \omega^{2} + m_2 \omega +
+m_3 & m_1 + m_2 + m_3
+\end{array} \right) \] } which must be the square of
+(\ref{BrannenMat}) since the square of a circulant is a circulant.
+Thus a choice of scale is specified by $\eta = \frac{1}{3} (m_1 +
+m_2 + m_3)$.
+
+%Products and Quantum Torus
+A $3 \times 3$ matrix is viewed as a function on the discrete
+torus $\mathbb{Z}_{3} \times \mathbb{Z}_{3}$, which has a quantum
+description and a convolution product for matrices
+\cite{AdrovBook}. Letting $D_{ij} = \delta_{ij} \omega^{i}$ there is a Weyl rule \[ D \circ (312) = \omega (312)
+\circ D \] where the phase $\frac{2 \pi}{3}$ is proportional to
+$\hbar^{-1}$. This associates Planck's constant with a hierarchy
+$\mathbb{N}$ determined by the size of the matrix, but the
+continuum limit is obtained via $\hbar \rightarrow \infty$ rather
+than $\hbar \rightarrow 0$.
+
+If masses are to be thought of as quantum numbers, then why are
+their values so awkward in comparison to, say, spin? For $2 \times
+2$ circulants with entries $A$ and $B$, the eigenvectors are
+$(1,1)$ and $(1,-1)$ with eigenvalues $(A + B)$ and $(A - B)$
+respectively. For example, for the Pauli swap matrix $\sigma_{x}$,
+with $A = 0$, the spin eigenvalues are $\pm 1$. Complexity in the
+eigenvalue set only arises in dimension three or higher.
+
+Degenerate eigenvalues $\frac{\lambda_{k}}{\eta} \in \{ 1 - r , 1
+- r , 1 + 2r \}$ occur when $\theta = 0$ and all matrix entries
+are real. Although this pattern does not describe the leptons, we
+observe that it is the typical composition of masses for baryon
+constituents. Since such mass operators arise in a preon model
+that unifies particle structure, it is expected that all standard
+model bound states and resonances may be arranged into mass
+triples.
+
+In quantum computation \cite{NielsenChuang} a Fourier transform is
+also defined in this way, acting on a set of $n$ basis states. For example, an
+$N$ qubit computation uses $n = 2^{N}$ basis states. The transform is
+unitary and it may be built from unitary gates, namely the
+Hadamard gate $H = \frac{1}{\sqrt{2}} (\sigma_{x} + \sigma_{z})$
+and the series
+\[ B_{k} = \left( \begin{array}{cc} 1 & 0 \\ 0 & e^{\frac{2 \pi i}{2^{k}}}
+\end{array} \right) \] By analogy, a mass computation with $3^{N}$
+basis states uses ternary digits, so the gates $B_{k}$ would be
+replaced by gates \begin{equation} T_{k} = \left( \begin{array}{ccc} 1 & 0 & 0 \\
+0 & e^{\frac{2 \pi i}{3^{k}}} & 0 \\ 0 & 0 & e^{\frac{4 \pi
+i}{3^{k}}} \end{array} \right) \end{equation} which are also
+unitary. In general, the Fourier operator entries $F_{ij}$ are given by $\omega^{ij}$, and the theory of {\em mutually unbiased bases} generalises the Pauli operator algebra in all prime power dimensions. 
+
+A basic time evolution operator exists for each dimension $n$. Note, however, that unlike in conventional constructions, this local evolution is not in any way associated with an emergent cosmic clock, the latter being more closely related to the scale $\hbar$, given here by the matrix dimension. That is, this approach does not assume a globally defined time for a nonsensical universal
+observer.
+
+%----------------------------------------------------------------
+\section{Discussion}
+
+The mass matrices arise from a one dimensional discrete transform,
+which itself involves commutative variables. However, it is seen
+that phase space variables satisfy the Weyl algebra of the quantum
+plane. Is there a noncommutative transform that extends this
+analysis to nonclassical underlying spaces? This is relevant to
+the question of extending the perturbative rest mass computations
+\cite{Brannen} to nonperturbative regimes.
+
+Kapranov \cite{KapranovFT} has recently considered path spaces
+approximated by cubical paths, each of which is represented by a
+noncommutative monomial in the spatial directions. In dimension $d
+> 1$ a noncommutative Fourier transform relates measures on the
+space of paths to functions of the noncommuting variables. The
+basic idea is that a path integral is just a map from a
+noncommutative ring to a suitable commutative subring. In this
+way, particle masses \cite{Brannen} could arise as path integral
+invariants.
+
+Taking T-duality seriously, one also expects to deal with
+nonassociativity. From a category theoretic point of view, both
+noncommutative and nonassociative structures can be dealt with in
+a unified framework. The cohomological element of interest here is
+the parity cube axiom, which describes the now familiar pentagon
+law on five of its faces. In a sufficiently lax algebraic setting,
+such as for tetracategories, the sixth face may break this law,
+providing the deformation parameter that turns a pentagon into a
+hexagon representing the permutation group $S_3$
+\cite{BataninComb}.
+
+The generation count by primitive idempotents \cite{Brannen} is
+confirmed by the string theoretic index theorem argument applied
+to the Riemann moduli space of the six punctured sphere, which has
+an orbifold Euler characteristic \cite{MulasePenk} of -6. The six
+punctures are associated to the six faces of a cube via a dual
+vertex, which is thickened to a sphere. Note that cohomological
+integrals for such moduli spaces commonly appear in QFT
+computations as multiple zeta values and polylogarithms.
+
+%----------------------------------------------------------------
+\begin{acknowledgments} For helpful discussions I thank Carl
+Brannen, Michael Rios, Matti Pitkanen, Tony Smith and Louise
+Riofrio. \end{acknowledgments}
+
+\begin{thebibliography}{7}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname bibnamefont\endcsname\relax
+ \def\bibnamefont#1{#1}\fi
+\expandafter\ifx\csname bibfnamefont\endcsname\relax
+ \def\bibfnamefont#1{#1}\fi
+\expandafter\ifx\csname citenamefont\endcsname\relax
+ \def\citenamefont#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+ \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{\citenamefont{Brannen}()}]{Brannen}
+\bibinfo{author}{\bibfnamefont{C.~A.} \bibnamefont{Brannen}},
+ \bibinfo{note}{http://brannenworks.com/dmaa.pdf}.
+
+\bibitem[{\citenamefont{Koide}(1982)}]{Koide1}
+\bibinfo{author}{\bibfnamefont{Y.}~\bibnamefont{Koide}},
+ \bibinfo{journal}{Lett. Nuovo Cim.} \textbf{\bibinfo{volume}{34}},
+ \bibinfo{pages}{201} (\bibinfo{year}{1982}).
+
+\bibitem[{\citenamefont{Aldrovandi}(2001)}]{AdrovBook}
+\bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Aldrovandi}},
+ \emph{\bibinfo{title}{Special matrices of mathematical physics}}
+ (\bibinfo{publisher}{World Scientific}, \bibinfo{year}{2001}).
+
+\bibitem[{\citenamefont{Nielsen and Chuang}(2000)}]{NielsenChuang}
+\bibinfo{author}{\bibfnamefont{M.~A.} \bibnamefont{Nielsen}} \bibnamefont{and}
+ \bibinfo{author}{\bibfnamefont{I.~L.} \bibnamefont{Chuang}},
+ \emph{\bibinfo{title}{Quantum computation and quantum information}}
+ (\bibinfo{publisher}{Cambridge}, \bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Kapranov}()}]{KapranovFT}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Kapranov}},
+ \bibinfo{note}{math.QA/0612411}.
+
+\bibitem[{\citenamefont{Batanin}()}]{BataninComb}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Batanin}},
+ \bibinfo{note}{math.CT/0301221}.
+
+\bibitem[{\citenamefont{Mulase and Penkava}()}]{MulasePenk}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Mulase}} \bibnamefont{and}
+ \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Penkava}},
+ \bibinfo{note}{math-ph/9811024}.
+
+\end{thebibliography}
+
+\end{document}

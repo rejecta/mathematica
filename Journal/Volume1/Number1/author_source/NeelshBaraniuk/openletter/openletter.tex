@@ -1,0 +1,103 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\pagestyle{empty}
+
+
+
+\begin{document}
+
+\begin{center}
+\LARGE{\emph{An open letter concerning}\\WInHD: Wavelet-based Inverse Halftoning via Deconvolution}\\
+\hfill\\
+\large{Ramesh Neelamani and Richard Baraniuk}
+\end{center}
+
+\hfill
+
+\noindent {\bf Birth}: The niche problem of inverse halftoning error-diffused halftones
+has been addressed by a number of solid researchers using several
+practical and effective methods. However, due to the non-linearity of
+the halftoning process and the complexities of the human visual system,
+the methods proposed to date have been ad hoc.
+
+At first glance, we thought that we had little chance of coming up with
+even a mediocre solution to the nonlinear inverse halftoning problem. We
+pursued lines of research from photon-limited imaging and Polya trees,
+but those approaches lead nowhere.  One day, Rob Nowak found some
+literature on an intriguing linear approximation to halftoning. We were
+pleasantly surprised when a wavelet-thresholding based estimator based
+on this linear approximation produced competitive results (not only in
+terms of the workhorse mean-squared-error (MSE) metric but also in terms
+of a standard visual quality metric). We called our algorithm
+Wavelet-based Inverse Halftoning via Deconvolution (WInHD).
+
+We thought that WInHD would be a ``slam-dunk" paper that would certainly
+interest the image processing community, because in addition to
+presenting competitive results near the state-of-the-art, our insights
+also reduced the inverse halftoning problem to a well-understood
+deconvolution problem. Furthermore, assuming that the linear
+approximation was accurate and that the model noise was Gaussian, we
+were able to derive and analyze bounds on WInHD's MSE performance as the
+image resolution increased.
+
+With high optimism, we submitted a paper to a top-tier image processing
+journal.
+
+\noindent {\bf Death}: But alas, our enthusiasm was deflated due to the following review
+points, which we disagree with.
+\begin{itemize}
+\item The linear approximation was deemed questionable. Any claims about optimality were deemed to be overstated.
+\item Our results were deemed to be visually inferior. The metrics used
+used to evaluate our simulation results did not conform to the quality
+of the images as perceived. We were urged to seek input from the experts
+in the field and then publish the results of the survey.
+\end{itemize}
+The combination of lukewarm reviews and diverging author interests meant
+that the paper had to be abandoned.
+
+\noindent {\bf After-life}: With its publication in Rejecta Mathematica, we would like to honestly address some of the issues raised in our paper's day of reckoning.
+
+We believe that while the reviewers raised several valid points, the
+paper contained several contributions that would benefit the image
+processing community.  Addressing the linear approximation point, we
+agree that a linear approximation to the halftoning process is not
+suitable for all purposes. However, our view is that the surprising
+results obtained using such a model make our paper more, not less,
+interesting.  We do concede that the optimality claims made in the paper
+need to be taken with a this linear approximation in mind.  However, the
+limitations of our analysis have been clearly stated in the paper (it
+was termed as conditional optimality in the paper, but perhaps our
+analysis required some bigger and bolder disclaimers).
+
+On the visual quality issue, beauty indeed lies in the eyes of the
+beholder!  Like a majority of image processing practitioners, we agree
+that the MSE may be inadequate to measure the visual quality of an
+image. However, in our paper, we employed all of the metrics that were
+accessible in the literature (that is, we did not cherry-pick them) to
+substantiate that our method provided ``superior visual" performance
+(arguably a strong term to use, but certainly not obviously wrong).
+Surveys can certainly be an effective approach to analyzing an image
+processing result. But, while useful, conducting surveys for every image
+processing paper borders on onerous. As an alternative, we published our
+code so that our results were reproducible and so that our method could
+be tested on anyone's images of choice.
+
+The tussle about the visual quality improvement afforded by WInHD seems
+to have no easy resolution in sight. However an even larger question
+emerges. Is it really necessary for follow-on papers to always
+significantly improve upon previous results?  Should a paper's
+publishablity be so heavily reliant on the improved results that it
+produces?  How about insights that may open some closed doors?
+
+
+
+\end{document}  

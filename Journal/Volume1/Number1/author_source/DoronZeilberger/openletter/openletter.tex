@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\topmargin 0.0in
+\headheight 0.0in
+\pagestyle{empty}
+
+
+\begin{document}
+\begin{center}
+\Large{A note from the Rejecta Mathematica editorial board
+regarding}\\ 
+\LARGE{\emph{Automatic CounTilings} by Doron Zeilberger}
+\end{center}
+
+The following paper was submitted by Doron Zeilberger in response to an invitation to contribute a paper to the inaugural issue of Rejecta Mathematica. In lieu of a traditional open letter, we would like to refer the reader to Prof. Zeilberger's website:
+
+\begin{center}
+\href{http://www.math.rutgers.edu/~zeilberg/mamarim/mamarimhtml/tilings.html}{\textbf{http://www.math.rutgers.edu/$\sim$zeilberg/mamarim/mamarimhtml/tilings.html}}
+\end{center}
+
+As a brief summary, this paper considers the problem of computing the number of ways in which a $k \times n$ rectangle can be covered by a given set of tiles. The paper in fact describes a Maple program -- available at the website above -- which will tackle the problem for all $n$, given any $k$ and any set of allowable tiles. What was once a problem that would have to be tackled on a case-by-case basis is approached with a unified treatment that relies on a computer to discover the appropriate ``structure theorems.'' As Prof. Zeilberger claims on his website, ``what is so nice about it is that everything is done by machine: the combinatorics, the algebra, and the analysis.''
+
+The rejection history of this paper is well-documented on Prof. Zeilberger's website. A primary source of dispute in the original referee review was whether Prof. Zeilberger's algorithm alone constituted a significant, original mathematical contribution. Prof. Zeilberger includes the original review, which he describes as ``narrow-minded and ignorant'', offers his own reply, and expresses his opinion about the ``flawed'' editorial policies of the rejecting journal. 
+
+For full context, software code, and examples, the interested reader is invited to read both the paper and the website.
+
+\hfill\\
+
+\hfill Rejecta Mathematica Editors
+\end{document}  
