@@ -4,12 +4,12 @@ Rejecta Mathematica Archive
 Installing LaTeX
 -----------
 
-This project has been tested with the MacTex 2014 distribution [https://tug.org/mactex/].
+This project has been tested on Mac OS X 10.9.4 with the MacTex 2014 distribution [https://tug.org/mactex/].
 This project should also build on linux systems, for example on Ubuntu or Debian try installing via
 
     sudo apt-get install pdflatex bibtex pdftex
 
-To run the build scripts, you should be able to find binarys for the following:
+To run the build scripts, you should be able to find the following installed binaries:
 
     which pdflatex --> /usr/texbin/pdflatex
     which pdftex 
